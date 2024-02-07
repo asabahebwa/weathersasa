@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  margin-top: 400;
+  width: 80vw;
+  /* border: 1px solid green; */
 }
 
 .App-logo {
@@ -28,11 +31,72 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.weatherSummary {
+  /* border: 1px solid red; */
+  height: 150px;
+  display: flex;
+}
+
+.today {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid black; */
+  width: 20%;
+  display: flex;
+}
+.otherDays {
+  /* border: 1px solid blue; */
+}
+
+.today .heading {
+  height: 20%;
+  display: flex;
+  font-size: 24px;
+  /* border: 1px solid green; */
+}
+
+.today .summary {
+  display: flex;
+  height: 80%;
+  /* border: 1px solid purple; */
+}
+
+.summaryIcon {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid red; */
+  height: 100%;
+}
+
+.summaryTemperature {
+  /* border: 1px solid green; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+.summaryTemperatureMax{
+  font-weight: bold;
+  /* border: 1px solid blue; */
+}
+.summaryTemperatureMin{
+  /* border: 1px solid blue; */
+}
+.summaryText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  /* border: 1px solid cyan; */
+}
+
+.summaryTextHidden{
+  visibility: hidden;
+}
+
+.weatherSummary .tomorrow {
+  /* border: 1px solid blue; */
+  width: 75%;
 }
