@@ -38,7 +38,7 @@ function App() {
     },
     plotarea: {
       // border: "1px solid red",
-      // marginTop: 50,
+      marginTop: 100,
     },
     animation: {
       effect: "ANIMATION_FADE_OUT",
@@ -70,6 +70,7 @@ function App() {
         values: seriesTemp,
       },
     ],
+    crosshairX: {},
   };
 
   if (forecast.forecast) {
@@ -88,7 +89,7 @@ function App() {
         "background-fit": "xy",
         "font-size": "30px",
         "border-radius": "50%",
-        "offset-y": -80,
+        "offset-y": -30,
         hook: `node:plot=0;index=${index}`,
         // text: item.condition.text,
       };
