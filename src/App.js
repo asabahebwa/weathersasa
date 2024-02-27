@@ -34,7 +34,9 @@ function App() {
     type: "area",
     plot: {
       aspect: "spline",
-      stacked: "true",
+      tooltip: {
+        visible: false,
+      },
     },
     plotarea: {
       // border: "1px solid red",
@@ -70,7 +72,11 @@ function App() {
         values: seriesTemp,
       },
     ],
-    crosshairX: {},
+    crosshairX: {
+      'plot-label': {
+        text: "%v°C"
+      }
+    },
   };
 
   if (forecast.forecast) {
