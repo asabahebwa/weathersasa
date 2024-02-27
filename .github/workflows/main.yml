@@ -1,0 +1,21 @@
+name: weathersasa
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy-to-digital-ocean-droplet:
+    runs-on: Ubuntu 22.04 (LTS) x64
+    name: deploy weathersasa
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@master
+      - name: Pull from GitHub
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_IP }}
+          username: ${{ secrets.HOST_USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: cd projects/weathersasa/ && git pull && yarn build
