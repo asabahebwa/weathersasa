@@ -18,7 +18,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy": "scp -r ./public/* /var/www/weathersasa.com/html",
+    "deploy": "scp -r ./build/* /var/www/weathersasa.com/html",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
