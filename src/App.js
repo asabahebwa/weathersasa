@@ -46,7 +46,7 @@ function App() {
     scaleX: {
       step: "1hour",
       label: {
-        text: "date",
+        text: "test",
       },
       item: {
         // border: "1px solid red",
