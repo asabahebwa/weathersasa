@@ -9,6 +9,7 @@ import "./App.css";
 
 function App() {
   const [config, setConfig] = useState({});
+  const [location, setLocation] = useState(null);
 
   let mounted = useRef(true);
   let chart = useRef(null);
@@ -31,9 +32,9 @@ function App() {
   let todayWeatherSummaryMaximumTemperature;
 
   let chartConfig = {
-    type: "area",
+    type: "bar",
     plot: {
-      aspect: "spline",
+      // aspect: "spline",
       tooltip: {
         visible: false,
       },
@@ -73,9 +74,9 @@ function App() {
       },
     ],
     crosshairX: {
-      'plot-label': {
-        text: "%v°C"
-      }
+      "plot-label": {
+        text: "%v°C",
+      },
     },
   };
 
@@ -122,15 +123,31 @@ function App() {
     chartConfig.labels = weatherIcons;
   }
 
-  useEffect(() => {
-    mounted.current = true;
-
-    getWeatherForecast().then((items) => {
+  function success(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    setLocation({ latitude, longitude });
+    getWeatherForecast(latitude, longitude).then((items) => {
       if (mounted.current) {
         dispatch(addForecast(items));
         setConfig(chartConfig);
       }
     });
+  }
+
+  function error() {
+    console.log("Unable to retrieve your location");
+  }
+
+  useEffect(() => {
+    mounted.current = true;
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(success, error);
+    } else {
+      console.log("Geolocation not supported");
+    }
+
     return () => (mounted.current = false);
   }, []);
 
