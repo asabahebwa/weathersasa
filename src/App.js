@@ -7,6 +7,38 @@ import { getWeatherForecast } from "./services/forecast";
 import { addForecast } from "./store/forecast/index";
 import "./App.css";
 
+let gcolors = [
+  "#0AAEF6",
+  "#08A8F6",
+  "#0BA8F5",
+  "#3AB5C5",
+  "#72C58F",
+  "#A6D15B",
+  "#DDD324",
+  "#FCB800",
+  "#FC7300",
+  "#FE2901",
+  "#FD2300",
+  "#FF0000",
+];
+
+window.rule_plot = function (p) {
+  console.log(p)
+  let cindex = Math.round(p.value / 5);
+  console.log(cindex)
+
+  let colors = gcolors.slice(0, cindex);
+  let stops = [],
+    step = parseFloat(Number(0.9 / colors.length).toFixed(2));
+  for (let i = 0; i < colors.length; i++) {
+    stops.push(parseFloat(Number(0.05 + i * step).toFixed(2)));
+  }
+  return {
+    gradientStops: stops.join(" "),
+    gradientColors: colors.join(" "),
+  };
+};
+
 function App() {
   const [config, setConfig] = useState({});
   const [location, setLocation] = useState(null);
@@ -34,13 +66,13 @@ function App() {
   let chartConfig = {
     type: "bar",
     plot: {
-      // aspect: "spline",
       tooltip: {
         visible: false,
       },
+      fillAngle: 270,
+      jsRule: "rule_plot()",
     },
     plotarea: {
-      // border: "1px solid red",
       marginTop: 100,
     },
     animation: {
