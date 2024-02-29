@@ -23,9 +23,9 @@ let gcolors = [
 ];
 
 window.rule_plot = function (p) {
-  console.log(p)
+  // console.log(p)
   let cindex = Math.round(p.value / 5);
-  console.log(cindex)
+  // console.log(cindex)
 
   let colors = gcolors.slice(0, cindex);
   let stops = [],
