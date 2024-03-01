@@ -171,47 +171,51 @@ function App() {
     setConfig(chartConfig);
   }, [forecast]);
 
-  return (
-    <div className="App">
-      <div className="weatherSummary">
-        <div className="today">
-          <div className="heading">Today</div>
-          <div className="summary">
-            <div className="summaryIcon">
-              <img
-                src={todayWeatherSummaryIcon}
-                alt="wather icon"
-                width="120px"
-                height="120px"
-              />
-            </div>
-            <div className="summaryTemperature">
-              <span className="summaryTemperatureMax">
-                {todayWeatherSummaryMaximumTemperature}
-                {String.fromCharCode(176)}
-              </span>
-              <br />
-              <span className="summaryTemperatureMin">
-                {todayWeatherSummaryMinimumTemperature}
-                {String.fromCharCode(176)}
-              </span>
-            </div>
-            <div className="summaryText">
-              <span>{todayWeatherSummaryText}</span>
-              <br />
-              <span className="summaryTextHidden">
-                {todayWeatherSummaryText}
-              </span>
+  if (forecast === undefined) {
+    return <div>loading</div>;
+  } else {
+    return (
+      <div className="App">
+        <div className="weatherSummary">
+          <div className="today">
+            <div className="heading">Today</div>
+            <div className="summary">
+              <div className="summaryIcon">
+                <img
+                  src={todayWeatherSummaryIcon}
+                  alt="wather icon"
+                  width="120px"
+                  height="120px"
+                />
+              </div>
+              <div className="summaryTemperature">
+                <span className="summaryTemperatureMax">
+                  {todayWeatherSummaryMaximumTemperature}
+                  {String.fromCharCode(176)}
+                </span>
+                <br />
+                <span className="summaryTemperatureMin">
+                  {todayWeatherSummaryMinimumTemperature}
+                  {String.fromCharCode(176)}
+                </span>
+              </div>
+              <div className="summaryText">
+                <span>{todayWeatherSummaryText}</span>
+                <br />
+                <span className="summaryTextHidden">
+                  {todayWeatherSummaryText}
+                </span>
+              </div>
             </div>
           </div>
+          <div className="otherDays"></div>
         </div>
-        <div className="otherDays"></div>
+        <div>
+          <ZingChart data={config} ref={chart} />
+        </div>
       </div>
-      <div>
-        <ZingChart data={config} ref={chart} />
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
