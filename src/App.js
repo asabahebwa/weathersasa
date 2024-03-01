@@ -41,6 +41,7 @@ window.rule_plot = function (p) {
 
 function App() {
   const [config, setConfig] = useState({});
+  const [loading, setLoading] = useState(true);
 
   let mounted = useRef(true);
   let chart = useRef(null);
@@ -161,6 +162,7 @@ function App() {
       if (mounted.current) {
         dispatch(addForecast(items));
         setConfig(chartConfig);
+        setLoading(false);
       }
     });
 
@@ -171,9 +173,10 @@ function App() {
     setConfig(chartConfig);
   }, [forecast]);
 
-  if (forecast === undefined) {
-    return <div>loading</div>;
+  if (loading) {
+    return <div>loading...</div>;
   } else {
+    // console.log(todayWeatherSummaryIcon);
     return (
       <div className="App">
         <div className="weatherSummary">
@@ -181,12 +184,16 @@ function App() {
             <div className="heading">Today</div>
             <div className="summary">
               <div className="summaryIcon">
-                <img
-                  src={todayWeatherSummaryIcon}
-                  alt="wather icon"
-                  width="120px"
-                  height="120px"
-                />
+                {loading ? (
+                  <span>loading ...</span>
+                ) : (
+                  <img
+                    src={todayWeatherSummaryIcon}
+                    alt="wather icon"
+                    // width="120px"
+                    // height="120px"
+                  />
+                )}
               </div>
               <div className="summaryTemperature">
                 <span className="summaryTemperatureMax">
