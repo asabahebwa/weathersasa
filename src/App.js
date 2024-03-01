@@ -41,7 +41,6 @@ window.rule_plot = function (p) {
 
 function App() {
   const [config, setConfig] = useState({});
-  const [location, setLocation] = useState(null);
 
   let mounted = useRef(true);
   let chart = useRef(null);
@@ -155,30 +154,15 @@ function App() {
     chartConfig.labels = weatherIcons;
   }
 
-  function success(position) {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-    setLocation({ latitude, longitude });
-    getWeatherForecast(latitude, longitude).then((items) => {
+  useEffect(() => {
+    mounted.current = true;
+
+    getWeatherForecast().then((items) => {
       if (mounted.current) {
         dispatch(addForecast(items));
         setConfig(chartConfig);
       }
     });
-  }
-
-  function error() {
-    console.log("Unable to retrieve your location");
-  }
-
-  useEffect(() => {
-    mounted.current = true;
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(success, error);
-    } else {
-      console.log("Geolocation not supported");
-    }
 
     return () => (mounted.current = false);
   }, []);
