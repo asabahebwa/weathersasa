@@ -190,8 +190,6 @@ function App() {
                   <img
                     src={todayWeatherSummaryIcon}
                     alt="wather icon"
-                    // width="120px"
-                    // height="120px"
                   />
                 )}
               </div>

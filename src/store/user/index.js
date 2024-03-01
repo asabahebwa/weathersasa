@@ -8,11 +8,8 @@ export const userReducer = (state = defaultState, action) => {
     case LOGIN:
       const newState = Object.assign({}, defaultState, action.user);
       return newState;
-      break;
-
     case LOGOUT:
       return defaultState;
-      break;
     default:
       return state;
   }

@@ -14,8 +14,6 @@ export const forecastReducer = (state = defaultState, action) => {
     case ADD_FORECAST:
       const newState = Object.assign({}, defaultState, action.forecast);
       return newState;
-      break;
-
     default:
       return state;
   }
