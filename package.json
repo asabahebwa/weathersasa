@@ -18,7 +18,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && compress-cra",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "deploy": "scp -r ./build/* /var/www/weathersasa.com/html",
     "test": "react-scripts test",
@@ -41,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "compress-create-react-app": "^1.4.5"
   }
 }
