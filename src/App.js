@@ -1,40 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import ZingChart from "zingchart-react";
 
 import { getWeatherForecast } from "./services/forecast";
 import { addForecast } from "./store/forecast/index";
 import "./App.css";
-
-let gcolors = [
-  "#0AAEF6",
-  "#08A8F6",
-  "#0BA8F5",
-  "#3AB5C5",
-  "#72C58F",
-  "#A6D15B",
-  "#DDD324",
-  "#FCB800",
-  "#FC7300",
-  "#FE2901",
-  "#FD2300",
-  "#FF0000",
-];
-
-window.rule_plot = function (p) {
-  let cindex = Math.round(p.value / 5);
-
-  let colors = gcolors.slice(0, cindex);
-  let stops = [],
-    step = parseFloat(Number(0.9 / colors.length).toFixed(2));
-  for (let i = 0; i < colors.length; i++) {
-    stops.push(parseFloat(Number(0.05 + i * step).toFixed(2)));
-  }
-  return {
-    gradientStops: stops.join(" "),
-    gradientColors: colors.join(" "),
-  };
-};
 
 function App() {
   const [config, setConfig] = useState({});
@@ -171,7 +140,7 @@ function App() {
   }, [forecast]);
 
   if (loading) {
-    return <div>loading...</div>
+    return <div>loading...</div>;
   } else {
     return (
       <div className="App">
@@ -183,7 +152,12 @@ function App() {
                 {loading ? (
                   <span>loading...</span>
                 ) : (
-                  <img src={todayWeatherSummaryIcon} alt="wather icon" width={64} height={64} />
+                  <img
+                    src={todayWeatherSummaryIcon}
+                    alt="wather icon"
+                    width={64}
+                    height={64}
+                  />
                 )}
               </div>
               <div className="summaryTemperature">
@@ -208,8 +182,8 @@ function App() {
           </div>
           <div className="otherDays"></div>
         </div>
-        <div>
-          <ZingChart data={config} ref={chart} />
+        <div style={{ border: "1px solid red", height: 500 }}>
+          {/* <ZingChart data={config} ref={chart} /> */}
         </div>
       </div>
     );

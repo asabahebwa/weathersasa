@@ -76,13 +76,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-
 }
-.summaryTemperatureMax{
+.summaryTemperatureMax {
   font-weight: bold;
   /* border: 1px solid blue; */
 }
-.summaryTemperatureMin{
+.summaryTemperatureMin {
   /* border: 1px solid blue; */
 }
 .summaryText {
@@ -94,14 +93,19 @@
   margin-left: 1rem;
   padding-left: 1rem;
   /* border: 1px solid cyan; */
-  border-left: 1px solid #8A8C8E;
+  border-left: 1px solid #8a8c8e;
 }
 
-.summaryTextHidden{
+.summaryTextHidden {
   visibility: hidden;
 }
 
 .weatherSummary .tomorrow {
   /* border: 1px solid blue; */
   width: 75%;
+}
+
+.chart {
+  /* border: 1px solid red; */
+  /* height: 500px; */
 }
