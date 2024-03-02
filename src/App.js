@@ -22,9 +22,7 @@ let gcolors = [
 ];
 
 window.rule_plot = function (p) {
-  // console.log(p)
   let cindex = Math.round(p.value / 5);
-  // console.log(cindex)
 
   let colors = gcolors.slice(0, cindex);
   let stops = [],
@@ -173,9 +171,8 @@ function App() {
   }, [forecast]);
 
   if (loading) {
-    return <div>loading...</div>;
+    return <div>loading...</div>
   } else {
-    // console.log(todayWeatherSummaryIcon);
     return (
       <div className="App">
         <div className="weatherSummary">
@@ -184,12 +181,9 @@ function App() {
             <div className="summary">
               <div className="summaryIcon">
                 {loading ? (
-                  <span>loading ...</span>
+                  <span>loading...</span>
                 ) : (
-                  <img
-                    src={todayWeatherSummaryIcon}
-                    alt="wather icon"
-                  />
+                  <img src={todayWeatherSummaryIcon} alt="wather icon" width={64} height={64} />
                 )}
               </div>
               <div className="summaryTemperature">
