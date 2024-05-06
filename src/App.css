@@ -109,16 +109,24 @@
   /* border: 1px solid red; */
   display: flex;
   height: 400px;
+  margin-top: 50px;
 }
 
 .weatherByHour {
-  /* border: 1px solid blue; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: 1px solid #D5D5D5;
   width: 75px;
-  padding-top: 50px;
+}
+
+.weatherByHourTime {
+  /* border: 1px solid cyan; */
+  /* margin-top: 50px; */
 }
 
 .weatherByHourIcon {
   /* border: 1px solid green; */
   /* width: 75px; */
-  padding-top: 50px;
+  /* margin-top: 50px; */
 }

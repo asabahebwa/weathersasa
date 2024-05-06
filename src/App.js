@@ -24,6 +24,13 @@ function App() {
 
   let weatherByHour;
 
+  let minTempC;
+  let maxTempC;
+
+  let temperaturesC = [];
+
+  let temperatures;
+
   let todayWeatherSummaryIcon;
 
   let todayWeatherSummaryText;
@@ -90,14 +97,24 @@ function App() {
       (item) => item.time_epoch
     );
 
-    weatherByHour = forecast.forecast.forecastday[0].hour.map((item) => {
-      // console.log(item);
+    temperatures = forecast.forecast.forecastday[0].hour.map(
+      (item, index) => item.temp_c
+    );
+
+    minTempC = Math.min(...temperatures);
+    maxTempC = Math.max(...temperatures);
+
+    weatherByHour = forecast.forecast.forecastday[0].hour.map((item, index) => {
       return (
-        <div className="weatherByHour">
-          {item.time.split(" ")[1]}
-          <br />
+        <div className="weatherByHour" key={index}>
+          <div className="weatherByHourTime">{item.time.split(" ")[1]}</div>
           <div className="weatherByHourIcon">
-            <img src={`https:${item.condition.icon}`} alt="icon" width={50}/>
+            <img
+              src={`https:${item.condition.icon}`}
+              alt="icon"
+              width={50}
+              style={{ marginBottom: (item.temp_c / maxTempC) * 250 }}
+            />
           </div>
         </div>
       );
