@@ -81,7 +81,7 @@ function App() {
   };
 
   if (forecast.forecast) {
-    console.log(forecast.forecast);
+    // console.log(forecast.forecast);
     seriesTemp = forecast.forecast.forecastday[0].hour.map(
       (item) => item.temp_c
     );
@@ -91,7 +91,7 @@ function App() {
     );
 
     weatherByHour = forecast.forecast.forecastday[0].hour.map((item) => {
-      console.log(item);
+      // console.log(item);
       return (
         <div className="weatherByHour">
           {item.time.split(" ")[1]}
