@@ -107,5 +107,18 @@
 
 .chart {
   /* border: 1px solid red; */
-  /* height: 500px; */
+  display: flex;
+  height: 400px;
+}
+
+.weatherByHour {
+  /* border: 1px solid blue; */
+  width: 75px;
+  padding-top: 50px;
+}
+
+.weatherByHourIcon {
+  /* border: 1px solid green; */
+  /* width: 75px; */
+  padding-top: 50px;
 }

@@ -22,6 +22,8 @@ function App() {
 
   let weatherIcons = [];
 
+  let weatherByHour;
+
   let todayWeatherSummaryIcon;
 
   let todayWeatherSummaryText;
@@ -79,7 +81,7 @@ function App() {
   };
 
   if (forecast.forecast) {
-    // console.log(forecast.forecast);
+    console.log(forecast.forecast);
     seriesTemp = forecast.forecast.forecastday[0].hour.map(
       (item) => item.temp_c
     );
@@ -87,6 +89,19 @@ function App() {
     scaleXValues = forecast.forecast.forecastday[0].hour.map(
       (item) => item.time_epoch
     );
+
+    weatherByHour = forecast.forecast.forecastday[0].hour.map((item) => {
+      console.log(item);
+      return (
+        <div className="weatherByHour">
+          {item.time.split(" ")[1]}
+          <br />
+          <div className="weatherByHourIcon">
+            <img src={`https:${item.condition.icon}`} alt="icon" width={50}/>
+          </div>
+        </div>
+      );
+    });
 
     weatherIcons = forecast.forecast.forecastday[0].hour.map((item, index) => {
       return {
@@ -182,9 +197,7 @@ function App() {
           </div>
           <div className="otherDays"></div>
         </div>
-        <div style={{ border: "1px solid red", height: 500 }}>
-          {/* <ZingChart data={config} ref={chart} /> */}
-        </div>
+        <div className="chart">{weatherByHour}</div>
       </div>
     );
   }
