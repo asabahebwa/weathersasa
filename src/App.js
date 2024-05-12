@@ -105,16 +105,18 @@ function App() {
     maxTempC = Math.max(...temperatures);
 
     weatherByHour = forecast.forecast.forecastday[0].hour.map((item, index) => {
+      // console.log(item);
       return (
         <div className="weatherByHour" key={index}>
           <div className="weatherByHourTime">{item.time.split(" ")[1]}</div>
-          <div className="weatherByHourIcon">
-            <img
-              src={`https:${item.condition.icon}`}
-              alt="icon"
-              width={50}
-              style={{ marginBottom: (item.temp_c / maxTempC) * 250 }}
-            />
+          <div style={{ marginBottom: (item.temp_c / maxTempC) * 250 }}>
+            <div className="weatherByHourIcon">
+              <img src={`https:${item.condition.icon}`} alt="icon" width={50} />
+            </div>
+            <div className="weatherByHourTemp">
+              {item.temp_c}
+              {String.fromCharCode(176)}
+            </div>
           </div>
         </div>
       );
