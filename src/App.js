@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { getWeatherForecast } from "./services/forecast";
 import { addForecast } from "./store/forecast/index";
 import { fetchPlace } from "./services/fetchPlace";
-import "./App.css";
+import Header from "./components/Header";
+import "./styles/App.css";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -20,15 +21,10 @@ function App() {
   const forecast = useSelector((state) => state.forecast);
 
   let weatherByHour;
-
   let maxTempC;
-
   let temperatures;
-
   let todayWeatherSummaryIcon;
-
   let todayWeatherSummaryText;
-
   let todayWeatherSummaryMinimumTemperature;
   let todayWeatherSummaryMaximumTemperature;
 
@@ -56,6 +52,7 @@ function App() {
   };
 
   if (forecast.forecast) {
+    // All your data processing code remains the same
     temperatures = forecast.forecast.forecastday[0].hour.map(
       (item, index) => item.temp_c
     );
@@ -63,7 +60,6 @@ function App() {
     maxTempC = Math.max(...temperatures);
 
     weatherByHour = forecast.forecast.forecastday[0].hour.map((item, index) => {
-      // console.log(item);
       return (
         <div className="weatherByHour" key={index}>
           <div className="weatherByHourTime">{item.time.split(" ")[1]}</div>
@@ -81,14 +77,9 @@ function App() {
     });
 
     todayWeatherSummaryIcon = `https:${forecast.forecast.forecastday[0].day.condition.icon}`;
-
-    todayWeatherSummaryText =
-      forecast.forecast.forecastday[0].day.condition.text;
-
-    todayWeatherSummaryMinimumTemperature =
-      forecast.forecast.forecastday[0].day.mintemp_c;
-    todayWeatherSummaryMaximumTemperature =
-      forecast.forecast.forecastday[0].day.maxtemp_c;
+    todayWeatherSummaryText = forecast.forecast.forecastday[0].day.condition.text;
+    todayWeatherSummaryMinimumTemperature = forecast.forecast.forecastday[0].day.mintemp_c;
+    todayWeatherSummaryMaximumTemperature = forecast.forecast.forecastday[0].day.maxtemp_c;
   }
 
   useEffect(() => {
@@ -107,56 +98,19 @@ function App() {
       });
     }
   }, [selectedCity]);
+
   return (
     <div className="App">
-      <header className="app-header">
-        <h1>WEATHER</h1>
-        <div className="header-search">
-          <div className="placesAutocomplete">
-            <div className="placesAutocomplete__inputWrap">
-              <input
-                list="places"
-                type="text"
-                id="city"
-                name="city"
-                onChange={handleCityChange}
-                onInput={(e) => {
-                  if (autocompleteCities.includes(e.target.value)) {
-                    // console.log("Selected city from list:", e.target.value);
-                    setSelectedCity(e.target.value);
-
-                    // Find selected city coordinates when it matches
-                    const selectedPlace = cities.find(
-                      (c) => c.name === e.target.value
-                    );
-                    if (selectedPlace) {
-                      const [longitude, latitude] = selectedPlace.coordinates;
-                      console.log(
-                        `Selected city coordinates: lat ${latitude}, lon ${longitude}`
-                      );
-                      setCoordinates({ latitude, longitude });
-                      setLoading(true);
-                    }
-                  }
-                }}
-                value={city}
-                required
-                placeholder="Enter a city"
-                pattern={autocompleteCities.join("|")}
-                autoComplete="off"
-              />
-              <datalist id="places">
-                {autocompleteCities.map((city, i) => (
-                  <option key={i}>{city}</option>
-                ))}
-              </datalist>
-            </div>
-            {autocompleteErr && (
-              <span className="inputError">{autocompleteErr}</span>
-            )}
-          </div>
-        </div>
-      </header>
+      <Header
+        city={city}
+        handleCityChange={handleCityChange}
+        autocompleteCities={autocompleteCities}
+        setSelectedCity={setSelectedCity}
+        cities={cities}
+        setCoordinates={setCoordinates}
+        setLoading={setLoading}
+        autocompleteErr={autocompleteErr}
+      />
 
       {/* Content section that can be loading */}
       {loading ? (
