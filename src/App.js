@@ -113,6 +113,9 @@ function App() {
   } else {
     return (
       <div className="App">
+        <header className="app-header">
+          <h1>WEATHER</h1>
+        </header>
         <div className="weatherSummary">
           <div className="today">
             <div className="heading">Today</div>
