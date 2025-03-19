@@ -116,6 +116,9 @@ function App() {
         <header className="app-header">
           <h1>WEATHER</h1>
         </header>
+        <div className="location-section">
+          <div className="selected-city">{selectedCity || "London"}</div>
+        </div>
         <div className="weatherSummary">
           <div className="today">
             <div className="heading">Today</div>

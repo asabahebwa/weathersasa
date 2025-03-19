@@ -36,6 +36,18 @@
   font-weight: 700;
 }
 
+.location-section {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.selected-city {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-left: 2rem;
+  color: #333;
+}
+
 /* You might need to adjust your existing styles to accommodate the header */
 .App {
   position: relative;
@@ -81,7 +93,7 @@ select {
   height: 20%;
   display: flex;
   font-size: 24px;
-  margin-left: 1rem;
+  margin-left: 2rem; /* Same margin as selected-city */
   /* border: 1px solid green; */
 }
 
