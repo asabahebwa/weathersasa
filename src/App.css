@@ -1,31 +1,25 @@
 .App {
   text-align: center;
-  margin-top: 400;
   width: 80vw;
   color: #3a3c3e;
-  /* border: 1px solid green; */
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  position: relative;
+  margin: 0 auto; /* Center the app */
+  margin-top: 0;
+  margin-bottom: 0;
+  /* border: 1px solid red */
 }
 
 .app-header {
-  width: 100%;
-  height: 4rem;
-  background-color: #149edc; /* You can change this color as desired */
+  height: 5rem;
+  background-color: #149edc;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 2rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
+  position: relative; /* Ensure proper stacking context */
+  z-index: 10; /* Keep header above other content */
 }
 
 .app-header h1 {
@@ -36,6 +30,55 @@
   font-weight: 700;
 }
 
+.header-search {
+  flex: 0 0 auto;
+  width: 40%;
+  max-width: 400px;
+}
+
+.placesAutocomplete {
+  position: relative;
+}
+
+.placesAutocomplete__inputWrap {
+  width: 100%;
+}
+
+.placesAutocomplete__inputWrap input {
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.inputError {
+  position: absolute;
+  color: #ff3333;
+  font-size: 12px;
+  margin-top: 4px;
+  right: 0;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  position: relative;
+  width: 100%;
+  margin-top: 2rem; /* Match the margin-bottom of header */
+}
+
+.loading-message {
+  font-size: 1.2rem;
+  color: #555;
+  padding: 10px 20px;
+  border-radius: 4px;
+  background-color: rgba(20, 158, 220, 0.1);
+}
+
 .location-section {
   text-align: left;
   margin-bottom: 1rem;
@@ -44,14 +87,8 @@
 .selected-city {
   font-size: 1.5rem;
   font-weight: 500;
-  margin-left: 2rem;
+  /* margin-left: 2rem; */
   color: #333;
-}
-
-/* You might need to adjust your existing styles to accommodate the header */
-.App {
-  position: relative;
-  /* Add any other existing styles */
 }
 
 .weatherSummary {
@@ -92,8 +129,10 @@ select {
 .today .heading {
   height: 20%;
   display: flex;
-  font-size: 24px;
-  margin-left: 2rem; /* Same margin as selected-city */
+  font-size: 1.5rem;
+  line-height: 28px;
+  line-height: 1.75rem;
+  /* margin-left: 2rem; */
   /* border: 1px solid green; */
 }
 

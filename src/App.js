@@ -107,107 +107,106 @@ function App() {
       });
     }
   }, [selectedCity]);
+  return (
+    <div className="App">
+      <header className="app-header">
+        <h1>WEATHER</h1>
+        <div className="header-search">
+          <div className="placesAutocomplete">
+            <div className="placesAutocomplete__inputWrap">
+              <input
+                list="places"
+                type="text"
+                id="city"
+                name="city"
+                onChange={handleCityChange}
+                onInput={(e) => {
+                  if (autocompleteCities.includes(e.target.value)) {
+                    // console.log("Selected city from list:", e.target.value);
+                    setSelectedCity(e.target.value);
 
-  if (loading) {
-    return <div>loading...</div>;
-  } else {
-    return (
-      <div className="App">
-        <header className="app-header">
-          <h1>WEATHER</h1>
-        </header>
-        <div className="location-section">
-          <div className="selected-city">{selectedCity || "London"}</div>
+                    // Find selected city coordinates when it matches
+                    const selectedPlace = cities.find(
+                      (c) => c.name === e.target.value
+                    );
+                    if (selectedPlace) {
+                      const [longitude, latitude] = selectedPlace.coordinates;
+                      console.log(
+                        `Selected city coordinates: lat ${latitude}, lon ${longitude}`
+                      );
+                      setCoordinates({ latitude, longitude });
+                      setLoading(true);
+                    }
+                  }
+                }}
+                value={city}
+                required
+                placeholder="Enter a city"
+                pattern={autocompleteCities.join("|")}
+                autoComplete="off"
+              />
+              <datalist id="places">
+                {autocompleteCities.map((city, i) => (
+                  <option key={i}>{city}</option>
+                ))}
+              </datalist>
+            </div>
+            {autocompleteErr && (
+              <span className="inputError">{autocompleteErr}</span>
+            )}
+          </div>
         </div>
-        <div className="weatherSummary">
-          <div className="today">
-            <div className="heading">Today</div>
-            <div className="summary">
-              <div className="summaryIcon">
-                {loading ? (
-                  <span>loading...</span>
-                ) : (
+      </header>
+
+      {/* Content section that can be loading */}
+      {loading ? (
+        <div className="loading-container">
+          <div className="loading-message">Loading weather data...</div>
+        </div>
+      ) : (
+        <>
+          <div className="location-section">
+            <div className="selected-city">{selectedCity || "London"}</div>
+          </div>
+          <div className="weatherSummary">
+            <div className="today">
+              <div className="heading">Today</div>
+              <div className="summary">
+                <div className="summaryIcon">
                   <img
                     src={todayWeatherSummaryIcon}
-                    alt="wather icon"
+                    alt="weather icon"
                     width={64}
                     height={64}
                   />
-                )}
-              </div>
-              <div className="summaryTemperature">
-                <span className="summaryTemperatureMax">
-                  {todayWeatherSummaryMaximumTemperature}
-                  {String.fromCharCode(176)}
-                </span>
-                <br />
-                <span className="summaryTemperatureMin">
-                  {todayWeatherSummaryMinimumTemperature}
-                  {String.fromCharCode(176)}
-                </span>
-              </div>
-              <div className="summaryText">
-                <span>{todayWeatherSummaryText}</span>
-                <br />
-                <span className="summaryTextHidden">
-                  {todayWeatherSummaryText}
-                </span>
+                </div>
+                <div className="summaryTemperature">
+                  <span className="summaryTemperatureMax">
+                    {todayWeatherSummaryMaximumTemperature}
+                    {String.fromCharCode(176)}
+                  </span>
+                  <br />
+                  <span className="summaryTemperatureMin">
+                    {todayWeatherSummaryMinimumTemperature}
+                    {String.fromCharCode(176)}
+                  </span>
+                </div>
+                <div className="summaryText">
+                  <span>{todayWeatherSummaryText}</span>
+                  <br />
+                  <span className="summaryTextHidden">
+                    {todayWeatherSummaryText}
+                  </span>
+                </div>
               </div>
             </div>
+            <div className="otherDays"></div>
           </div>
-          <div className="otherDays">
-            <div className="placesAutocomplete">
-              <div className="placesAutocomplete__inputWrap">
-                <input
-                  list="places"
-                  type="text"
-                  id="city"
-                  name="city"
-                  onChange={handleCityChange}
-                  onInput={(e) => {
-                    if (autocompleteCities.includes(e.target.value)) {
-                      console.log("Selected city from list:", e.target.value);
-                      setSelectedCity(e.target.value);
-
-                      // Find selected city coordinates when it matches
-                      const selectedPlace = cities.find(
-                        (c) => c.name === e.target.value
-                      );
-                      if (selectedPlace) {
-                        const [longitude, latitude] = selectedPlace.coordinates;
-                        console.log(
-                          `Selected city coordinates: lat ${latitude}, lon ${longitude}`
-                        );
-                        setCoordinates({ latitude, longitude });
-                        setLoading(true);
-                      }
-                    }
-                  }}
-                  value={city}
-                  required
-                  placeholder="*start typing and choose your city from the given options"
-                  pattern={autocompleteCities.join("|")}
-                  autoComplete="off"
-                />
-
-                <datalist id="places">
-                  {autocompleteCities.map((city, i) => (
-                    <option key={i}>{city}</option>
-                  ))}
-                </datalist>
-              </div>
-              <label htmlFor="city" className="label">
-                {autocompleteErr && (
-                  <span className="inputError">{autocompleteErr}</span>
-                )}
-              </label>
-            </div>
-          </div>
-        </div>
-        <div className="chart">{weatherByHour}</div>
-      </div>
-    );
-  }
+          <div className="chart">{weatherByHour}</div>
+        </>
+      )}
+    </div>
+  );
 }
 
 export default App;
