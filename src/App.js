@@ -166,7 +166,10 @@ function App() {
       ) : (
         <>
           <div className="location-section">
-            <div className="selected-city">{selectedCity || "London"}</div>
+            <div className="selected-city">
+              {selectedCity ||
+                "London, Greater London, England, United Kingdom"}
+            </div>
           </div>
           <div className="weatherSummary">
             <div className="today">
