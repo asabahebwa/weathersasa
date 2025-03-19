@@ -99,10 +99,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-    getWeatherForecast(coordinates).then((items) => {
-      dispatch(addForecast(items));
-      setLoading(false);
-    });
+    if (selectedCity) {
+      setLoading(true);
+      getWeatherForecast(coordinates).then((items) => {
+        dispatch(addForecast(items));
+        setLoading(false);
+      });
+    }
   }, [selectedCity]);
 
   if (loading) {
@@ -170,6 +173,7 @@ function App() {
                           `Selected city coordinates: lat ${latitude}, lon ${longitude}`
                         );
                         setCoordinates({ latitude, longitude });
+                        setLoading(true);
                       }
                     }
                   }}
