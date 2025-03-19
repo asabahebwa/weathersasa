@@ -2,7 +2,7 @@
   text-align: center;
   margin-top: 400;
   width: 80vw;
-  color: #3A3C3E;
+  color: #3a3c3e;
   /* border: 1px solid green; */
 }
 
@@ -36,6 +36,7 @@
   /* border: 1px solid red; */
   height: 150px;
   display: flex;
+  justify-content: space-between;
 }
 
 .today {
@@ -47,6 +48,23 @@
 }
 .otherDays {
   /* border: 1px solid blue; */
+  width: 30%;
+  margin-top: auto;
+  margin-bottom: auto;
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
 .today .heading {
@@ -107,7 +125,7 @@
 }
 
 .chart {
-  /* border: 1px solid red; */
+  /* border: 1px solid blue; */
   display: flex;
   height: 400px;
   margin-top: 50px;
@@ -140,3 +158,5 @@
   font-weight: 600;
   /* margin-top: 50px; */
 }
+
+

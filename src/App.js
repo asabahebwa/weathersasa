@@ -1,33 +1,27 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { getWeatherForecast } from "./services/forecast";
 import { addForecast } from "./store/forecast/index";
+import { fetchPlace } from "./services/fetchPlace";
 import "./App.css";
 
 function App() {
-  const [config, setConfig] = useState({});
   const [loading, setLoading] = useState(true);
-
-  let mounted = useRef(true);
-  let chart = useRef(null);
+  const [city, setCity] = useState("");
+  const [cities, setCities] = useState([]);
+  const [selectedCity, setSelectedCity] = useState("");
+  const [coordinates, setCoordinates] = useState(null);
+  const [autocompleteCities, setAutocompleteCities] = useState([]);
+  const [autocompleteErr, setAutocompleteErr] = useState("");
 
   const dispatch = useDispatch();
 
   const forecast = useSelector((state) => state.forecast);
 
-  let seriesTemp = [];
-
-  let scaleXValues = [];
-
-  let weatherIcons = [];
-
   let weatherByHour;
 
-  let minTempC;
   let maxTempC;
-
-  let temperaturesC = [];
 
   let temperatures;
 
@@ -38,70 +32,34 @@ function App() {
   let todayWeatherSummaryMinimumTemperature;
   let todayWeatherSummaryMaximumTemperature;
 
-  let chartConfig = {
-    type: "bar",
-    plot: {
-      tooltip: {
-        visible: false,
-      },
-      fillAngle: 270,
-      jsRule: "rule_plot()",
-    },
-    plotarea: {
-      marginTop: 100,
-    },
-    animation: {
-      effect: "ANIMATION_FADE_OUT",
-    },
-    scaleX: {
-      step: "1hour",
-      label: {
-        text: "test",
-      },
-      item: {
-        // border: "1px solid red",
-      },
-      transform: {
-        type: "date",
-        all: "%h:%i:%A",
-      },
-      // "max-items": 12,
-    },
-    // utc: true,
-    timezone: 3,
-    scaleY: {
-      label: {
-        text: "Temperature (°C)",
-      },
-    },
-    labels: weatherIcons,
-    series: [
-      {
-        values: seriesTemp,
-      },
-    ],
-    crosshairX: {
-      "plot-label": {
-        text: "%v°C",
-      },
-    },
+  const handleCityChange = async (e) => {
+    setCity(e.target.value);
+    if (!city) return;
+
+    const res = await fetchPlace(city);
+
+    // console.log(res);
+
+    !autocompleteCities.includes(e.target.value) &&
+      res.features &&
+      setAutocompleteCities(res.features.map((place) => place.place_name));
+    res.error ? setAutocompleteErr(res.error) : setAutocompleteErr("");
+
+    if (res.features) {
+      const cities = res.features.map((place) => ({
+        name: place.place_name,
+        coordinates: place.geometry.coordinates,
+      }));
+
+      setCities(cities);
+    }
   };
 
   if (forecast.forecast) {
-    // console.log(forecast.forecast);
-    seriesTemp = forecast.forecast.forecastday[0].hour.map(
-      (item) => item.temp_c
-    );
-
-    scaleXValues = forecast.forecast.forecastday[0].hour.map(
-      (item) => item.time_epoch
-    );
-
     temperatures = forecast.forecast.forecastday[0].hour.map(
       (item, index) => item.temp_c
     );
 
-    minTempC = Math.min(...temperatures);
     maxTempC = Math.max(...temperatures);
 
     weatherByHour = forecast.forecast.forecastday[0].hour.map((item, index) => {
@@ -122,18 +80,6 @@ function App() {
       );
     });
 
-    weatherIcons = forecast.forecast.forecastday[0].hour.map((item, index) => {
-      return {
-        "background-image": `https:${item.condition.icon}`,
-        "background-fit": "xy",
-        "font-size": "30px",
-        "border-radius": "50%",
-        "offset-y": -30,
-        hook: `node:plot=0;index=${index}`,
-        // text: item.condition.text,
-      };
-    });
-
     todayWeatherSummaryIcon = `https:${forecast.forecast.forecastday[0].day.condition.icon}`;
 
     todayWeatherSummaryText =
@@ -143,35 +89,21 @@ function App() {
       forecast.forecast.forecastday[0].day.mintemp_c;
     todayWeatherSummaryMaximumTemperature =
       forecast.forecast.forecastday[0].day.maxtemp_c;
-
-    let minDateValue = Math.min(...scaleXValues);
-
-    let maxDateValue = Math.max(...scaleXValues);
-
-    chartConfig.scaleX.minValue = minDateValue * 1000;
-    chartConfig.scaleX.maxValue = maxDateValue * 1000;
-
-    chartConfig.series[0].values = seriesTemp;
-    chartConfig.labels = weatherIcons;
   }
 
   useEffect(() => {
-    mounted.current = true;
-
-    getWeatherForecast().then((items) => {
-      if (mounted.current) {
-        dispatch(addForecast(items));
-        setConfig(chartConfig);
-        setLoading(false);
-      }
+    getWeatherForecast(coordinates).then((items) => {
+      dispatch(addForecast(items));
+      setLoading(false);
     });
-
-    return () => (mounted.current = false);
   }, []);
 
   useEffect(() => {
-    setConfig(chartConfig);
-  }, [forecast]);
+    getWeatherForecast(coordinates).then((items) => {
+      dispatch(addForecast(items));
+      setLoading(false);
+    });
+  }, [selectedCity]);
 
   if (loading) {
     return <div>loading...</div>;
@@ -214,7 +146,53 @@ function App() {
               </div>
             </div>
           </div>
-          <div className="otherDays"></div>
+          <div className="otherDays">
+            <div className="placesAutocomplete">
+              <div className="placesAutocomplete__inputWrap">
+                <input
+                  list="places"
+                  type="text"
+                  id="city"
+                  name="city"
+                  onChange={handleCityChange}
+                  onInput={(e) => {
+                    if (autocompleteCities.includes(e.target.value)) {
+                      console.log("Selected city from list:", e.target.value);
+                      setSelectedCity(e.target.value);
+
+                      // Find selected city coordinates when it matches
+                      const selectedPlace = cities.find(
+                        (c) => c.name === e.target.value
+                      );
+                      if (selectedPlace) {
+                        const [longitude, latitude] = selectedPlace.coordinates;
+                        console.log(
+                          `Selected city coordinates: lat ${latitude}, lon ${longitude}`
+                        );
+                        setCoordinates({ latitude, longitude });
+                      }
+                    }
+                  }}
+                  value={city}
+                  required
+                  placeholder="*start typing and choose your city from the given options"
+                  pattern={autocompleteCities.join("|")}
+                  autoComplete="off"
+                />
+
+                <datalist id="places">
+                  {autocompleteCities.map((city, i) => (
+                    <option key={i}>{city}</option>
+                  ))}
+                </datalist>
+              </div>
+              <label htmlFor="city" className="label">
+                {autocompleteErr && (
+                  <span className="inputError">{autocompleteErr}</span>
+                )}
+              </label>
+            </div>
+          </div>
         </div>
         <div className="chart">{weatherByHour}</div>
       </div>
