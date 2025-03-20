@@ -1,12 +1,13 @@
 /* Weather days styling */
 .weatherDays {
   display: flex;
-  margin: 1rem 2rem 2rem;
+  /* margin: 1rem 2rem 2rem; */
   overflow-x: auto;
   scrollbar-width: thin;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
   padding-bottom: 0.5rem; /* Space for scrollbar */
+  /* border: 1px solid red; */
 }
 
 /* Add custom scrollbar styling */
