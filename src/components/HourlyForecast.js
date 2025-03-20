@@ -9,15 +9,24 @@ const HourlyForecast = ({ forecastData, selectedDayIndex }) => {
   const hourlyData = forecastData.forecast.forecastday[selectedDayIndex].hour;
 
   // Calculate max temperature for scaling
-  const temperatures = hourlyData.map((item) => item.temp_c);
+  const temperatures = hourlyData.map((item) => {
+    return item.temp_c;
+  });
   const maxTempC = Math.max(...temperatures);
+  const minTempC = Math.min(...temperatures);
 
   return (
     <div className="chart">
       {hourlyData.map((item, index) => (
         <div className="weatherByHour" key={index}>
           <div className="weatherByHourTime">{item.time.split(" ")[1]}</div>
-          <div style={{ marginBottom: (item.temp_c / maxTempC) * 250 }}>
+          <div
+            style={{
+              marginBottom:
+                ((item.temp_c - minTempC) / (maxTempC - minTempC)) * 250,
+            }}
+            className="weatherByHourTempContainer"
+          >
             <div className="weatherByHourIcon">
               <img src={`https:${item.condition.icon}`} alt="icon" width={50} />
             </div>
