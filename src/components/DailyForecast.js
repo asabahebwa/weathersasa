@@ -1,10 +1,31 @@
 import React from "react";
 import "../styles/DailyForecast.css";
 
-const DailyForecast = ({ forecastData, selectedDayIndex, setSelectedDayIndex }) => {
+const DailyForecast = ({
+  forecastData,
+  selectedDayIndex,
+  setSelectedDayIndex,
+}) => {
   if (!forecastData || !forecastData.forecast) {
     return null;
   }
+
+  const nth = (d) => {
+    switch (d) {
+      case 1:
+      case 21:
+      case 31:
+        return "st";
+      case 2:
+      case 22:
+        return "nd";
+      case 3:
+      case 23:
+        return "rd";
+      default:
+        return "th";
+    }
+  };
 
   const formatDayOfWeek = (dateStr) => {
     const date = new Date(dateStr);
@@ -12,8 +33,8 @@ const DailyForecast = ({ forecastData, selectedDayIndex, setSelectedDayIndex }) 
   };
 
   const formatDate = (dateStr) => {
-    const date = new Date(dateStr);
-    return date.getDate();
+    const date = new Date(dateStr).getDate();
+    return date + nth(date);
   };
 
   return (
