@@ -15,6 +15,9 @@ const HourlyForecast = ({ forecastData, selectedDayIndex }) => {
   const maxTempC = Math.max(...temperatures);
   const minTempC = Math.min(...temperatures);
 
+  let marginBottomMax = 250;
+  let marginBottomMin = 50;
+
   return (
     <div className="chart">
       {hourlyData.map((item, index) => (
@@ -23,7 +26,9 @@ const HourlyForecast = ({ forecastData, selectedDayIndex }) => {
           <div
             style={{
               marginBottom:
-                ((item.temp_c - minTempC) / (maxTempC - minTempC)) * 250,
+                ((item.temp_c - minTempC) / (maxTempC - minTempC)) *
+                  (marginBottomMax - marginBottomMin) +
+                marginBottomMin,
             }}
             className="weatherByHourTempContainer"
           >
