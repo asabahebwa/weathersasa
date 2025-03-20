@@ -5,6 +5,8 @@ import { getWeatherForecast } from "./services/forecast";
 import { addForecast } from "./store/forecast/index";
 import { fetchPlace } from "./services/fetchPlace";
 import Header from "./components/Header";
+import Loader from "./components/Loader";
+import Location from "./components/Location";
 import "./styles/App.css";
 
 function App() {
@@ -77,9 +79,12 @@ function App() {
     });
 
     todayWeatherSummaryIcon = `https:${forecast.forecast.forecastday[0].day.condition.icon}`;
-    todayWeatherSummaryText = forecast.forecast.forecastday[0].day.condition.text;
-    todayWeatherSummaryMinimumTemperature = forecast.forecast.forecastday[0].day.mintemp_c;
-    todayWeatherSummaryMaximumTemperature = forecast.forecast.forecastday[0].day.maxtemp_c;
+    todayWeatherSummaryText =
+      forecast.forecast.forecastday[0].day.condition.text;
+    todayWeatherSummaryMinimumTemperature =
+      forecast.forecast.forecastday[0].day.mintemp_c;
+    todayWeatherSummaryMaximumTemperature =
+      forecast.forecast.forecastday[0].day.maxtemp_c;
   }
 
   useEffect(() => {
@@ -114,17 +119,10 @@ function App() {
 
       {/* Content section that can be loading */}
       {loading ? (
-        <div className="loading-container">
-          <div className="loading-message">Loading weather data...</div>
-        </div>
+        <Loader />
       ) : (
         <>
-          <div className="location-section">
-            <div className="selected-city">
-              {selectedCity ||
-                "London, Greater London, England, United Kingdom"}
-            </div>
-          </div>
+          <Location selectedCity={selectedCity} />
           <div className="weatherSummary">
             <div className="today">
               <div className="heading">Today</div>
