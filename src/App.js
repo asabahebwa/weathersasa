@@ -7,6 +7,8 @@ import { fetchPlace } from "./services/fetchPlace";
 import Header from "./components/Header";
 import Loader from "./components/Loader";
 import Location from "./components/Location";
+import HourlyForecast from "./components/HourlyForecast";
+import DailyForecast from "./components/DailyForecast";
 import "./styles/App.css";
 
 function App() {
@@ -17,26 +19,17 @@ function App() {
   const [coordinates, setCoordinates] = useState(null);
   const [autocompleteCities, setAutocompleteCities] = useState([]);
   const [autocompleteErr, setAutocompleteErr] = useState("");
+  const [selectedDayIndex, setSelectedDayIndex] = useState(0); // Add this to track which day is selected
 
   const dispatch = useDispatch();
 
   const forecast = useSelector((state) => state.forecast);
-
-  let weatherByHour;
-  let maxTempC;
-  let temperatures;
-  let todayWeatherSummaryIcon;
-  let todayWeatherSummaryText;
-  let todayWeatherSummaryMinimumTemperature;
-  let todayWeatherSummaryMaximumTemperature;
 
   const handleCityChange = async (e) => {
     setCity(e.target.value);
     if (!city) return;
 
     const res = await fetchPlace(city);
-
-    // console.log(res);
 
     !autocompleteCities.includes(e.target.value) &&
       res.features &&
@@ -52,40 +45,6 @@ function App() {
       setCities(cities);
     }
   };
-
-  if (forecast.forecast) {
-    // All your data processing code remains the same
-    temperatures = forecast.forecast.forecastday[0].hour.map(
-      (item, index) => item.temp_c
-    );
-
-    maxTempC = Math.max(...temperatures);
-
-    weatherByHour = forecast.forecast.forecastday[0].hour.map((item, index) => {
-      return (
-        <div className="weatherByHour" key={index}>
-          <div className="weatherByHourTime">{item.time.split(" ")[1]}</div>
-          <div style={{ marginBottom: (item.temp_c / maxTempC) * 250 }}>
-            <div className="weatherByHourIcon">
-              <img src={`https:${item.condition.icon}`} alt="icon" width={50} />
-            </div>
-            <div className="weatherByHourTemp">
-              {item.temp_c}
-              {String.fromCharCode(176)}
-            </div>
-          </div>
-        </div>
-      );
-    });
-
-    todayWeatherSummaryIcon = `https:${forecast.forecast.forecastday[0].day.condition.icon}`;
-    todayWeatherSummaryText =
-      forecast.forecast.forecastday[0].day.condition.text;
-    todayWeatherSummaryMinimumTemperature =
-      forecast.forecast.forecastday[0].day.mintemp_c;
-    todayWeatherSummaryMaximumTemperature =
-      forecast.forecast.forecastday[0].day.maxtemp_c;
-  }
 
   useEffect(() => {
     getWeatherForecast(coordinates).then((items) => {
@@ -117,47 +76,27 @@ function App() {
         autocompleteErr={autocompleteErr}
       />
 
-      {/* Content section that can be loading */}
       {loading ? (
         <Loader />
       ) : (
         <>
           <Location selectedCity={selectedCity} />
-          <div className="weatherSummary">
-            <div className="today">
-              <div className="heading">Today</div>
-              <div className="summary">
-                <div className="summaryIcon">
-                  <img
-                    src={todayWeatherSummaryIcon}
-                    alt="weather icon"
-                    width={64}
-                    height={64}
-                  />
-                </div>
-                <div className="summaryTemperature">
-                  <span className="summaryTemperatureMax">
-                    {todayWeatherSummaryMaximumTemperature}
-                    {String.fromCharCode(176)}
-                  </span>
-                  <br />
-                  <span className="summaryTemperatureMin">
-                    {todayWeatherSummaryMinimumTemperature}
-                    {String.fromCharCode(176)}
-                  </span>
-                </div>
-                <div className="summaryText">
-                  <span>{todayWeatherSummaryText}</span>
-                  <br />
-                  <span className="summaryTextHidden">
-                    {todayWeatherSummaryText}
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div className="otherDays"></div>
+          <div className="weatherDays">
+            {forecast.forecast && (
+              <DailyForecast
+                forecastData={forecast}
+                selectedDayIndex={selectedDayIndex}
+                setSelectedDayIndex={setSelectedDayIndex}
+              />
+            )}
           </div>
-          <div className="chart">{weatherByHour}</div>
+
+          {forecast.forecast && (
+            <HourlyForecast
+              forecastData={forecast}
+              selectedDayIndex={selectedDayIndex}
+            />
+          )}
         </>
       )}
     </div>

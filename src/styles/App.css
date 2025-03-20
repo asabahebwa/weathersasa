@@ -9,18 +9,6 @@
   /* border: 1px solid red */
 }
 
-.location-section {
-  text-align: left;
-  margin-bottom: 1rem;
-}
-
-.selected-city {
-  font-size: 1.5rem;
-  font-weight: 500;
-  /* margin-left: 2rem; */
-  color: #333;
-}
-
 .weatherSummary {
   /* border: 1px solid red; */
   height: 150px;
@@ -102,39 +90,4 @@
 .weatherSummary .tomorrow {
   /* border: 1px solid blue; */
   width: 75%;
-}
-
-.chart {
-  /* border: 1px solid blue; */
-  display: flex;
-  height: 400px;
-  margin-top: 50px;
-}
-
-.weatherByHour {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-left: 1px solid #d5d5d5;
-  width: 75px;
-  /* border: 1px solid red; */
-}
-
-.weatherByHourTime {
-  /* border: 1px solid cyan; */
-  /* margin-top: 50px; */
-}
-
-.weatherByHourIcon {
-  /* border: 1px solid green; */
-  /* width: 75px; */
-  /* margin-top: 50px; */
-}
-
-.weatherByHourTemp {
-  display: flex;
-  justify-content: center;
-  /* border: 1px solid blue; */
-  font-weight: 600;
-  /* margin-top: 50px; */
 }
