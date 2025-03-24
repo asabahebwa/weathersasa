@@ -36,11 +36,11 @@
   flex: 0 0 6.75rem;
   height: 5.875rem;
   background-color: rgba(255, 255, 255, 0.9);
-  padding: 0rem;
+  padding-left: 0.7rem;
   margin-top: 0.5rem;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   transition: transform 0.2s;
   cursor: pointer;
   border-left: 1px solid #d5d5d5;
@@ -62,6 +62,7 @@
   border-left: 1px solid #d5d5d5;
   justify-content: space-around;
   box-shadow: 0 -8px 0 #eb5038;
+  padding-left: 0rem;
 }
 
 /* Add visual indicator for scrollable content */
@@ -117,7 +118,7 @@
 .weatherDay__date {
   display: flex;
   align-items: center;
-  padding-left: 1rem;
+  justify-content: flex-start;
   /* border: 1px solid red; */
   margin-top: 0.3rem;
 }
@@ -157,6 +158,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  /* border: 1px solid green; */
   width: 100%;
 }
 
