@@ -10,6 +10,8 @@ const DailyForecast = ({
     return null;
   }
 
+  // console.log(forecastData);
+
   const nth = (d) => {
     switch (d) {
       case 1:
@@ -48,29 +50,37 @@ const DailyForecast = ({
           onClick={() => setSelectedDayIndex(index)}
         >
           <div className="weatherDay__date">
-            <div className="weatherDay__dayOfWeek">
+            <span className="weatherDay__dayOfWeek">
               {formatDayOfWeek(day.date)}
-            </div>
-            <div className="weatherDay__dateOfMonth">
+            </span>
+            &nbsp;
+            <span className="weatherDay__dateOfMonth">
               {formatDate(day.date)}
+            </span>
+          </div>
+
+          <div className="weatherDay__summary">
+            <div className="weatherDay__icon">
+              <img
+                src={`https:${day.day.condition.icon}`}
+                alt={day.day.condition.text}
+                width={selectedDayIndex === index ? 88 : 64}
+                height={selectedDayIndex === index ? 88 : 64}
+              />
             </div>
-          </div>
-          <div className="weatherDay__icon">
-            <img
-              src={`https:${day.day.condition.icon}`}
-              alt={day.day.condition.text}
-              width={40}
-            />
-          </div>
-          <div className="weatherDay__temps">
-            <span className="weatherDay__maxTemp">
-              {Math.round(day.day.maxtemp_c)}
-              {String.fromCharCode(176)}
-            </span>
-            <span className="weatherDay__minTemp">
-              {Math.round(day.day.mintemp_c)}
-              {String.fromCharCode(176)}
-            </span>
+            <div className="weatherDay__temps">
+              <span className="weatherDay__maxTemp">
+                {Math.round(day.day.maxtemp_c)}
+                {String.fromCharCode(176)}
+              </span>
+              <span className="weatherDay__minTemp">
+                {Math.round(day.day.mintemp_c)}
+                {String.fromCharCode(176)}
+              </span>
+            </div>
+            {selectedDayIndex === index && (
+              <div className="weatherDay__condition">{day.day.condition.text}</div>
+            )}
           </div>
         </div>
       ))}
