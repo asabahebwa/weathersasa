@@ -9,6 +9,7 @@ import Loader from "./components/Loader";
 import Location from "./components/Location";
 import HourlyForecast from "./components/HourlyForecast";
 import DailyForecast from "./components/DailyForecast";
+import MenuBar from "./components/MenuBar";
 import "./styles/App.css";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
   const dispatch = useDispatch();
 
   const forecast = useSelector((state) => state.forecast);
+  console.log(forecast);
 
   const handleCityChange = async (e) => {
     setCity(e.target.value);
@@ -65,6 +67,7 @@ function App() {
 
   return (
     <div className="App">
+      <MenuBar />
       <Header
         city={city}
         handleCityChange={handleCityChange}
@@ -80,8 +83,8 @@ function App() {
         <Loader />
       ) : (
         <>
-          <Location selectedCity={selectedCity} />
-          <div className="weatherDays">
+          <div className="location-and-daily-forecast">
+            <Location selectedCity={selectedCity} />
             {forecast.forecast && (
               <DailyForecast
                 forecastData={forecast}

@@ -6,11 +6,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* border: 1px solid blue; */
-  display: flex;
   justify-content: center;
-  /* align-items: center; */
   /* height: 80vh; */
-  margin-top: 1rem
 }
 
 code {

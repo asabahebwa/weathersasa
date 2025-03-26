@@ -1,28 +1,34 @@
+.header-container {
+  background-color: #067eb3;
+}
 .app-header {
-  height: 5rem;
-  background-color: #149edc;
+  height: 4rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2rem;
+  /* padding: 0px 1rem; */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
   position: relative; /* Ensure proper stacking context */
   z-index: 10; /* Keep header above other content */
+  max-width: 1280px;
+  margin: 0 auto;
+  /* border: 1px solid red; */
 }
 
 .app-header h1 {
   color: white;
   margin: 0;
-  font-size: 1.8rem;
+  font-size: 2.4rem;
   letter-spacing: 1px;
   font-weight: 700;
+  /* border: 1px solid blue; */
 }
 
 .header-search {
   flex: 0 0 auto;
-  width: 40%;
-  max-width: 400px;
+  width: 80%;
+  max-width: 1000px;
 }
 
 .placesAutocomplete {
@@ -30,6 +36,7 @@
 }
 
 .placesAutocomplete__inputWrap {
+  /* border: 1px solid red; */
   width: 100%;
 }
 
@@ -59,4 +66,48 @@ select {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+/* Add these styles to position the search icon */
+.placesAutocomplete__inputWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px; /* Position on the extreme right */
+  color: #949494;
+  z-index: 1;
+  pointer-events: none; /* This ensures clicks pass through to the input */
+  transition: color 0.3s ease;
+}
+
+/* Update input styling to accommodate the icon */
+.placesAutocomplete__inputWrap input {
+  padding-right: 35px; /* Add enough padding for the icon */
+}
+
+/* Style for when the input has content */
+.placesAutocomplete__inputWrap input:not(:placeholder-shown) + .search-icon {
+  color: #149edc;
+}
+
+/* Style for when the input is focused */
+.placesAutocomplete__inputWrap input:focus + .search-icon {
+  color: #149edc;
+}
+
+/* Dark mode styles */
+body.dark-mode .search-icon {
+  color: #aaa;
+}
+
+body.dark-mode .placesAutocomplete__inputWrap input:focus + .search-icon,
+body.dark-mode
+  .placesAutocomplete__inputWrap
+  input:not(:placeholder-shown)
+  + .search-icon {
+  color: #4dabf7;
 }

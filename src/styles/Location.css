@@ -1,11 +1,15 @@
 .location-section {
+  display: flex;
   text-align: left;
-  margin-bottom: 1rem;
+  /* border: 1px solid red; */
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  /* padding: 0px 1rem; */
 }
 
 .selected-city {
-  font-size: 1.5rem;
+  font-size: 28px;
   font-weight: 500;
-  /* margin-left: 2rem; */
-  color: #333;
+  color: white;
 }

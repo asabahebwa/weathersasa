@@ -5,7 +5,7 @@ function Location({ selectedCity }) {
   let city = selectedCity.split(",")[0];
   return (
     <div className="location-section">
-      <div className="selected-city">{city || "London"}</div>
+      <h1 className="selected-city">{city || "London"}</h1>
     </div>
   );
 }
