@@ -49,7 +49,7 @@ function Header({
                 autoComplete="off"
               />
               <span className="search-icon">
-                <FontAwesomeIcon icon={faSearch} />
+                <FontAwesomeIcon icon={faSearch} size="xl" />
               </span>
               <datalist id="places">
                 {autocompleteCities.map((city, i) => (

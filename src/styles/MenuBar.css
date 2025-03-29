@@ -6,12 +6,11 @@
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  height: 4rem;
-  color: #333;
+  height: 3.8rem;
+  color: #202224;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding: 0px 1rem; */
   /* border: 1px solid red; */
 }
 
