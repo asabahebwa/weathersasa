@@ -6,6 +6,12 @@
   width: 4rem;
   padding: 0rem 0.3rem;
   /* border: 1px solid red; */
+  margin-top: 0.4rem;
+}
+
+.weatherByHour:hover {
+  cursor: pointer;
+  box-shadow: 0 -3px 0 #eb5038;
 }
 
 .weatherByHourTime {

@@ -21,7 +21,7 @@ const HourlyForecast = ({ forecastData, selectedDayIndex }) => {
   return (
     <div className="chart">
       {hourlyData.map((item, index) => {
-        console.log(item);
+        // console.log(item);
         return (
           <div className="weatherByHour" key={index}>
             <div className="weatherByHourTime">
