@@ -20,28 +20,38 @@ const HourlyForecast = ({ forecastData, selectedDayIndex }) => {
 
   return (
     <div className="chart">
-      {hourlyData.map((item, index) => (
-        <div className="weatherByHour" key={index}>
-          <div className="weatherByHourTime">{item.time.split(" ")[1]}</div>
-          <div
-            style={{
-              marginBottom:
-                ((item.temp_c - minTempC) / (maxTempC - minTempC)) *
-                  (marginBottomMax - marginBottomMin) +
-                marginBottomMin,
-            }}
-            className="weatherByHourTempContainer"
-          >
-            <div className="weatherByHourIcon">
-              <img src={`https:${item.condition.icon}`} alt="icon" width={50} />
+      {hourlyData.map((item, index) => {
+        console.log(item);
+        return (
+          <div className="weatherByHour" key={index}>
+            <div className="weatherByHourTime">
+              <span>{item.time.split(" ")[1].split(":")[0]}</span>
+              <span className="weatherByHourTimeZero">{"00"}</span>
             </div>
-            <div className="weatherByHourTemp">
-              {item.temp_c}
-              {String.fromCharCode(176)}
+            <div
+              style={{
+                marginBottom:
+                  ((item.temp_c - minTempC) / (maxTempC - minTempC)) *
+                    (marginBottomMax - marginBottomMin) +
+                  marginBottomMin,
+              }}
+              className="weatherByHourTempContainer"
+            >
+              <div className="weatherByHourIcon">
+                <img
+                  src={`https:${item.condition.icon}`}
+                  alt="icon"
+                  width={50}
+                />
+              </div>
+              <div className="weatherByHourTemp">
+                {item.temp_c}
+                {String.fromCharCode(176)}
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };

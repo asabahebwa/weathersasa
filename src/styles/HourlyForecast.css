@@ -3,13 +3,21 @@
   flex-direction: column;
   justify-content: space-between;
   border-left: 1px solid #d5d5d5;
-  width: 75px;
+  width: 4rem;
+  padding: 0rem 0.3rem;
   /* border: 1px solid red; */
 }
 
 .weatherByHourTime {
-  /* border: 1px solid cyan; */
-  /* margin-top: 50px; */
+  /* border: 1px solid red; */
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+.weatherByHourTimeZero {
+  font-weight: normal;
+  font-size: 0.875rem;
+  color: #666;
 }
 
 .weatherByHourTempContainer {
