@@ -20,3 +20,19 @@
   fill: #545658;
   color: #545658;
 }
+.lastUpdated-sun {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 1rem;
+  /* border: 1px solid red; */
+}
+
+.lastUpdated-sunrise {
+  margin-right: 0.5rem;
+}
+.lastUpdated-sunset {
+  margin-left: 0.5rem;
+}
