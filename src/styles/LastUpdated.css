@@ -1,0 +1,22 @@
+.lastUpdated {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 1rem;
+  /* border: 1px solid red; */
+}
+
+.lastUpdated-text {
+  margin: 0rem 0.6rem;
+  font-size: 13px;
+  fill: #545658;
+  color: #545658;
+}
+.lastUpdated-time {
+  font-size: 13px;
+  color: #666;
+  fill: #545658;
+  color: #545658;
+}

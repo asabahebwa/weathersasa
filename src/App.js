@@ -9,6 +9,7 @@ import Loader from "./components/Loader";
 import Location from "./components/Location";
 import HourlyForecast from "./components/HourlyForecast";
 import DailyForecast from "./components/DailyForecast";
+import LastUpdated from "./components/LastUpdated";
 import MenuBar from "./components/MenuBar";
 import "./styles/App.css";
 
@@ -93,13 +94,13 @@ function App() {
               />
             )}
           </div>
-
           {forecast.forecast && (
             <HourlyForecast
               forecastData={forecast}
               selectedDayIndex={selectedDayIndex}
             />
           )}
+          <LastUpdated forecastData={forecast} />
         </>
       )}
     </div>
