@@ -44,44 +44,442 @@ const HourlyForecast = ({ forecastData, selectedDayIndex }) => {
     return result;
   };
 
+  let conditions = [
+    {
+      code: 1000,
+      day: "Sunny",
+      night: "Clear",
+      icon: 113,
+    },
+    {
+      code: 1003,
+      day: "Partly cloudy",
+      night: "Partly cloudy",
+      icon: 116,
+    },
+    {
+      code: 1006,
+      day: "Cloudy",
+      night: "Cloudy",
+      icon: 119,
+    },
+    {
+      code: 1009,
+      day: "Overcast",
+      night: "Overcast",
+      icon: 122,
+    },
+    {
+      code: 1030,
+      day: "Mist",
+      night: "Mist",
+      icon: 143,
+    },
+    {
+      code: 1063,
+      day: "Patchy rain possible",
+      night: "Patchy rain possible",
+      icon: 176,
+    },
+    {
+      code: 1066,
+      day: "Patchy snow possible",
+      night: "Patchy snow possible",
+      icon: 179,
+    },
+    {
+      code: 1069,
+      day: "Patchy sleet possible",
+      night: "Patchy sleet possible",
+      icon: 182,
+    },
+    {
+      code: 1072,
+      day: "Patchy freezing drizzle possible",
+      night: "Patchy freezing drizzle possible",
+      icon: 185,
+    },
+    {
+      code: 1087,
+      day: "Thundery outbreaks possible",
+      night: "Thundery outbreaks possible",
+      icon: 200,
+    },
+    {
+      code: 1114,
+      day: "Blowing snow",
+      night: "Blowing snow",
+      icon: 227,
+    },
+    {
+      code: 1117,
+      day: "Blizzard",
+      night: "Blizzard",
+      icon: 230,
+    },
+    {
+      code: 1135,
+      day: "Fog",
+      night: "Fog",
+      icon: 248,
+    },
+    {
+      code: 1147,
+      day: "Freezing fog",
+      night: "Freezing fog",
+      icon: 260,
+    },
+    {
+      code: 1150,
+      day: "Patchy light drizzle",
+      night: "Patchy light drizzle",
+      icon: 263,
+    },
+    {
+      code: 1153,
+      day: "Light drizzle",
+      night: "Light drizzle",
+      icon: 266,
+    },
+    {
+      code: 1168,
+      day: "Freezing drizzle",
+      night: "Freezing drizzle",
+      icon: 281,
+    },
+    {
+      code: 1171,
+      day: "Heavy freezing drizzle",
+      night: "Heavy freezing drizzle",
+      icon: 284,
+    },
+    {
+      code: 1180,
+      day: "Patchy light rain",
+      night: "Patchy light rain",
+      icon: 293,
+    },
+    {
+      code: 1183,
+      day: "Light rain",
+      night: "Light rain",
+      icon: 296,
+    },
+    {
+      code: 1186,
+      day: "Moderate rain at times",
+      night: "Moderate rain at times",
+      icon: 299,
+    },
+    {
+      code: 1189,
+      day: "Moderate rain",
+      night: "Moderate rain",
+      icon: 302,
+    },
+    {
+      code: 1192,
+      day: "Heavy rain at times",
+      night: "Heavy rain at times",
+      icon: 305,
+    },
+    {
+      code: 1195,
+      day: "Heavy rain",
+      night: "Heavy rain",
+      icon: 308,
+    },
+    {
+      code: 1198,
+      day: "Light freezing rain",
+      night: "Light freezing rain",
+      icon: 311,
+    },
+    {
+      code: 1201,
+      day: "Moderate or heavy freezing rain",
+      night: "Moderate or heavy freezing rain",
+      icon: 314,
+    },
+    {
+      code: 1204,
+      day: "Light sleet",
+      night: "Light sleet",
+      icon: 317,
+    },
+    {
+      code: 1207,
+      day: "Moderate or heavy sleet",
+      night: "Moderate or heavy sleet",
+      icon: 320,
+    },
+    {
+      code: 1210,
+      day: "Patchy light snow",
+      night: "Patchy light snow",
+      icon: 323,
+    },
+    {
+      code: 1213,
+      day: "Light snow",
+      night: "Light snow",
+      icon: 326,
+    },
+    {
+      code: 1216,
+      day: "Patchy moderate snow",
+      night: "Patchy moderate snow",
+      icon: 329,
+    },
+    {
+      code: 1219,
+      day: "Moderate snow",
+      night: "Moderate snow",
+      icon: 332,
+    },
+    {
+      code: 1222,
+      day: "Patchy heavy snow",
+      night: "Patchy heavy snow",
+      icon: 335,
+    },
+    {
+      code: 1225,
+      day: "Heavy snow",
+      night: "Heavy snow",
+      icon: 338,
+    },
+    {
+      code: 1237,
+      day: "Ice pellets",
+      night: "Ice pellets",
+      icon: 350,
+    },
+    {
+      code: 1240,
+      day: "Light rain shower",
+      night: "Light rain shower",
+      icon: 353,
+    },
+    {
+      code: 1243,
+      day: "Moderate or heavy rain shower",
+      night: "Moderate or heavy rain shower",
+      icon: 356,
+    },
+    {
+      code: 1246,
+      day: "Torrential rain shower",
+      night: "Torrential rain shower",
+      icon: 359,
+    },
+    {
+      code: 1249,
+      day: "Light sleet showers",
+      night: "Light sleet showers",
+      icon: 362,
+    },
+    {
+      code: 1252,
+      day: "Moderate or heavy sleet showers",
+      night: "Moderate or heavy sleet showers",
+      icon: 365,
+    },
+    {
+      code: 1255,
+      day: "Light snow showers",
+      night: "Light snow showers",
+      icon: 368,
+    },
+    {
+      code: 1258,
+      day: "Moderate or heavy snow showers",
+      night: "Moderate or heavy snow showers",
+      icon: 371,
+    },
+    {
+      code: 1261,
+      day: "Light showers of ice pellets",
+      night: "Light showers of ice pellets",
+      icon: 374,
+    },
+    {
+      code: 1264,
+      day: "Moderate or heavy showers of ice pellets",
+      night: "Moderate or heavy showers of ice pellets",
+      icon: 377,
+    },
+    {
+      code: 1273,
+      day: "Patchy light rain with thunder",
+      night: "Patchy light rain with thunder",
+      icon: 386,
+    },
+    {
+      code: 1276,
+      day: "Moderate or heavy rain with thunder",
+      night: "Moderate or heavy rain with thunder",
+      icon: 389,
+    },
+    {
+      code: 1279,
+      day: "Patchy light snow with thunder",
+      night: "Patchy light snow with thunder",
+      icon: 392,
+    },
+    {
+      code: 1282,
+      day: "Moderate or heavy snow with thunder",
+      night: "Moderate or heavy snow with thunder",
+      icon: 395,
+    },
+  ];
+
+  const getConditionText = (code, text) => {
+    switch (code) {
+      case 1000:
+        if (text === "Clear ") {
+          return "A clear sky";
+        } else {
+          return "Sunny";
+        }
+      case 1003:
+        return "Partly cloudy";
+      case 1006:
+        return "Cloudy";
+      case 1009:
+        return "Overcast";
+      case 1030:
+        return "Mist";
+      case 1063:
+        return "Patchy rain possible";
+      case 1066:
+        return "Patchy snow possible";
+      case 1069:
+        return "Patchy sleet possible";
+      case 1072:
+        return "Patchy freezing drizzle possible";
+      case 1087:
+        return "Thundery outbreaks possible";
+      case 1114:
+        return "Blowing snow";
+      case 1117:
+        return "Blizzard";
+      case 1135:
+        return "Fog";
+      case 1147:
+        return "Freezing fog";
+      case 1150:
+        return "Patchy light drizzle";
+      case 1153:
+        return "Light drizzle";
+      case 1168:
+        return "Freezing drizzle";
+      case 1171:
+        return "Heavy freezing drizzle";
+      case 1180:
+        return "Patchy light rain";
+      case 1183:
+        return "Light rain";
+      case 1186:
+        return "Moderate rain at times";
+      case 1189:
+        return "Moderate rain";
+      case 1192:
+        return "Heavy rain at times";
+      case 1195:
+        return "Heavy rain";
+      case 1198:
+        return "Light freezing rain";
+      case 1201:
+        return "Moderate or heavy freezing rain";
+      case 1204:
+        return "Light sleet";
+      case 1207:
+        return "Moderate or heavy sleet";
+      case 1210:
+        return "Patchy light snow";
+      case 1213:
+        return "Light snow";
+      case 1216:
+        return "Patchy moderate snow";
+      case 1219:
+        return "Moderate snow";
+      case 1222:
+        return "Patchy heavy snow";
+      case 1225:
+        return "Heavy snow";
+      case 1237:
+        return "Ice pellets";
+      case 1240:
+        return "Light rain shower";
+      case 1243:
+        return "Moderate or heavy rain shower";
+      case 1246:
+        return "Torrential rain shower";
+      case 1249:
+        return "Light sleet showers";
+      case 1252:
+        return "Moderate or heavy sleet showers";
+      case 1255:
+        return "Light snow showers";
+      case 1258:
+        return "Moderate or heavy snow showers";
+      case 1261:
+        return "Light showers of ice pellets";
+      case 1264:
+        return "Moderate or heavy showers of ice pellets";
+      case 1273:
+        return "Patchy light rain with thunder";
+      case 1276:
+        return "Moderate or heavy rain with thunder";
+      case 1279:
+        return "Patchy light snow with thunder";
+      case 1282:
+        return "Moderate or heavy snow with thunder";
+      default:
+        return "Unknown condition";
+    }
+  };
+
   const getWindPower = (windSpeed) => {
     let result = "";
     switch (true) {
       case windSpeed === 0:
-        result = "calm and still winds";
+        result = "with calm and still winds";
         break;
       case windSpeed > 0 && windSpeed <= 5:
-        result = "light winds";
+        result = "with light winds";
         break;
       case windSpeed > 5 && windSpeed <= 11:
-        result = "light breeze";
+        result = "and a light breeze";
         break;
       case windSpeed > 11 && windSpeed <= 28:
-        result = "gentle breeze";
+        result = "and a gentle breeze";
         break;
       case windSpeed > 28 && windSpeed <= 38:
-        result = "fresh breeze";
+        result = "and a fresh breeze";
         break;
       case windSpeed > 38 && windSpeed <= 49:
-        result = "strong breeze";
+        result = "and a strong breeze";
         break;
       case windSpeed > 49 && windSpeed <= 61:
-        result = "moderate gale";
+        result = "and a moderate gale";
         break;
       case windSpeed > 61 && windSpeed <= 74:
-        result = "fresh gale";
+        result = "and a fresh gale";
         break;
       case windSpeed > 74 && windSpeed <= 88:
-        result = "strong gale";
+        result = "and a strong gale";
         break;
       case windSpeed > 88 && windSpeed <= 102:
-        result = "whole gale";
+        result = "and a whole gale";
         break;
       case windSpeed > 102 && windSpeed <= 118:
-        result = "storm";
+        result = "and a storm";
         break;
       case windSpeed > 118:
-        result = "hurricane";
+        result = "and a hurricane";
         break;
       default:
         result = "Unknown wind conditions";
@@ -134,7 +532,8 @@ const HourlyForecast = ({ forecastData, selectedDayIndex }) => {
               <div className="weatherByHourDetails">
                 <div className="weatherDetailsCondition">
                   <span className="weatherDetailsConditionText">
-                    {item.condition.text} and a {getWindPower(item.wind_kph)}
+                    {getConditionText(item.condition.code, item.condition.text)}{" "}
+                    {getWindPower(item.wind_kph)}
                   </span>
                 </div>
 

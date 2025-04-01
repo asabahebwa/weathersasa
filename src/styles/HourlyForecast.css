@@ -67,6 +67,7 @@
   padding-top: 0.1875rem;
   display: block;
   white-space: normal;
+  text-align: start;
 }
 
 .weatherDetailsRows {
