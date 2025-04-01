@@ -3,7 +3,7 @@
 .weatherDays {
   display: flex;
   overflow-x: auto;
-  scrollbar-width: thin;
+  /* scrollbar-width: thin; */
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
   padding-bottom: 0.3rem;
@@ -13,25 +13,6 @@
   max-width: 1280px;
   margin: 0 auto;
   /* border: 1px solid red; */
-}
-
-/* Add custom scrollbar styling */
-.weatherDays::-webkit-scrollbar {
-  height: 6px;
-}
-
-.weatherDays::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-}
-
-.weatherDays::-webkit-scrollbar-thumb {
-  background: #b3b3b3;
-  border-radius: 10px;
-}
-
-.weatherDays::-webkit-scrollbar-thumb:hover {
-  background: #888;
 }
 
 .weatherDay {
