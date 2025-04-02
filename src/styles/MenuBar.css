@@ -14,10 +14,26 @@
   /* border: 1px solid red; */
 }
 
-body.dark-mode .menu-bar {
-  background-color: #1a1a1a;
-  color: #f8f9fa;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+.center-mobile-logo {
+  display: none;
+}
+
+.mobile-sign-in {
+  display: none;
+}
+
+.hamburger-menu {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.hamburger-menu:hover {
+  color: #067eb3;
 }
 
 .menu-bar-left {
@@ -26,7 +42,6 @@ body.dark-mode .menu-bar {
   align-items: center;
 }
 .menu-bar-right {
-  margin-right: 1rem;
   /* border: 1px solid blue; */
   display: flex;
   align-items: center;
@@ -36,7 +51,7 @@ body.dark-mode .menu-bar {
   display: flex;
   align-items: center;
   margin-right: 1.2rem;
-  /* border: 1px solid red; */
+  /* border: 1px solid blue; */
 }
 
 .logo span {
@@ -110,10 +125,6 @@ body.dark-mode .menu-bar {
   font-size: 0.95rem;
 }
 
-body.dark-mode .main-nav ul li a {
-  color: #f8f9fa;
-}
-
 .main-nav ul li a:hover {
   /* color: #149edc; */
   box-shadow: 0 2px 0 #067eb3;
@@ -131,88 +142,99 @@ body.dark-mode .main-nav ul li a {
   transition: color 0.2s;
 }
 
-body.dark-mode .social-icons a {
-  color: #ccc;
-}
-
 .social-icons a:hover {
   color: #149edc;
 }
 
-.dark-mode-toggle {
-  background: none;
-  border: none;
-  color: #555;
-  font-size: 1.1rem;
-  cursor: pointer;
-  padding: 0.3rem;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-body.dark-mode .dark-mode-toggle {
-  color: #f0c420;
-}
-
-.dark-mode-toggle:hover {
-  background-color: #eee;
-}
-
-body.dark-mode .dark-mode-toggle:hover {
-  background-color: #333;
+/* Mobile menu container - hidden by default */
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 3.8rem;
+  left: 0;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  padding: 1rem;
+  flex-direction: column;
+  transition: transform 0.3s ease;
 }
 
 /* Media queries for responsiveness */
-@media (max-width: 900px) {
+@media (max-width: 700px) {
   .menu-bar {
-    flex-direction: column;
-    height: auto;
-    padding: 1rem;
+    position: relative; /* For absolute positioned mobile menu */
   }
 
-  .menu-bar-left,
-  .menu-bar-right {
-    width: 100%;
+  /* Rearrange menu bar items */
+  .menu-bar-left {
+    width: auto;
+    margin-left: 0;
+    border: none;
   }
 
-  .menu-bar-right {
-    margin-top: 1rem;
-    flex-wrap: wrap;
+  .logo {
+    margin: 0;
   }
 
-  .main-nav {
-    width: 100%;
-    margin-bottom: 0.5rem;
+  .logo-w {
+    /* border: 1px solid red; */
+    width: 32px;
+    height: 32px;
   }
 
-  .main-nav ul {
-    justify-content: center;
-  }
-
-  .social-icons {
-    margin-right: 1rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .main-nav ul {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .main-nav ul li {
-    margin: 0.25rem 0.75rem;
-  }
-
-  .social-icons {
-    justify-content: center;
-    margin: 0.5rem 0;
+  .logo-s {
+    /* border: 1px solid blue; */
+    width: 32px;
+    height: 32px;
   }
 
   .menu-bar-right {
-    justify-content: center;
+    width: auto;
+    margin-right: 0;
+  }
+
+  /* Show only sign-in on the left */
+  .menu-bar-left .logo {
+    display: none; /* Hide logo in left section */
+  }
+
+  .menu-bar-left .sign-in {
+    display: none; /* Show sign-in button */
+  }
+
+  .menu-bar-left .mobile-sign-in {
+    display: flex; /* Show sign-in button */
+  }
+
+  .menu-bar-left .user-icon {
+    /* border: 1px solid blue; */
+    width: 32px;
+    height: 32px;
+  }
+
+  /* Add center logo */
+  .center-mobile-logo {
+    display: flex;
+    /* border: 1px solid red; */
+    /* position: absolute; */
+    /* left: 50%; */
+    /* transform: translateX(-50%); */
+  }
+
+  /* Hide desktop navigation and show hamburger */
+  .menu-bar-right .main-nav,
+  .menu-bar-right .social-icons,
+  .menu-bar-right .dark-mode-toggle {
+    display: none;
+  }
+
+  .hamburger-menu {
+    display: block;
+  }
+
+  .mobile-menu-active {
+    display: none;
   }
 }

@@ -21,6 +21,7 @@
 .app-header h1 {
   color: white;
   margin: 0;
+  margin-right: 3rem;
   font-size: 2.4rem;
   letter-spacing: 1px;
   font-weight: 700;
@@ -28,7 +29,7 @@
 }
 
 .header-search {
-  flex: 0 0 auto;
+  /* flex: 0 0 auto; */
   width: 80%;
   max-width: 1000px;
 }
@@ -58,7 +59,7 @@
 
 .placesAutocomplete__inputWrap input::placeholder {
   color: #202224;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
 .inputError {
@@ -76,7 +77,7 @@ select {
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  /* border-radius: 4px; */
   box-sizing: border-box;
 }
 
@@ -111,15 +112,9 @@ select {
   color: #202224;
 }
 
-/* Dark mode styles */
-body.dark-mode .search-icon {
-  color: #aaa;
-}
-
-body.dark-mode .placesAutocomplete__inputWrap input:focus + .search-icon,
-body.dark-mode
-  .placesAutocomplete__inputWrap
-  input:not(:placeholder-shown)
-  + .search-icon {
-  color: #4dabf7;
+@media screen and (max-width: 700px) {
+  .app-header h1 {
+    font-size: 1.8rem;
+    margin-right: 2rem;
+  }
 }
