@@ -8,7 +8,7 @@
   -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
   max-width: 1280px;
   margin: 0 auto;
-  /* padding: 0 1rem; */
+  padding: 0 1rem;
 }
 
 .weatherByHour {

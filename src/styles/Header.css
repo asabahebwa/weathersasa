@@ -1,5 +1,7 @@
 .header-container {
   background-color: #067eb3;
+  padding: 0rem 1rem;
+  /* border: 1px solid red; */
 }
 .app-header {
   height: 3.8rem;

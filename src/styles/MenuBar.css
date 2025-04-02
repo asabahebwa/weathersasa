@@ -1,6 +1,6 @@
 .menu-bar-container {
-  width: 100%;
   /* border: 1px solid blue; */
+  padding: 0rem 1rem;
 }
 .menu-bar {
   width: 100%;
