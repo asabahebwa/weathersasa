@@ -22,8 +22,12 @@
   display: none;
 }
 
-.hamburger-menu {
+.hamburger-menu-container {
   display: none;
+  cursor: pointer;
+}
+
+.hamburger-menu {
   background: none;
   border: none;
   cursor: pointer;
@@ -165,13 +169,14 @@
 @media (max-width: 700px) {
   .menu-bar {
     position: relative; /* For absolute positioned mobile menu */
+    /* border: 1px solid red; */
   }
 
   /* Rearrange menu bar items */
   .menu-bar-left {
     width: auto;
-    margin-left: 0;
     border: none;
+    /* border: 1px solid red; */
   }
 
   .logo {
@@ -218,9 +223,6 @@
   .center-mobile-logo {
     display: flex;
     /* border: 1px solid red; */
-    /* position: absolute; */
-    /* left: 50%; */
-    /* transform: translateX(-50%); */
   }
 
   /* Hide desktop navigation and show hamburger */
@@ -230,8 +232,13 @@
     display: none;
   }
 
-  .hamburger-menu {
-    display: block;
+  .hamburger-menu-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    /* border: 1px solid blue; */
   }
 
   .mobile-menu-active {

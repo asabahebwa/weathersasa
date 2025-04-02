@@ -100,13 +100,11 @@ const MenuBar = () => {
               <FontAwesomeIcon icon={faGithub} />
             </a>
           </div>
-          <button
-            className="hamburger-menu"
-            onClick={toggleMobileMenu}
-            aria-label="Toggle mobile menu"
-          >
-            <FontAwesomeIcon icon={mobileMenuOpen ? faTimes : faBars} />
-          </button>
+          <div className="hamburger-menu-container" onClick={toggleMobileMenu}>
+            <button className="hamburger-menu" aria-label="Toggle mobile menu">
+              <FontAwesomeIcon icon={mobileMenuOpen ? faTimes : faBars} />
+            </button>
+          </div>
         </div>
       </div>
       <div
