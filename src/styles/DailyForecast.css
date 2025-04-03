@@ -35,7 +35,6 @@
 .weatherDay--selected {
   display: flex;
   flex: 0 0 25.375rem; /* This sets it to 40% of the container width */
-  min-width: 25.375rem; /* Set minimum width */
   max-width: 30rem; /* Set maximum width to prevent it from becoming too large */
   height: 9.25rem;
   z-index: 2; /* Ensure it appears above other items */
@@ -214,4 +213,82 @@
 .weatherDay--selected .weatherDay__minTemp {
   font-size: 24px;
   /* border: 1px solid red; */
+}
+
+@media screen and (max-width: 700px) {
+  .weatherDays{
+    /* padding: 0rem 1rem; */
+  }
+  .weatherDay {
+    max-width: 6.75rem;
+    padding: 0;
+  }
+
+  .weatherDay .weatherDay__date {
+    /* border: 1px solid red; */
+    margin-left: 0.5rem;
+  }
+
+  .weatherDay .weatherDay__temps {
+    /* border: 1px solid green; */
+    width: auto;
+  }
+
+  .weatherDay .weatherDay__icon {
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 64px;
+    width: 64x;
+  }
+
+  .weatherDay .weatherDay__summary {
+    /* border: 1px solid blue; */
+    justify-content: flex-end;
+    width: auto;
+  }
+  .weatherDay--selected {
+    /* border: 1px solid #0000ff; */
+    max-width: 130px;
+    height: 114px;
+    /* padding: 4px 7px; */
+  }
+  .weatherDay--selected .weatherDay__date {
+    /* border: 1px solid green; */
+    padding: 0;
+    margin: 0;
+    margin-left: 0.5rem;
+  }
+  .weatherDay--selected .weatherDay__dayOfWeek {
+    font-size: 1.2rem;
+  }
+  .weatherDay--selected .weatherDay__dateOfMonth {
+    font-size: 1.2rem;
+  }
+  .weatherDay--selected .weatherDay__temps {
+    /* border: 1px solid blue; */
+  }
+
+  .weatherDay--selected .weatherDay__maxTemp {
+    font-size: 1.2rem;
+  }
+  .weatherDay--selected .weatherDay__minTemp {
+    font-size: 1.2rem;
+  }
+  .weatherDay--selected .weatherDay__summary {
+    /* border: 1px solid red; */
+    justify-content: center;
+  }
+  .weatherDay--selected .weatherDay__icon {
+    /* border: 1px solid blue; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 64px;
+    width: 64x;
+  }
+  .weatherDay--selected .weatherDay__condition {
+    display: none; /* Hide on mobile */
+  }
 }
