@@ -10,6 +10,7 @@ import Location from "./components/Location";
 import HourlyForecast from "./components/HourlyForecast";
 import DailyForecast from "./components/DailyForecast";
 import LastUpdated from "./components/LastUpdated";
+import MobileWeatherCondition from "./components/MobileWeatherCondition";
 import MenuBar from "./components/MenuBar";
 import "./styles/App.css";
 
@@ -94,6 +95,12 @@ function App() {
               />
             )}
           </div>
+          {forecast.forecast && (
+            <MobileWeatherCondition
+              forecastData={forecast}
+              selectedDayIndex={selectedDayIndex}
+            />
+          )}
           {forecast.forecast && (
             <HourlyForecast
               forecastData={forecast}
