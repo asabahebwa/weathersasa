@@ -12,6 +12,7 @@ import DailyForecast from "./components/DailyForecast";
 import LastUpdated from "./components/LastUpdated";
 import MobileWeatherCondition from "./components/MobileWeatherCondition";
 import MenuBar from "./components/MenuBar";
+import Sun from "./components/Sun";
 import "./styles/App.css";
 
 function App() {
@@ -108,6 +109,7 @@ function App() {
             />
           )}
           <LastUpdated forecastData={forecast} />
+          <Sun forecastData={forecast} />
         </>
       )}
     </div>
