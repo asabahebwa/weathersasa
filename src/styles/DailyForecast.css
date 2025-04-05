@@ -117,7 +117,7 @@
   text-decoration: none;
 }
 
-.dayOrNight {
+.weatherDay .dayOrNight {
   margin-top: 0.4rem;
   display: flex;
   font-size: 1rem;
@@ -249,9 +249,21 @@
     margin-left: 0.5rem;
   }
 
+  .weatherDay .dayOrNight {
+    margin-left: 0.5rem;
+  }
+
   .weatherDay .weatherDay__temps {
     /* border: 1px solid green; */
     width: auto;
+  }
+
+  .weatherDay .weatherDay__temps .weatherDay__lowTempText {
+    font-size: 14px;
+  }
+
+  .weatherDay .weatherDay__temps .weatherDay__lowTemp {
+    font-size: 1.2rem;
   }
 
   .weatherDay .weatherDay__icon {
@@ -285,6 +297,11 @@
   }
   .weatherDay--selected .weatherDay__dateOfMonth {
     font-size: 1.2rem;
+  }
+  .weatherDay--selected .dayOrNight {
+    font-size: 1.2rem;
+    border: 1px solid red;
+    margin-left: 0.5rem;
   }
   .weatherDay--selected .weatherDay__temps {
     /* border: 1px solid blue; */
