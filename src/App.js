@@ -28,7 +28,7 @@ function App() {
   const dispatch = useDispatch();
 
   const forecast = useSelector((state) => state.forecast);
-  console.log(forecast);
+  // console.log(forecast);
 
   const handleCityChange = async (e) => {
     setCity(e.target.value);
