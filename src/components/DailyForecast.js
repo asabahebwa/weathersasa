@@ -192,12 +192,69 @@ const DailyForecast = ({
     return date + nth(date);
   };
 
-  const isDayOrNight = () => {
+  const getCurrentWeather = (day, index) => {
     const currentDetails = forecastData.current;
+
     return (
-      <div className="dayOrNight">
-        <span>{currentDetails.is_day ? "Today" : "Tonight"}</span>
-      </div>
+      <>
+        <div className="dayOrNight">
+          <span>{currentDetails.is_day === 1 ? "Today" : "Tonight"}</span>
+        </div>
+
+        <div className="weatherDay__summary">
+          <div className="weatherDay__icon">
+            <img
+              src={
+                currentDetails.is_day === 1
+                  ? `https:${day.day.condition.icon}`
+                  : `https:${currentDetails.condition.icon}`
+              }
+              alt={day.day.condition.text}
+              width={selectedDayIndex === index ? 88 : 64}
+              height={selectedDayIndex === index ? 88 : 64}
+            />
+          </div>
+          {currentDetails.is_day === 1 ? (
+            <div className="weatherDay__temps">
+              <span className="weatherDay__maxTemp">
+                {Math.round(day.day.maxtemp_c)}
+                {String.fromCharCode(176)}
+              </span>
+              <span className="weatherDay__minTemp">
+                {Math.round(day.day.mintemp_c)}
+                {String.fromCharCode(176)}
+              </span>
+            </div>
+          ) : (
+            <div className="weatherDay__temps">
+              <span className="weatherDay__lowTempText">Now</span>
+              <span className="weatherDay__lowTemp">
+                {Math.round(currentDetails.temp_c)}
+                {String.fromCharCode(176)}
+              </span>
+            </div>
+          )}
+
+          {selectedDayIndex === index &&
+            (currentDetails.is_day === 1 ? (
+              <div className="weatherDay__condition">
+                {getConditionText(
+                  day.day.condition.code,
+                  day.day.condition.text
+                )}{" "}
+                {getWindPower(day.day.maxwind_kph)}
+              </div>
+            ) : (
+              <div className="weatherDay__condition">
+                {getConditionText(
+                  currentDetails.condition.code,
+                  currentDetails.condition.text
+                )}{" "}
+                {getWindPower(currentDetails.wind_kph)}
+              </div>
+            ))}
+        </div>
+      </>
     );
   };
 
@@ -212,59 +269,52 @@ const DailyForecast = ({
           onClick={() => setSelectedDayIndex(index)}
         >
           {index === 0 ? (
-            isDayOrNight()
+            getCurrentWeather(day, index)
           ) : (
-            <div className="weatherDay__date">
-              <span className="weatherDay__dayOfWeek">
-                {formatDayOfWeek(day.date)}
-              </span>
-              &nbsp;
-              <span className="weatherDay__dateOfMonth">
-                {formatDate(day.date)}
-              </span>
-            </div>
+            <>
+              <div className="weatherDay__date">
+                <span className="weatherDay__dayOfWeek">
+                  {formatDayOfWeek(day.date)}
+                </span>
+                &nbsp;
+                <span className="weatherDay__dateOfMonth">
+                  {formatDate(day.date)}
+                </span>
+              </div>
+
+              <div className="weatherDay__summary">
+                <div className="weatherDay__icon">
+                  <img
+                    src={`https:${day.day.condition.icon}`}
+                    alt={day.day.condition.text}
+                    width={selectedDayIndex === index ? 88 : 64}
+                    height={selectedDayIndex === index ? 88 : 64}
+                  />
+                </div>
+
+                <div className="weatherDay__temps">
+                  <span className="weatherDay__maxTemp">
+                    {Math.round(day.day.maxtemp_c)}
+                    {String.fromCharCode(176)}
+                  </span>
+                  <span className="weatherDay__minTemp">
+                    {Math.round(day.day.mintemp_c)}
+                    {String.fromCharCode(176)}
+                  </span>
+                </div>
+
+                {selectedDayIndex === index && (
+                  <div className="weatherDay__condition">
+                    {getConditionText(
+                      day.day.condition.code,
+                      day.day.condition.text
+                    )}{" "}
+                    {getWindPower(day.day.maxwind_kph)}
+                  </div>
+                )}
+              </div>
+            </>
           )}
-
-          <div className="weatherDay__summary">
-            <div className="weatherDay__icon">
-              <img
-                src={`https:${day.day.condition.icon}`}
-                alt={day.day.condition.text}
-                width={selectedDayIndex === index ? 88 : 64}
-                height={selectedDayIndex === index ? 88 : 64}
-              />
-            </div>
-            {index === 0 ? (
-              <div className="weatherDay__temps">
-                <span className="weatherDay__lowTempText">Low</span>
-                <span className="weatherDay__lowTemp">
-                  {Math.round(day.day.mintemp_c)}
-                  {String.fromCharCode(176)}
-                </span>
-              </div>
-            ) : (
-              <div className="weatherDay__temps">
-                <span className="weatherDay__maxTemp">
-                  {Math.round(day.day.maxtemp_c)}
-                  {String.fromCharCode(176)}
-                </span>
-                <span className="weatherDay__minTemp">
-                  {Math.round(day.day.mintemp_c)}
-                  {String.fromCharCode(176)}
-                </span>
-              </div>
-            )}
-
-            {selectedDayIndex === index && (
-              <div className="weatherDay__condition">
-                {getConditionText(
-                  day.day.condition.code,
-                  day.day.condition.text
-                )}{" "}
-                {getWindPower(day.day.maxwind_kph)}
-              </div>
-            )}
-          </div>
         </div>
       ))}
     </div>
