@@ -300,7 +300,7 @@
   }
   .weatherDay--selected .dayOrNight {
     font-size: 1.2rem;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     margin-left: 0.5rem;
   }
   .weatherDay--selected .weatherDay__temps {
