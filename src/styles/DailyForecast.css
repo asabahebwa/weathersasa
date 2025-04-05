@@ -111,15 +111,19 @@
   /* border: 1px solid blue; */
   padding: 0rem;
   margin-left: 1rem;
-  line-height: 1;
 }
 
 .weatherDay--selected:hover .weatherDay__date {
   text-decoration: none;
 }
 
+.dayOrNight {
+  margin-top: 0.4rem;
+  display: flex;
+  font-size: 1rem;
+}
+
 .weatherDay__dayOfWeek {
-  font-weight: 500;
   display: flex;
   font-size: 1rem;
 }
@@ -134,6 +138,14 @@
 }
 
 .weatherDay--selected .weatherDay__dateOfMonth {
+  font-size: 1.5rem;
+}
+
+.weatherDay--selected .dayOrNight {
+  align-self: flex-start;
+  /* border: 1px solid blue; */
+  padding: 0rem;
+  margin-left: 1rem;
   font-size: 1.5rem;
 }
 
@@ -215,8 +227,13 @@
   /* border: 1px solid red; */
 }
 
+.weatherDay--selected .weatherDay__lowTemp {
+  font-size: 24px;
+  /* border: 1px solid red; */
+}
+
 @media screen and (max-width: 700px) {
-  .weatherDays{
+  .weatherDays {
     /* padding: 0rem 1rem; */
   }
   .weatherDay {

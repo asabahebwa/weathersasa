@@ -192,6 +192,15 @@ const DailyForecast = ({
     return date + nth(date);
   };
 
+  const isDayOrNight = () => {
+    const currentDetails = forecastData.current;
+    return (
+      <div className="dayOrNight">
+        <span>{currentDetails.is_day ? "Today" : "Tonight"}</span>
+      </div>
+    );
+  };
+
   return (
     <div className="weatherDays">
       {forecastData.forecast.forecastday.map((day, index) => (
@@ -202,15 +211,19 @@ const DailyForecast = ({
           key={index}
           onClick={() => setSelectedDayIndex(index)}
         >
-          <div className="weatherDay__date">
-            <span className="weatherDay__dayOfWeek">
-              {formatDayOfWeek(day.date)}
-            </span>
-            &nbsp;
-            <span className="weatherDay__dateOfMonth">
-              {formatDate(day.date)}
-            </span>
-          </div>
+          {index === 0 ? (
+            isDayOrNight()
+          ) : (
+            <div className="weatherDay__date">
+              <span className="weatherDay__dayOfWeek">
+                {formatDayOfWeek(day.date)}
+              </span>
+              &nbsp;
+              <span className="weatherDay__dateOfMonth">
+                {formatDate(day.date)}
+              </span>
+            </div>
+          )}
 
           <div className="weatherDay__summary">
             <div className="weatherDay__icon">
@@ -221,16 +234,27 @@ const DailyForecast = ({
                 height={selectedDayIndex === index ? 88 : 64}
               />
             </div>
-            <div className="weatherDay__temps">
-              <span className="weatherDay__maxTemp">
-                {Math.round(day.day.maxtemp_c)}
-                {String.fromCharCode(176)}
-              </span>
-              <span className="weatherDay__minTemp">
-                {Math.round(day.day.mintemp_c)}
-                {String.fromCharCode(176)}
-              </span>
-            </div>
+            {index === 0 ? (
+              <div className="weatherDay__temps">
+                <span className="weatherDay__lowTempText">Low</span>
+                <span className="weatherDay__lowTemp">
+                  {Math.round(day.day.mintemp_c)}
+                  {String.fromCharCode(176)}
+                </span>
+              </div>
+            ) : (
+              <div className="weatherDay__temps">
+                <span className="weatherDay__maxTemp">
+                  {Math.round(day.day.maxtemp_c)}
+                  {String.fromCharCode(176)}
+                </span>
+                <span className="weatherDay__minTemp">
+                  {Math.round(day.day.mintemp_c)}
+                  {String.fromCharCode(176)}
+                </span>
+              </div>
+            )}
+
             {selectedDayIndex === index && (
               <div className="weatherDay__condition">
                 {getConditionText(
