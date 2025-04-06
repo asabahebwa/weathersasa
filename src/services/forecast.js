@@ -3,7 +3,7 @@ export function getWeatherForecast(coordinates) {
     let { latitude, longitude } = coordinates;
 
     return fetch(
-      `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${latitude},${longitude}&days=14&aqi=no&alerts=no`
+      `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${latitude},${longitude}&days=14&aqi=yes&alerts=no`
     )
       .then((data) => {
         return data.json();
@@ -14,7 +14,7 @@ export function getWeatherForecast(coordinates) {
       });
   } else {
     return fetch(
-      `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=London&days=14&aqi=no&alerts=no`
+      `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=London&days=14&aqi=yes&alerts=no`
     )
       .then((data) => {
         return data.json();

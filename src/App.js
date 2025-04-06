@@ -13,6 +13,7 @@ import LastUpdated from "./components/LastUpdated";
 import MobileWeatherCondition from "./components/MobileWeatherCondition";
 import MenuBar from "./components/MenuBar";
 import Sun from "./components/Sun";
+import AirQuality from "./components/AirQuality";
 import "./styles/App.css";
 
 function App() {
@@ -109,7 +110,11 @@ function App() {
             />
           )}
           <LastUpdated forecastData={forecast} />
-          <Sun forecastData={forecast} />
+          <Sun forecastData={forecast} selectedDayIndex={selectedDayIndex} />
+          <AirQuality
+            forecastData={forecast}
+            selectedDayIndex={selectedDayIndex}
+          />
         </>
       )}
     </div>

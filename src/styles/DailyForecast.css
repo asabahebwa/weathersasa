@@ -6,7 +6,7 @@
   /* scrollbar-width: thin; */
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-  padding: 0rem 1rem;
+  padding: 0rem 1rem; /*controls the scrollbar width */
   padding-bottom: 0.3rem;
   flex-wrap: nowrap;
   align-items: end;

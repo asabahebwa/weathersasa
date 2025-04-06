@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/Sun.css";
 
-function Sun({ forecastData }) {
+function Sun({ forecastData, selectedDayIndex }) {
   if (!forecastData || !forecastData.forecast) {
     return null;
   }
@@ -9,11 +9,13 @@ function Sun({ forecastData }) {
   return (
     <div className="sun">
       <span className="sunrise">
-        Sunrise {forecastData.forecast.forecastday[0].astro.sunrise}
+        Sunrise{" "}
+        {forecastData.forecast.forecastday[selectedDayIndex].astro.sunrise}
       </span>{" "}
       {"|"}
       <span className="sunset">
-        Sunset {forecastData.forecast.forecastday[0].astro.sunset}
+        Sunset{" "}
+        {forecastData.forecast.forecastday[selectedDayIndex].astro.sunset}
       </span>
     </div>
   );
