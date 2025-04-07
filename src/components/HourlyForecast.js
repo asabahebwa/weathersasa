@@ -11,13 +11,13 @@ const HourlyForecast = ({ forecastData, selectedDayIndex }) => {
 
   // Calculate max temperature for scaling
   const temperatures = hourlyData.map((item) => {
-    return item.temp_c;
+    return Math.trunc(item.temp_c);
   });
   const maxTempC = Math.max(...temperatures);
   const minTempC = Math.min(...temperatures);
 
-  let marginBottomMax = 250;
-  let marginBottomMin = 50;
+  let marginBottomMax = 136;
+  let marginBottomMin = 16;
 
   // Toggle expanded state for clicked hour
   const toggleExpand = (index) => {
@@ -25,6 +25,20 @@ const HourlyForecast = ({ forecastData, selectedDayIndex }) => {
       setExpandedHourIndex(null);
     } else {
       setExpandedHourIndex(index);
+    }
+  };
+
+  const getChanceOfPrecipitation = (rain, snow) => {
+    if (rain === 0 && snow === 0) {
+      return "0%";
+    } else if (rain > 0 && snow === 0) {
+      return `${Math.trunc(rain)}%`;
+    } else if (rain === 0 && snow > 0) {
+      return `${Math.trunc(snow)}%`;
+    } else if (rain > 0 && snow > 0) {
+      return `${Math.trunc(rain)}%`;
+    } else {
+      return "0%";
     }
   };
 
@@ -505,25 +519,51 @@ const HourlyForecast = ({ forecastData, selectedDayIndex }) => {
                 <span>{item.time.split(" ")[1].split(":")[0]}</span>
                 <span className="weatherByHourTimeZero">{"00"}</span>
               </div>
-              <div
-                style={{
-                  marginBottom:
-                    ((item.temp_c - minTempC) / (maxTempC - minTempC)) *
-                      (marginBottomMax - marginBottomMin) +
-                    marginBottomMin,
-                }}
-                className="weatherByHourTempContainer"
-              >
-                <div className="weatherByHourIcon">
-                  <img
-                    src={`https:${item.condition.icon}`}
-                    alt="icon"
-                    width={50}
-                  />
+              <div className="weatherByHourTempPrecipAndWind">
+                <div
+                  style={{
+                    marginBottom:
+                      ((Math.trunc(item.temp_c) - minTempC) /
+                        (maxTempC - minTempC)) *
+                        (marginBottomMax - marginBottomMin) +
+                      marginBottomMin,
+                  }}
+                  className="weatherByHourTempContainer"
+                >
+                  <div className="weatherByHourIcon">
+                    <img
+                      src={`https:${item.condition.icon}`}
+                      alt="icon"
+                      width={50}
+                    />
+                  </div>
+                  <div className="weatherByHourTemp">
+                    {Math.trunc(item.temp_c)}
+                    {String.fromCharCode(176)}
+                  </div>
                 </div>
-                <div className="weatherByHourTemp">
-                  {item.temp_c}
-                  {String.fromCharCode(176)}
+                <div className="weatherByHourPrecipAndWind">
+                  <div className="weatherByHourPrecipitationContainer">
+                    <img
+                      src="/precipitation.png"
+                      alt="icon"
+                      width={30}
+                      height={30}
+                      color="red"
+                      className="weatherByHourPrecipitationIcon"
+                    />
+                    <div className="weatherByHourPrecipitationText">
+                      {getChanceOfPrecipitation(
+                        item.chance_of_rain,
+                        item.chance_of_snow
+                      )}
+                    </div>
+                  </div>
+                  <div className="weatherByHourWindContainer">
+                    <span className="weatherByHourWindIcon">
+                      {Math.trunc(item.wind_kph)}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>

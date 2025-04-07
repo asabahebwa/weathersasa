@@ -1,7 +1,7 @@
 .chart {
   /* border: 1px solid blue; */
   display: flex;
-  height: 400px;
+  height: auto;
   margin-top: 50px;
   overflow-x: auto;
   scroll-behavior: smooth;
@@ -14,6 +14,8 @@
 .weatherByHour {
   display: flex;
   margin-top: 0.4rem;
+  /* height: 333px; */
+  /* border: 1px solid green; */
 }
 
 .weatherByHour:hover {
@@ -27,6 +29,7 @@
   justify-content: space-between;
   border-left: 1px solid #d5d5d5;
   width: 4rem;
+  /* height: 333px; */
   /* border: 1px solid red; */
 }
 
@@ -40,6 +43,57 @@
 .weatherByHour:hover {
   cursor: pointer;
   box-shadow: 0 -3px 0 #eb5038;
+}
+
+.weatherByHourTempPrecipAndWind {
+  /* border: 1px solid yellow; */
+  margin-bottom: 0.5rem;
+}
+
+.weatherByHourPrecipAndWind {
+  /* border: 1px solid green; */
+}
+
+.weatherByHourPrecipitationContainer {
+  display: flex;
+  flex-direction: column;
+  height: 45px;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid red; */
+}
+.weatherByHourPrecipitationIcon{
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid blue; */
+}
+
+.weatherByHourPrecipitationText {
+  display: flex;
+  font-size: 12px;
+  justify-content: center;
+  align-items: flex-start;
+  /* border: 1px solid red; */
+}
+
+.weatherByHourWindContainer {
+  display: flex;
+  height: 36px;
+  margin-top: 0.6rem;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid blue; */
+}
+
+.weatherByHourWindIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+  border-radius: 50%;
+  border: 2px solid #141414;
 }
 
 /* Details panel content styling */
@@ -120,33 +174,6 @@
   color: #141414;
 }
 
-/* Dark mode styles */
-body.dark-mode .weatherByHour-details-panel {
-  background-color: rgba(40, 40, 40, 0.9);
-  border-color: rgba(20, 158, 220, 0.5);
-}
-
-body.dark-mode .weatherByHour--active {
-  background-color: rgba(20, 158, 220, 0.2);
-}
-
-body.dark-mode .detailLabel {
-  color: #aaa;
-}
-
-body.dark-mode .detailValue,
-body.dark-mode .weatherDetailsTime {
-  color: #f0f0f0;
-}
-
-body.dark-mode .weatherDetailsCondition {
-  color: #ccc;
-}
-
-body.dark-mode .weatherDetailsRow {
-  border-bottom-color: rgba(255, 255, 255, 0.1);
-}
-
 /* Animation for fading in details */
 @keyframes fadeIn {
   from {
@@ -161,14 +188,16 @@ body.dark-mode .weatherDetailsRow {
 
 .weatherByHourTime {
   /* border: 1px solid red; */
+  color: #141414;
   font-weight: 500;
-  margin-top: 1rem;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .weatherByHourTimeZero {
   font-weight: normal;
-  font-size: 0.875rem;
-  color: #666;
+  color: #545658;
 }
 
 .weatherByHourTempContainer {
@@ -187,4 +216,10 @@ body.dark-mode .weatherDetailsRow {
   /* border: 1px solid blue; */
   font-weight: 600;
   /* margin-top: 50px; */
+}
+
+@media (max-width: 700px) {
+  .weatherByHourTimeZero {
+    /* border: 1px solid red; */
+  }
 }
