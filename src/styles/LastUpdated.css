@@ -26,5 +26,6 @@
   .lastUpdated {
     /* border: 1px solid red; */
     justify-content: flex-start;
+    margin: 1rem 0;
   }
 }

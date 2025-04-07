@@ -36,7 +36,7 @@
   display: none;
   justify-content: center;
   align-items: center;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   padding-right: 2.625rem;
 }
 .pollen-icon {
@@ -46,8 +46,7 @@
   color: black;
   font-size: 0.8125rem;
   font-weight: bold;
-  /* transform: rotate(45deg) scale(0.7071); */
-  border: 1px solid red;
+  /* border: 1px solid red; */
   background-color: #afd251;
   width: 32px;
   height: 32px;
@@ -56,10 +55,10 @@
   padding-left: 8px;
 }
 .pollution-container {
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   padding-right: 2.625rem;
 }
 .pollution-icon {
@@ -67,11 +66,8 @@
   justify-content: center;
   align-items: center;
   color: black;
-  font-size: 0.8125rem;
+  font-size: 1rem;
   font-weight: bold;
-  /* transform: rotate(45deg) scale(0.7071); */
-  border: 1px solid red;
-  background-color: #afd251;
   width: 32px;
   height: 32px;
 }
