@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../styles/HourlyForecast.css";
 
 const HourlyForecast = ({ forecastData, selectedDayIndex }) => {
   const [expandedHourIndex, setExpandedHourIndex] = useState(null);
+
   if (!forecastData || !forecastData.forecast) {
     return null;
   }
@@ -28,32 +29,56 @@ const HourlyForecast = ({ forecastData, selectedDayIndex }) => {
     }
   };
 
-  const getChanceOfPrecipitation = (rain, snow) => {
-    if (rain === 0 && snow === 0) {
-      return "0%";
-    } else if (rain > 0 && snow === 0) {
-      return `${Math.trunc(rain)}%`;
-    } else if (rain === 0 && snow > 0) {
-      return `${Math.trunc(snow)}%`;
-    } else if (rain > 0 && snow > 0) {
-      return `${Math.trunc(rain)}%`;
+  const getWindDirection = (windDegree) => {
+    if (windDegree >= 0 && windDegree < 22.5) {
+      return "north";
+    } else if (windDegree >= 22.5 && windDegree < 67.5) {
+      return "north east";
+    } else if (windDegree >= 67.5 && windDegree < 112.5) {
+      return "East";
+    } else if (windDegree >= 112.5 && windDegree < 157.5) {
+      return "south east";
+    } else if (windDegree >= 157.5 && windDegree < 202.5) {
+      return "south";
+    } else if (windDegree >= 202.5 && windDegree < 247.5) {
+      return "south west";
+    } else if (windDegree >= 247.5 && windDegree < 292.5) {
+      return "west";
+    } else if (windDegree >= 292.5 && windDegree < 337.5) {
+      return "north west";
     } else {
-      return "0%";
+      return "north";
     }
   };
 
-  const getPrecipitation = (precip) => {
+  const getPrecipitationValue = (rain, snow) => {
+    let value = "";
+    if (rain === 0 && snow === 0) {
+      value = `0%`;
+    } else if (rain > 0 && snow === 0) {
+      value = `${Math.trunc(rain)}%`;
+    } else if (rain === 0 && snow > 0) {
+      value = `${Math.trunc(snow)}%`;
+    } else if (rain > 0 && snow > 0) {
+      value = `${Math.trunc(rain + snow)}%`;
+    } else {
+      value = `-`;
+    }
+    return value;
+  };
+
+  const getPrecipitationText = (rain, snow) => {
     let result = "";
-    switch (precip) {
-      case 0:
-        result = "Precipitation is not expected";
-        break;
-      case precip > 0:
-        result = "Chance of precipitation";
-        break;
-      default:
-        result = "Unknown precipitation";
-        break;
+    if (rain === 0 && snow === 0) {
+      result = "Precipitation is not expected";
+    } else if (rain > 0 && snow === 0) {
+      result = "Precipitation is expected";
+    } else if (rain === 0 && snow > 0) {
+      result = "Precipitation is expected";
+    } else if (rain > 0 && snow > 0) {
+      result = "Precipitation is expected";
+    } else {
+      result = "Unknown precipitation";
     }
     return result;
   };
@@ -553,7 +578,7 @@ const HourlyForecast = ({ forecastData, selectedDayIndex }) => {
                       className="weatherByHourPrecipitationIcon"
                     />
                     <div className="weatherByHourPrecipitationText">
-                      {getChanceOfPrecipitation(
+                      {getPrecipitationValue(
                         item.chance_of_rain,
                         item.chance_of_snow
                       )}
@@ -577,7 +602,7 @@ const HourlyForecast = ({ forecastData, selectedDayIndex }) => {
                   </span>
                 </div>
 
-                <div className="weatherDetailsRows">
+                <div className="weatherDetailsRows__general">
                   <div className="weatherDetailsRow">
                     <span className="detailLabel">Humidity:</span>
                     <span className="detailValue">{item.humidity}%</span>
@@ -591,17 +616,27 @@ const HourlyForecast = ({ forecastData, selectedDayIndex }) => {
                     <span className="detailValue">{item.wind_kph} kph</span>
                   </div>
                 </div>
-                <div className="weatherDetailsRow__temp">
-                  <span className="detailLabel">Temperature feels like</span>
-                  <span className="detailValue">
-                    {item.feelslike_c}
-                    {String.fromCharCode(176)}C
-                  </span>
-                </div>
-                <div className="weatherDetailsRow__precip">
-                  <span className="detailLabel">
-                    {getPrecipitation(item.precip_mm)}
-                  </span>
+                <div className="weatherDetailsRows__all">
+                  <div className="weatherDetailsRow__temp">
+                    <span className="detailLabel">Temperature feels like</span>
+                    <span className="detailValue">
+                      {item.feelslike_c}
+                      {String.fromCharCode(176)}C
+                    </span>
+                  </div>
+                  <div className="weatherDetailsRow__precip">
+                    <span className="detailLabel">
+                      {getPrecipitationText(
+                        item.chance_of_rain,
+                        item.chance_of_snow
+                      )}
+                    </span>
+                  </div>
+                  <div className="weatherDetailsRow__wind">
+                    <span className="detailLabel">
+                      Light winds from the {getWindDirection(item.wind_degree)}
+                    </span>
+                  </div>
                 </div>
               </div>
             )}

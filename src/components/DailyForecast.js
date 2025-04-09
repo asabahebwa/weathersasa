@@ -268,53 +268,49 @@ const DailyForecast = ({
           key={index}
           onClick={() => setSelectedDayIndex(index)}
         >
-          {index === 0 ? (
-            getCurrentWeather(day, index)
-          ) : (
-            <>
-              <div className="weatherDay__date">
-                <span className="weatherDay__dayOfWeek">
-                  {formatDayOfWeek(day.date)}
+          <>
+            <div className="weatherDay__date">
+              <span className="weatherDay__dayOfWeek">
+                {formatDayOfWeek(day.date)}
+              </span>
+              &nbsp;
+              <span className="weatherDay__dateOfMonth">
+                {formatDate(day.date)}
+              </span>
+            </div>
+
+            <div className="weatherDay__summary">
+              <div className="weatherDay__icon">
+                <img
+                  src={`https:${day.day.condition.icon}`}
+                  alt={day.day.condition.text}
+                  width={selectedDayIndex === index ? 88 : 64}
+                  height={selectedDayIndex === index ? 88 : 64}
+                />
+              </div>
+
+              <div className="weatherDay__temps">
+                <span className="weatherDay__maxTemp">
+                  {Math.round(day.day.maxtemp_c)}
+                  {String.fromCharCode(176)}
                 </span>
-                &nbsp;
-                <span className="weatherDay__dateOfMonth">
-                  {formatDate(day.date)}
+                <span className="weatherDay__minTemp">
+                  {Math.round(day.day.mintemp_c)}
+                  {String.fromCharCode(176)}
                 </span>
               </div>
 
-              <div className="weatherDay__summary">
-                <div className="weatherDay__icon">
-                  <img
-                    src={`https:${day.day.condition.icon}`}
-                    alt={day.day.condition.text}
-                    width={selectedDayIndex === index ? 88 : 64}
-                    height={selectedDayIndex === index ? 88 : 64}
-                  />
+              {selectedDayIndex === index && (
+                <div className="weatherDay__condition">
+                  {getConditionText(
+                    day.day.condition.code,
+                    day.day.condition.text
+                  )}{" "}
+                  {getWindPower(day.day.maxwind_kph)}
                 </div>
-
-                <div className="weatherDay__temps">
-                  <span className="weatherDay__maxTemp">
-                    {Math.round(day.day.maxtemp_c)}
-                    {String.fromCharCode(176)}
-                  </span>
-                  <span className="weatherDay__minTemp">
-                    {Math.round(day.day.mintemp_c)}
-                    {String.fromCharCode(176)}
-                  </span>
-                </div>
-
-                {selectedDayIndex === index && (
-                  <div className="weatherDay__condition">
-                    {getConditionText(
-                      day.day.condition.code,
-                      day.day.condition.text
-                    )}{" "}
-                    {getWindPower(day.day.maxwind_kph)}
-                  </div>
-                )}
-              </div>
-            </>
-          )}
+              )}
+            </div>
+          </>
         </div>
       ))}
     </div>

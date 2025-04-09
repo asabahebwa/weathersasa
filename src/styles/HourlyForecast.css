@@ -62,7 +62,7 @@
   align-items: center;
   /* border: 1px solid red; */
 }
-.weatherByHourPrecipitationIcon{
+.weatherByHourPrecipitationIcon {
   display: flex;
   flex-direction: column;
   /* border: 1px solid blue; */
@@ -99,37 +99,51 @@
 /* Details panel content styling */
 
 .weatherByHourDetails {
+  /* position: relative; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   /* border: 1px solid blue; */
   background-color: #f6f6f6;
-  animation: fadeIn 2s forwards;
-  width: 12.75rem;
+  width: 14rem;
   padding: 0.375rem 1.25rem;
-  /* margin-top: 0.4rem; */
 }
 
 .weatherDetailsCondition {
   color: #141414;
   padding-top: 0.1875rem;
   display: block;
+  height: 6rem;
   white-space: normal;
+  /* border: 1px solid blue; */
 }
 
 .weatherDetailsConditionText {
   color: #333;
   font-weight: 500;
   color: #141414;
-  padding-top: 0.1875rem;
+  /* padding-top: 0.1875rem; */
   display: block;
   white-space: normal;
   text-align: start;
 }
 
-.weatherDetailsRows {
-  margin-top: 4rem;
-  margin-bottom: 1rem;
+.weatherDetailsRows__general {
+  /* margin-top: 1.5rem; */
+  /* margin-bottom: 0.8rem; */
   padding: 13px;
   padding-left: 0;
+  padding-top: 0;
+  padding-bottom: 1.5rem;
+  height: 4rem;
   border-bottom: 1px solid #b0b2b4;
+  /* border: 1px solid red; */
+  /* padding-top: 4rem; */
+}
+
+.weatherDetailsRows__all {
+  padding: 2px;
+  padding-bottom: 0.3rem;
 }
 
 .weatherDetailsRow {
@@ -142,24 +156,38 @@
 .weatherDetailsRow__temp {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   font-size: 0.85rem;
-  margin-bottom: 1rem;
+  height: 2rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
   border-bottom: 1px solid #b0b2b4;
+  /* border: 1px solid yellow; */
 }
 
-.weatherDetailsRow__temp {
-  display: flex;
-  justify-content: flex-start;
-  font-size: 0.85rem;
-  padding-bottom: 13px;
-  border-bottom: 1px solid #b0b2b4;
-}
 .weatherDetailsRow__precip {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   font-size: 0.85rem;
-  padding-bottom: 13px;
+  height: 2rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
   border-bottom: 1px solid #b0b2b4;
+  /* border: 1px solid blue; */
+}
+.weatherDetailsRow__wind {
+  display: flex;
+  justify-content: flex-start;
+  white-space: normal;
+  text-align: start;
+  align-items: center;
+  font-size: 0.85rem;
+  height: 2rem;
+  margin-top: 0.5rem;
+  /* padding-bottom: 13px; */
+  /* border: 1px solid red; */
 }
 
 .detailLabel {

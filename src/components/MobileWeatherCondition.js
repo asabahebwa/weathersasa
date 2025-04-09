@@ -155,52 +155,22 @@ function MobileWeatherCondition({ forecastData, selectedDayIndex }) {
     return result;
   };
 
-  const currentDetails = forecastData.current;
-
   if (!forecastData || !forecastData.forecast) {
     return null;
   }
 
   return (
     <div className="mobile-condition-container">
-      {selectedDayIndex !== 0
-        ? forecastData.forecast.forecastday[selectedDayIndex] && (
-            <div className="mobile-condition">
-              {getConditionText(
-                forecastData.forecast.forecastday[selectedDayIndex].day
-                  .condition.code,
-                forecastData.forecast.forecastday[selectedDayIndex].day
-                  .condition.text
-              )}{" "}
-              {getWindPower(
-                forecastData.forecast.forecastday[selectedDayIndex].day
-                  .maxwind_kph
-              )}
-            </div>
-          )
-        : forecastData.forecast.forecastday[selectedDayIndex] &&
-          (currentDetails.is_day === 1 ? (
-            <div className="mobile-condition">
-              {getConditionText(
-                forecastData.forecast.forecastday[selectedDayIndex].day
-                  .condition.code,
-                forecastData.forecast.forecastday[selectedDayIndex].day
-                  .condition.text
-              )}{" "}
-              {getWindPower(
-                forecastData.forecast.forecastday[selectedDayIndex].day
-                  .maxwind_kph
-              )}
-            </div>
-          ) : (
-            <div className="mobile-condition">
-              {getConditionText(
-                currentDetails.condition.code,
-                currentDetails.condition.text
-              )}{" "}
-              {getWindPower(currentDetails.wind_kph)}
-            </div>
-          ))}
+      <div className="mobile-condition">
+        {getConditionText(
+          forecastData.forecast.forecastday[selectedDayIndex].day.condition
+            .code,
+          forecastData.forecast.forecastday[selectedDayIndex].day.condition.text
+        )}{" "}
+        {getWindPower(
+          forecastData.forecast.forecastday[selectedDayIndex].day.maxwind_kph
+        )}
+      </div>
     </div>
   );
 }
