@@ -47,12 +47,6 @@
   /* border: 1px solid green; */
 }
 
-/* Add visual indicator for scrollable content */
-.weatherDays::after {
-  content: "";
-  flex: 0 0 10px; /* Small spacer at the end */
-}
-
 /* Add optional scroll indicators */
 .weatherDays-container {
   position: relative;
@@ -221,9 +215,6 @@
 }
 
 @media screen and (max-width: 700px) {
-  .weatherDays {
-    padding: 0.3rem 0.5rem;
-  }
   .weatherDay {
     max-width: 6.75rem;
     padding: 0;

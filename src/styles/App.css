@@ -9,6 +9,12 @@
 
 .location-and-daily-forecast {
   /* border: 1px solid green; */
-  /* margin-left: 1rem; */
+  padding: 0rem 1rem;
   background-image: url("../../public/bi.jpg");
+}
+
+@media screen and (max-width: 700px) {
+  .location-and-daily-forecast {
+    padding: 0rem 0.5rem;
+  }
 }
