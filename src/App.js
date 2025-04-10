@@ -107,6 +107,7 @@ function App() {
             <HourlyForecast
               forecastData={forecast}
               selectedDayIndex={selectedDayIndex}
+              setSelectedDayIndex={setSelectedDayIndex}
             />
           )}
           <LastUpdated forecastData={forecast} />

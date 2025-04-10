@@ -1,5 +1,6 @@
 .chart {
   /* border: 1px solid blue; */
+  background-color: #f6f6f6;
   display: flex;
   height: auto;
   margin-top: 50px;
@@ -8,14 +9,15 @@
   -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 1rem;
+  /* padding: 0 1rem; */
 }
 
 .weatherByHour {
   display: flex;
   margin-top: 0.4rem;
-  /* height: 333px; */
   /* border: 1px solid green; */
+  min-height: 348px;
+  background-color: white;
 }
 
 .weatherByHour:hover {
@@ -29,7 +31,6 @@
   justify-content: space-between;
   border-left: 1px solid #d5d5d5;
   width: 4rem;
-  /* height: 333px; */
   /* border: 1px solid red; */
 }
 
@@ -129,8 +130,6 @@
 }
 
 .weatherDetailsRows__general {
-  /* margin-top: 1.5rem; */
-  /* margin-bottom: 0.8rem; */
   padding: 13px;
   padding-left: 0;
   padding-top: 0;
@@ -138,7 +137,6 @@
   height: 4rem;
   border-bottom: 1px solid #b0b2b4;
   /* border: 1px solid red; */
-  /* padding-top: 4rem; */
 }
 
 .weatherDetailsRows__all {
@@ -202,18 +200,6 @@
   color: #141414;
 }
 
-/* Animation for fading in details */
-@keyframes fadeIn {
-  from {
-    opacity: 1;
-    transform: translateY(0%) translateX(0);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0%) translateX(0);
-  }
-}
-
 .weatherByHourTime {
   /* border: 1px solid red; */
   color: #141414;
@@ -246,6 +232,49 @@
   /* margin-top: 50px; */
 }
 
+.seeMoreWeatherBefore {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.4rem;
+  min-width: 200px;
+  width: 200px;
+  font-size: 14px;
+  cursor: pointer;
+  /* border: 1px solid red; */
+}
+
+.seeMoreWeatherBefore .date {
+  font-weight: bold;
+}
+
+.seeMoreWeatherBefore:hover .date {
+  text-decoration: underline;
+  color: #067eb3;
+}
+
+.seeMoreWeatherAfter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.4rem;
+  font-size: 14px;
+  width: 200px;
+  min-width: 200px;
+  cursor: pointer;
+  /* border: 1px solid red; */
+}
+
+.seeMoreWeatherAfter .date {
+  font-weight: bold;
+}
+
+.seeMoreWeatherAfter:hover .date {
+  text-decoration: underline;
+  color: #067eb3;
+}
 @media (max-width: 700px) {
   .weatherByHourTimeZero {
     /* border: 1px solid red; */

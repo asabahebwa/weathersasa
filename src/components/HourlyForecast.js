@@ -1,14 +1,86 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import "../styles/HourlyForecast.css";
 
-const HourlyForecast = ({ forecastData, selectedDayIndex }) => {
+const HourlyForecast = ({
+  forecastData,
+  selectedDayIndex,
+  setSelectedDayIndex,
+}) => {
   const [expandedHourIndex, setExpandedHourIndex] = useState(null);
 
   if (!forecastData || !forecastData.forecast) {
     return null;
   }
 
+  const nth = (d) => {
+    switch (d) {
+      case 1:
+      case 21:
+      case 31:
+        return "st";
+      case 2:
+      case 22:
+        return "nd";
+      case 3:
+      case 23:
+        return "rd";
+      default:
+        return "th";
+    }
+  };
+
+  const getPreviousDayDate = (currentDate) => {
+    const date = new Date(currentDate);
+    date.setDate(date.getDate() - 1);
+
+    // Format the date to display day of week and day
+    const options = { weekday: "long", day: "numeric" };
+
+    return (
+      date.toLocaleDateString("en-GB", options) +
+      nth(parseInt(date.toLocaleDateString("en-GB", options).split(" ")[1]))
+    );
+  };
+
+  const getNextDayDate = (currentDate) => {
+    const date = new Date(currentDate);
+    date.setDate(date.getDate() + 1);
+
+    // Format the date to display day of week and month/day
+    const options = { weekday: "long", day: "numeric" };
+
+    return (
+      date.toLocaleDateString("en-GB", options) +
+      nth(parseInt(date.toLocaleDateString("en-GB", options).split(" ")[1]))
+    );
+  };
+
+  const currentDayDate =
+    forecastData.forecast.forecastday[selectedDayIndex].date;
+
+  const formattedNextDayDate = getNextDayDate(currentDayDate);
+  const formattedPreviousDayDate = getPreviousDayDate(currentDayDate);
+  // console.log(formattedNextDayDate);
+
+  const getHoursElapsedSinceMidnight = () => {
+    const now = new Date();
+
+    // Get hours and minutes
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+
+    // Calculate total hours with decimal for partial hours
+    const totalHours = hours + minutes / 60;
+
+    return Math.trunc(totalHours) - 2;
+  };
+
   const hourlyData = forecastData.forecast.forecastday[selectedDayIndex].hour;
+
+  const timelyHourlyData = hourlyData.slice(getHoursElapsedSinceMidnight());
+
+  let data = selectedDayIndex === 0 ? timelyHourlyData : hourlyData;
+  // console.log(timelyHourlyData);
 
   // Calculate max temperature for scaling
   const temperatures = hourlyData.map((item) => {
@@ -528,7 +600,17 @@ const HourlyForecast = ({ forecastData, selectedDayIndex }) => {
   };
   return (
     <div className="chart">
-      {hourlyData.map((item, index) => {
+      {selectedDayIndex !== 0 && (
+        <div
+          className="seeMoreWeatherBefore"
+          onClick={() => setSelectedDayIndex(selectedDayIndex - 1)}
+        >
+          <span>See more weather for</span>
+          <span className="date">{formattedPreviousDayDate}</span>
+        </div>
+      )}
+
+      {data.map((item, index) => {
         // console.log(item);
         const isExpanded = expandedHourIndex === index;
         return (
@@ -643,6 +725,15 @@ const HourlyForecast = ({ forecastData, selectedDayIndex }) => {
           </div>
         );
       })}
+      {selectedDayIndex < 13 && (
+        <div
+          className="seeMoreWeatherAfter"
+          onClick={() => setSelectedDayIndex(selectedDayIndex + 1)}
+        >
+          <span>See more weather for</span>
+          <span className="date">{formattedNextDayDate}</span>
+        </div>
+      )}
     </div>
   );
 };
