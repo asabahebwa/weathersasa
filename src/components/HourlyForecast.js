@@ -60,19 +60,22 @@ const HourlyForecast = ({
 
   const formattedNextDayDate = getNextDayDate(currentDayDate);
   const formattedPreviousDayDate = getPreviousDayDate(currentDayDate);
-  // console.log(formattedNextDayDate);
 
   const getHoursElapsedSinceMidnight = () => {
-    const now = new Date();
+    let date = new Date(forecastData.location.localtime);
 
     // Get hours and minutes
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
 
     // Calculate total hours with decimal for partial hours
     const totalHours = hours + minutes / 60;
 
-    return Math.trunc(totalHours) - 2;
+    if (Math.trunc(totalHours) >= 2) {
+      return Math.trunc(totalHours) - 2;
+    } else {
+      return Math.trunc(totalHours);
+    }
   };
 
   const hourlyData = forecastData.forecast.forecastday[selectedDayIndex].hour;
@@ -605,7 +608,7 @@ const HourlyForecast = ({
           className="seeMoreWeatherBefore"
           onClick={() => setSelectedDayIndex(selectedDayIndex - 1)}
         >
-          <span>See more weather for</span>
+          <span>See weather for</span>
           <span className="date">{formattedPreviousDayDate}</span>
         </div>
       )}
@@ -732,7 +735,7 @@ const HourlyForecast = ({
           className="seeMoreWeatherAfter"
           onClick={() => setSelectedDayIndex(selectedDayIndex + 1)}
         >
-          <span>See more weather for</span>
+          <span>See weather for</span>
           <span className="date">{formattedNextDayDate}</span>
         </div>
       )}

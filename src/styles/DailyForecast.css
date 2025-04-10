@@ -11,6 +11,7 @@
   max-width: 1280px;
   margin: 0 auto;
   /* border: 1px solid green; */
+  /* padding: 0rem 1rem; */
 }
 
 .weatherDay {
@@ -112,10 +113,8 @@
   text-decoration: none;
 }
 
-.weatherDay .dayOrNight {
-  margin-top: 0.4rem;
-  display: flex;
-  font-size: 1rem;
+.weatherDay--selected:hover .today {
+  text-decoration: none;
 }
 
 .weatherDay__dayOfWeek {
@@ -134,15 +133,6 @@
 }
 
 .weatherDay--selected .weatherDay__dateOfMonth {
-  font-size: 1.5rem;
-}
-
-.weatherDay--selected .dayOrNight {
-  align-self: flex-start;
-  /* border: 1px solid blue; */
-  color: #141414;
-  padding: 0rem;
-  margin-left: 1rem;
   font-size: 1.5rem;
 }
 
