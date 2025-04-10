@@ -615,13 +615,15 @@ const HourlyForecast = ({
         const isExpanded = expandedHourIndex === index;
         return (
           <div
-            className={`weatherByHour ${
-              isExpanded ? "weatherByHour--expanded" : ""
-            }`}
+            className="weatherByHour"
             key={index}
             onClick={() => toggleExpand(index)}
           >
-            <div className="weatherByHourSummary">
+            <div
+              className={`weatherByHourSummary ${
+                isExpanded ? "weatherByHourSummary--expanded" : ""
+              }`}
+            >
               <div className="weatherByHourTime">
                 <span>{item.time.split(" ")[1].split(":")[0]}</span>
                 <span className="weatherByHourTimeZero">{"00"}</span>

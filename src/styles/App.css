@@ -9,5 +9,6 @@
 
 .location-and-daily-forecast {
   /* border: 1px solid green; */
+  /* margin-left: 1rem; */
   background-image: url("../../public/bi.jpg");
 }

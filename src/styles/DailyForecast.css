@@ -3,10 +3,8 @@
 .weatherDays {
   display: flex;
   overflow-x: auto;
-  /* scrollbar-width: thin; */
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-  padding: 0rem 1rem; /*controls the scrollbar width */
   padding-bottom: 0.3rem;
   flex-wrap: nowrap;
   align-items: end;
@@ -58,31 +56,6 @@
 .weatherDays-container {
   position: relative;
   margin: 1rem 2rem 2rem;
-}
-
-/* Optional: Add scroll arrow indicators */
-.scroll-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 5;
-}
-
-.scroll-left {
-  left: -15px;
-}
-
-.scroll-right {
-  right: -15px;
 }
 
 .weatherDay:hover {
@@ -255,7 +228,7 @@
 
 @media screen and (max-width: 700px) {
   .weatherDays {
-    /* padding: 0rem 1rem; */
+    padding: 0rem 0.5rem;
   }
   .weatherDay {
     max-width: 6.75rem;

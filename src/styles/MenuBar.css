@@ -3,7 +3,7 @@
   padding: 0rem 1rem;
 }
 .menu-bar {
-  width: 100%;
+  /* width: 100%; */
   max-width: 1280px;
   margin: 0 auto;
   height: 3.8rem;
@@ -167,6 +167,9 @@
 
 /* Media queries for responsiveness */
 @media (max-width: 700px) {
+  .menu-bar-container {
+    padding: 0rem 0.5rem;
+  }
   .menu-bar {
     position: relative; /* For absolute positioned mobile menu */
     /* border: 1px solid red; */

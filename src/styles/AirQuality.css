@@ -78,6 +78,7 @@
 
 @media screen and (max-width: 700px) {
   .air-quality-container {
+    padding: 0rem 0.5rem;
     margin-top: 1rem;
   }
 }
