@@ -88,6 +88,10 @@
   font-size: 1rem;
 }
 
+.weatherDay:hover .today {
+  text-decoration: underline;
+}
+
 .weatherDay--selected .today {
   align-self: flex-start;
   /* border: 1px solid blue; */
@@ -228,7 +232,7 @@
 
 @media screen and (max-width: 700px) {
   .weatherDays {
-    padding: 0rem 0.5rem;
+    padding: 0.3rem;
   }
   .weatherDay {
     max-width: 6.75rem;
