@@ -232,7 +232,7 @@
 
 @media screen and (max-width: 700px) {
   .weatherDays {
-    padding: 0.3rem;
+    padding: 0.3rem 0.5rem;
   }
   .weatherDay {
     max-width: 6.75rem;
