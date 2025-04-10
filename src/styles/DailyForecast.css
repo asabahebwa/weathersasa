@@ -106,6 +106,24 @@
   margin-top: 0.4rem;
 }
 
+.weatherDay .today {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  /* border: 1px solid red; */
+  margin-top: 0.4rem;
+  font-size: 1rem;
+}
+
+.weatherDay--selected .today {
+  align-self: flex-start;
+  /* border: 1px solid blue; */
+  padding: 0rem;
+  margin-left: 1rem;
+  font-size: 1.5rem;
+  color: #141414;
+}
+
 .weatherDay--selected .weatherDay__date {
   align-self: flex-start;
   /* border: 1px solid blue; */
@@ -249,6 +267,10 @@
     margin-left: 0.5rem;
   }
 
+  .weatherDay .today {
+    margin-left: 0.5rem;
+  }
+
   .weatherDay .dayOrNight {
     margin-left: 0.5rem;
   }
@@ -292,6 +314,14 @@
     margin: 0;
     margin-left: 0.5rem;
   }
+
+  .weatherDay--selected .today {
+    padding: 0;
+    margin: 0;
+    margin-left: 0.5rem;
+    font-size: 1.2rem;
+  }
+
   .weatherDay--selected .weatherDay__dayOfWeek {
     font-size: 1.2rem;
   }

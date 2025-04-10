@@ -269,15 +269,21 @@ const DailyForecast = ({
           onClick={() => setSelectedDayIndex(index)}
         >
           <>
-            <div className="weatherDay__date">
-              <span className="weatherDay__dayOfWeek">
-                {formatDayOfWeek(day.date)}
-              </span>
-              &nbsp;
-              <span className="weatherDay__dateOfMonth">
-                {formatDate(day.date)}
-              </span>
-            </div>
+            {index === 0 ? (
+              <div className="today">
+                <span>Today</span>
+              </div>
+            ) : (
+              <div className="weatherDay__date">
+                <span className="weatherDay__dayOfWeek">
+                  {formatDayOfWeek(day.date)}
+                </span>
+                &nbsp;
+                <span className="weatherDay__dateOfMonth">
+                  {formatDate(day.date)}
+                </span>
+              </div>
+            )}
 
             <div className="weatherDay__summary">
               <div className="weatherDay__icon">
