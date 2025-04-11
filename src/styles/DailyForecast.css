@@ -20,7 +20,6 @@
   padding-left: 0.7rem;
   margin-top: 0.5rem;
   flex-direction: column;
-  justify-content: space-between;
   align-items: flex-start;
   transition: transform 0.2s;
   cursor: pointer;
@@ -38,7 +37,6 @@
   position: relative; /* Need this for z-index to work */
   border-bottom: none;
   border-left: 1px solid #d5d5d5;
-  justify-content: space-around;
   box-shadow: 0 -8px 0 #eb5038, 0 6px 0 white;
   padding-left: 0rem;
 
@@ -69,7 +67,7 @@
   align-items: center;
   justify-content: flex-start;
   /* border: 1px solid red; */
-  margin-top: 0.2rem;
+  margin-top: 0.3rem;
 }
 
 .weatherDay .today {
@@ -77,8 +75,8 @@
   align-items: center;
   justify-content: flex-start;
   /* border: 1px solid red; */
-  margin-top: 0.2rem;
-  font-size: 1rem;
+  margin-top: 0.3rem;
+  font-size: 14px;
 }
 
 .weatherDay:hover .today {
@@ -99,6 +97,7 @@
   /* border: 1px solid blue; */
   padding: 0rem;
   margin-left: 1rem;
+  margin-top: 0.5rem;
 }
 
 .weatherDay--selected:hover .weatherDay__date {
@@ -141,8 +140,8 @@
   display: flex;
   /* border: 1px solid green; */
   width: 100%;
-  align-self: flex-start;
-  align-items: flex-start;
+  align-self: center;
+  align-items: center;
   margin-bottom: 0.5rem;
 }
 
@@ -165,6 +164,8 @@
 }
 
 .weatherDay__icon {
+  display: flex;
+  /* align-items: flex-start; */
   width: 60%;
   /* border: 1px solid blue; */
   margin-right: 0.4rem;
@@ -228,10 +229,6 @@
     margin-left: 0.5rem;
   }
 
-  .weatherDay .dayOrNight {
-    margin-left: 0.5rem;
-  }
-
   .weatherDay .weatherDay__temps {
     /* border: 1px solid green; */
     width: auto;
@@ -269,12 +266,14 @@
     /* border: 1px solid green; */
     padding: 0;
     margin: 0;
+    margin-top: 0.5rem;
     margin-left: 0.5rem;
   }
 
   .weatherDay--selected .today {
     padding: 0;
     margin: 0;
+    margin-top: 0.5rem;
     margin-left: 0.5rem;
     font-size: 1.2rem;
   }
@@ -285,11 +284,7 @@
   .weatherDay--selected .weatherDay__dateOfMonth {
     font-size: 1.2rem;
   }
-  .weatherDay--selected .dayOrNight {
-    font-size: 1.2rem;
-    /* border: 1px solid red; */
-    margin-left: 0.5rem;
-  }
+
   .weatherDay--selected .weatherDay__temps {
     /* border: 1px solid blue; */
   }
