@@ -16,7 +16,6 @@
 
 .weatherByHour {
   display: flex;
-  margin-top: 3px;
   /* border: 1px solid green; */
   min-height: 348px;
   background-color: white;
@@ -24,7 +23,7 @@
 
 .weatherByHour:hover {
   cursor: pointer;
-  box-shadow: 0 -3px 0 #eb5038, 0 3px 0 white;
+  box-shadow: inset 0 3px 0 #eb5038;
 }
 
 .weatherByHourSummary {
@@ -43,11 +42,6 @@
   justify-content: space-between;
   border-right: none;
   width: 4rem;
-}
-
-.weatherByHour:hover {
-  cursor: pointer;
-  box-shadow: 0 -3px 0 #eb5038;
 }
 
 .weatherByHourTempPrecipAndWind {

@@ -290,8 +290,8 @@ const DailyForecast = ({
                 <img
                   src={`https:${day.day.condition.icon}`}
                   alt={day.day.condition.text}
-                  width={selectedDayIndex === index ? 88 : 64}
-                  height={selectedDayIndex === index ? 88 : 64}
+                  width={selectedDayIndex === index ? 88 : 60}
+                  height={selectedDayIndex === index ? 88 : 60}
                 />
               </div>
 
