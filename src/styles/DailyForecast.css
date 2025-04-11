@@ -268,6 +268,7 @@
     margin: 0;
     margin-top: 0.5rem;
     margin-left: 0.5rem;
+    font-size: 1.2rem;
   }
 
   .weatherDay--selected .today {
@@ -276,6 +277,7 @@
     margin-top: 0.5rem;
     margin-left: 0.5rem;
     font-size: 1.2rem;
+    /* border: 1px solid red; */
   }
 
   .weatherDay--selected .weatherDay__dayOfWeek {
@@ -297,6 +299,7 @@
   }
   .weatherDay--selected .weatherDay__summary {
     /* border: 1px solid red; */
+    margin-top: 0.3rem;
     justify-content: center;
   }
   .weatherDay--selected .weatherDay__icon {

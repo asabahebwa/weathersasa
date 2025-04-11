@@ -680,53 +680,57 @@ const HourlyForecast = ({
               </div>
             </div>
 
-            {isExpanded && (
-              <div className="weatherByHourDetails">
-                <div className="weatherDetailsCondition">
-                  <span className="weatherDetailsConditionText">
-                    {getConditionText(item.condition.code, item.condition.text)}{" "}
-                    {getWindPower(item.wind_kph)}
-                  </span>
-                </div>
+            <div
+              className={
+                isExpanded
+                  ? "weatherByHourDetails--expanded"
+                  : "weatherByHourDetails"
+              }
+            >
+              <div className="weatherDetailsCondition">
+                <span className="weatherDetailsConditionText">
+                  {getConditionText(item.condition.code, item.condition.text)}{" "}
+                  {getWindPower(item.wind_kph)}
+                </span>
+              </div>
 
-                <div className="weatherDetailsRows__general">
-                  <div className="weatherDetailsRow">
-                    <span className="detailLabel">Humidity:</span>
-                    <span className="detailValue">{item.humidity}%</span>
-                  </div>
-                  <div className="weatherDetailsRow">
-                    <span className="detailLabel">Pressure:</span>
-                    <span className="detailValue">{item.pressure_mb} mb</span>
-                  </div>
-                  <div className="weatherDetailsRow">
-                    <span className="detailLabel">Wind:</span>
-                    <span className="detailValue">{item.wind_kph} kph</span>
-                  </div>
+              <div className="weatherDetailsRows__general">
+                <div className="weatherDetailsRow">
+                  <span className="detailLabel">Humidity:</span>
+                  <span className="detailValue">{item.humidity}%</span>
                 </div>
-                <div className="weatherDetailsRows__all">
-                  <div className="weatherDetailsRow__temp">
-                    <span className="detailLabel">Temperature feels like</span>
-                    <span className="detailValue">
-                      {item.feelslike_c}
-                      {String.fromCharCode(176)}C
-                    </span>
-                  </div>
-                  <div className="weatherDetailsRow__precip">
-                    <span className="detailLabel">
-                      {getPrecipitationText(
-                        item.chance_of_rain,
-                        item.chance_of_snow
-                      )}
-                    </span>
-                  </div>
-                  <div className="weatherDetailsRow__wind">
-                    <span className="detailLabel">
-                      Light winds from the {getWindDirection(item.wind_degree)}
-                    </span>
-                  </div>
+                <div className="weatherDetailsRow">
+                  <span className="detailLabel">Pressure:</span>
+                  <span className="detailValue">{item.pressure_mb} mb</span>
+                </div>
+                <div className="weatherDetailsRow">
+                  <span className="detailLabel">Wind:</span>
+                  <span className="detailValue">{item.wind_kph} kph</span>
                 </div>
               </div>
-            )}
+              <div className="weatherDetailsRows__all">
+                <div className="weatherDetailsRow__temp">
+                  <span className="detailLabel">Temperature feels like</span>
+                  <span className="detailValue">
+                    {item.feelslike_c}
+                    {String.fromCharCode(176)}C
+                  </span>
+                </div>
+                <div className="weatherDetailsRow__precip">
+                  <span className="detailLabel">
+                    {getPrecipitationText(
+                      item.chance_of_rain,
+                      item.chance_of_snow
+                    )}
+                  </span>
+                </div>
+                <div className="weatherDetailsRow__wind">
+                  <span className="detailLabel">
+                    Light winds from the {getWindDirection(item.wind_degree)}
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         );
       })}
