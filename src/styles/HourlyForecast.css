@@ -11,6 +11,10 @@
   margin: 0 auto;
   border-left: 1px solid #d5d5d5;
   border-right: 1px solid #d5d5d5;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
   /* padding: 0 1rem; */
 }
 
