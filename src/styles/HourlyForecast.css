@@ -19,6 +19,10 @@
   /* border: 1px solid green; */
   min-height: 348px;
   background-color: white;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
 }
 
 .weatherByHour:hover {
@@ -32,6 +36,10 @@
   justify-content: space-between;
   border-right: 1px solid #d5d5d5;
   width: 4rem;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
   /* border: 1px solid red; */
 }
 
@@ -42,16 +50,28 @@
   justify-content: space-between;
   border-right: none;
   width: 4rem;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
   box-shadow: inset 0 3px 0 #eb5038;
 }
 
 .weatherByHourTempPrecipAndWind {
   /* border: 1px solid yellow; */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
   margin-bottom: 0.5rem;
 }
 
 .weatherByHourPrecipAndWind {
   /* border: 1px solid green; */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
 }
 
 .weatherByHourPrecipitationContainer {
@@ -60,11 +80,19 @@
   height: 45px;
   justify-content: center;
   align-items: center;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
   /* border: 1px solid red; */
 }
 .weatherByHourPrecipitationIcon {
   display: flex;
   flex-direction: column;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
   /* border: 1px solid blue; */
 }
 
@@ -73,6 +101,10 @@
   font-size: 12px;
   justify-content: center;
   align-items: flex-start;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
   /* border: 1px solid red; */
 }
 
@@ -82,6 +114,10 @@
   margin-top: 0.6rem;
   justify-content: center;
   align-items: center;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
   /* border: 1px solid blue; */
 }
 
@@ -93,6 +129,10 @@
   height: 24px;
   font-size: 12px;
   border-radius: 50%;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
   border: 2px solid #141414;
 }
 
@@ -103,6 +143,10 @@
   visibility: hidden;
   flex-direction: column;
   justify-content: space-between;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
   /* border: 1px solid blue; */
   background-color: #f6f6f6;
   width: 0rem;
@@ -119,6 +163,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
   /* border: 1px solid blue; */
   background-color: #f6f6f6;
   width: 16.5rem;
@@ -142,6 +190,10 @@
   margin-right: 1.25rem;
   text-wrap: no-wrap;
   word-wrap: no-wrap;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
   /* border: 1px solid blue; */
 }
 
@@ -162,6 +214,10 @@
   height: fit-content;
   min-width: 14rem;
   text-wrap: no-wrap;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
   /* border: 1px solid red; */
   margin-bottom: 1.5rem;
 }
@@ -175,6 +231,10 @@
   margin-right: 1.25rem;
   min-width: 14rem;
   text-wrap: no-wrap;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
   /* border: 1px solid blue; */
 }
 
@@ -183,7 +243,10 @@
   justify-content: flex-start;
   font-size: 0.85rem;
   padding: 0.25rem;
-  /* width: 100%; */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
   /* border: 1px solid green; */
 }
 
@@ -197,6 +260,10 @@
   text-wrap: no-wrap;
   border-top: 1px solid #b0b2b4;
   border-bottom: 1px solid #b0b2b4;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
   /* border: 1px solid green; */
 }
 
@@ -210,6 +277,10 @@
   text-wrap: no-wrap;
   text-align: start;
   word-wrap: no-wrap;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
   border-bottom: 1px solid #b0b2b4;
   /* border: 1px solid blue; */
 }
@@ -223,6 +294,10 @@
   height: 2.5rem;
   min-width: 14rem;
   text-wrap: no-wrap;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
   /* border: 1px solid red; */
 }
 
@@ -253,10 +328,18 @@
 }
 
 .weatherByHourTempContainer {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
   /* border: 1px solid red; */
 }
 
 .weatherByHourIcon {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
   /* border: 1px solid green; */
   /* width: 75px; */
   /* margin-top: 50px; */
@@ -265,6 +348,10 @@
 .weatherByHourTemp {
   display: flex;
   justify-content: center;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
   /* border: 1px solid blue; */
   font-weight: 600;
   /* margin-top: 50px; */
@@ -279,6 +366,10 @@
   width: 200px;
   font-size: 14px;
   cursor: pointer;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
   border-right: 1px solid #d5d5d5;
   /* border: 1px solid red; */
   background-color: #f6f6f6;
@@ -301,6 +392,10 @@
   font-size: 14px;
   width: 200px;
   min-width: 200px;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
   cursor: pointer;
   /* border: 1px solid red; */
   background-color: #f6f6f6;
