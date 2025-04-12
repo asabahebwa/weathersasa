@@ -166,7 +166,7 @@
 }
 
 /* Media queries for responsiveness */
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .menu-bar-container {
     padding: 0rem 0.5rem;
   }

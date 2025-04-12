@@ -112,7 +112,7 @@ select {
   color: #202224;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 900px) {
   .header-container {
     padding: 0rem 0.5rem;
     /* border: 1px solid red; */

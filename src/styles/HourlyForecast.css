@@ -313,11 +313,17 @@
   text-decoration: underline;
   color: #067eb3;
 }
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .chart {
     padding: 0rem;
   }
   .weatherByHourTimeZero {
     /* border: 1px solid red; */
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1024px) {
+  .chart {
+    margin: 1rem;
   }
 }
