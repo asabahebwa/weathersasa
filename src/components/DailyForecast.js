@@ -275,9 +275,7 @@ const DailyForecast = ({
               </div>
             ) : (
               <div className="weatherDay__date">
-                <span className="weatherDay__dayOfWeek">
-                  {formatDayOfWeek(day.date)}
-                </span>
+                {formatDayOfWeek(day.date)}
                 &nbsp;
                 <span className="weatherDay__dateOfMonth">
                   {formatDate(day.date)}

@@ -43,7 +43,6 @@
   /* border: 1px solid green; */
 }
 
-/* Add optional scroll indicators */
 .weatherDays-container {
   position: relative;
   margin: 1rem 2rem 2rem;
@@ -62,12 +61,13 @@
   box-shadow: 0 -8px 0 #eb5038, 0 6px 0 white;
 }
 
-.weatherDay__date {
+.weatherDay .weatherDay__date {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   /* border: 1px solid red; */
   margin-top: 0.3rem;
+  font-size: 15px;
 }
 
 .weatherDay .today {
@@ -76,7 +76,7 @@
   justify-content: flex-start;
   /* border: 1px solid red; */
   margin-top: 0.3rem;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .weatherDay:hover .today {
@@ -94,24 +94,24 @@
 
 .weatherDay--selected .weatherDay__date {
   align-self: flex-start;
-  /* border: 1px solid blue; */
   padding: 0rem;
   margin-left: 1rem;
   margin-top: 0.5rem;
+  font-size: 1.5rem;
 }
 
 .weatherDay--selected:hover .weatherDay__date {
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .weatherDay--selected:hover .today {
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .weatherDay__dayOfWeek {
   display: flex;
   color: #141414;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .weatherDay--selected .weatherDay__dayOfWeek {
@@ -119,7 +119,7 @@
 }
 
 .weatherDay__dateOfMonth {
-  font-size: 14px;
+  font-size: 15px;
   color: #666;
 }
 
