@@ -9,8 +9,8 @@
   -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
   max-width: 1280px;
   margin: 0 auto;
-  border-left: 1px solid #d5d5d5;
-  border-right: 1px solid #d5d5d5;
+  border-left: 1px solid #e6e8ea;
+  border-right: 1px solid #e6e8ea;
   /* padding: 0 1rem; */
 }
 
@@ -30,7 +30,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-right: 1px solid #d5d5d5;
+  border-right: 1px solid #e6e8ea;
   width: 4rem;
   /* border: 1px solid red; */
 }
@@ -121,7 +121,7 @@
   justify-content: space-between;
   background-color: #f6f6f6;
   width: 15rem;
-  border-right: 1px solid #d5d5d5;
+  border-right: 1px solid #e6e8ea;
   -webkit-transition: width, 0.4s linear;
   -moz-transition: width, 0.4s linear;
   -ms-transition: width, 0.4s linear;
@@ -280,7 +280,7 @@
   padding: 1rem;
   font-size: 14px;
   cursor: pointer;
-  border-right: 1px solid #d5d5d5;
+  border-right: 1px solid #e6e8ea;
   /* border: 1px solid red; */
   background-color: #f6f6f6;
 }
