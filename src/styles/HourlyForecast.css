@@ -18,6 +18,16 @@
   display: flex;
   /* border: 1px solid green; */
   min-height: 348px;
+  -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
+  -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
+  -webkit-tap-highlight-color: rgba(
+    0,
+    0,
+    0,
+    0
+  ); /* prevent tap highlight color / shadow */
+  -webkit-user-select: none; /* prevent copy paste, to allow, change 'none' to 'text' */
+
   background-color: white;
 }
 
