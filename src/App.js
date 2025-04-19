@@ -76,6 +76,7 @@ function App() {
         city={city}
         handleCityChange={handleCityChange}
         autocompleteCities={autocompleteCities}
+        setAutocompleteCities={setAutocompleteCities}
         setSelectedCity={setSelectedCity}
         cities={cities}
         setCoordinates={setCoordinates}

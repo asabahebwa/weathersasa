@@ -174,15 +174,15 @@
   }
   .menu-bar {
     position: relative; /* For absolute positioned mobile menu */
-    /* border: 1px solid red; */
-    padding: 0 0.3rem;
+    /* border: 1px solid blue; */
+    padding: 0 0.5rem;
   }
 
   /* Rearrange menu bar items */
   .menu-bar-left {
     width: auto;
     border: none;
-    /* border: 1px solid red; */
+    /* border: 1px solid green; */
   }
 
   .logo {
@@ -276,6 +276,7 @@
     border-top: 1px solid #d5d5d5;
     /* border: 1px solid green; */
     height: 360px;
+    z-index: -100;
     -webkit-transition: height, 0.3s linear;
     -moz-transition: height, 0.3s linear;
     -ms-transition: height, 0.3s linear;

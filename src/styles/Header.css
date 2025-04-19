@@ -8,9 +8,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* padding: 0px 1rem; */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* margin-bottom: 2rem; */
   position: relative; /* Ensure proper stacking context */
   z-index: 10; /* Keep header above other content */
   max-width: 1280px;
@@ -21,7 +18,9 @@
 .app-header h1 {
   color: white;
   margin: 0;
-  margin-right: 3rem;
+  min-width: 15rem;
+  display: flex;
+  justify-content: flex-start;
   font-size: 2.4rem;
   letter-spacing: 1px;
   font-weight: 700;
@@ -29,9 +28,8 @@
 }
 
 .header-search {
-  /* flex: 0 0 auto; */
-  width: 80%;
-  max-width: 1000px;
+  width: 100%;
+  /* border: 1px solid green; */
 }
 
 .placesAutocomplete {
@@ -40,7 +38,6 @@
 
 .placesAutocomplete__inputWrap {
   /* border: 1px solid red; */
-  width: 100%;
 }
 
 .placesAutocomplete__inputWrap input {
@@ -51,33 +48,23 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   margin: 0 2.75rem 0 0;
   color: #202224;
-  background: #f6f6f6;
+  background: white;
   border-radius: 0;
   border: solid 0.0625rem rgba(0, 0, 0, 0);
   outline: none;
 }
 
 .placesAutocomplete__inputWrap input::placeholder {
-  color: #202224;
+  color: #545658;
   font-size: 1.1rem;
 }
 
-.inputError {
-  position: absolute;
-  color: #ff3333;
-  font-size: 12px;
-  margin-top: 4px;
-  right: 0;
-}
-
-input[type="text"],
+.placesAutocomplete__inputWrap input[type="text"],
 select {
   width: 100%;
-  padding: 12px 20px;
+  padding: 12px 0.5rem;
   margin: 8px 0;
   display: inline-block;
-  border: 1px solid #ccc;
-  /* border-radius: 4px; */
   box-sizing: border-box;
 }
 
@@ -112,13 +99,325 @@ select {
   color: #202224;
 }
 
+.app-header-spacer {
+  display: none;
+  height: 0;
+}
+
+.header-container-focused .app-header-spacer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 3.8rem;
+  left: 0;
+  right: 0;
+  height: 470px;
+  background-color: white;
+  z-index: 100;
+  padding: 0rem 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  /* border: 1px solid green; */
+}
+
+.app-header-spacer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1280px;
+  width: 100%;
+  min-height: 3.8rem;
+  margin: 0 auto;
+  /* border: 1px solid cyan; */
+}
+
+.app-header-spacer-header h1 {
+  display: flex;
+  justify-content: flex-start;
+  color: black;
+  margin: 0;
+  min-width: 15rem;
+  font-size: 2.4rem;
+  letter-spacing: 1px;
+  font-weight: 700;
+  /* border: 1px solid blue; */
+}
+
+.app-header-spacer-header-search {
+  width: 100%;
+  /* border: 1px solid red; */
+}
+
+.app-header-spacer-header-search-mobile {
+  display: none;
+}
+
+.app-header-spacer-header-search__placesAutocomplete {
+  position: relative;
+}
+
+.app-header-spacer-header-search__placesAutocomplete__inputWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  /* border: 1px solid red; */
+}
+
+.app-header-spacer-header-search__placesAutocomplete__inputWrap input {
+  width: 100%;
+  text-overflow: ellipsis;
+  padding: 0 0.5rem;
+  font-size: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin: 0 2.75rem 0 0;
+  color: #202224;
+  background: #f6f6f6;
+  border-radius: 0;
+  border: solid 0.0625rem rgba(0, 0, 0, 0);
+  outline: none;
+}
+
+.app-header-spacer-header-search__placesAutocomplete__inputWrap
+  input::placeholder {
+  color: #545658;
+  font-size: 1.1rem;
+}
+
+.app-header-spacer-header-search__placesAutocomplete__inputWrap input[type="text"],
+select {
+  width: 100%;
+  padding: 12px 0.5rem;
+  margin: 8px 0;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.app-header-spacer-search-icon {
+  position: absolute;
+  right: 10px; /* Position on the extreme right */
+  color: #202224;
+  z-index: 1;
+  pointer-events: none; /* This ensures clicks pass through to the input */
+  transition: color 0.3s ease;
+}
+
+.app-header-spacer-inputError {
+  position: absolute;
+  color: #ff3333;
+  font-size: 12px;
+  margin-top: 4px;
+  right: 0;
+}
+input[type="text"],
+select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  color: #202224;
+  border: 1px solid #f6f6f6;
+  /* border-radius: 4px; */
+  box-sizing: border-box;
+}
+
+.app-header-spacer-close-icon {
+  /* border: 1px solid red; */
+  margin: 0rem 1rem;
+  cursor: pointer;
+}
+
+.app-header-spacer-autocomplete-wrapper {
+  /* border: 1px solid blue; */
+  width: 100%;
+}
+
+.app-header-spacer-autocomplete-item {
+  /* border: 1px solid red; */
+  cursor: pointer;
+  display: flex;
+  font-size: 1rem;
+  padding: 11px;
+  border-bottom: 1px solid #e6e8ea;
+  color: #202224;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: start;
+  /* width: 100%; */
+}
+
+.app-header-spacer-autocomplete-item:hover {
+  background-color: #202224;
+  color: #f6f6f6;
+  cursor: pointer;
+}
+
+.app-header-spacer-locations {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 1rem;
+  /* padding: 0rem 1rem; */
+}
+
+.app-header-spacer-locations-heading {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 14px;
+  padding-left: 1rem;
+}
+
+.app-header-spacer-locations-remember {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid blue; */
+  background-color: #f6f6f6;
+  border-top: 1px solid #b0b2b4;
+  margin: 0;
+  padding: 1rem;
+}
+
+.app-header-spacer-locations-remember h4 {
+  text-align: start;
+  font-size: 1.5rem;
+  color: #141414;
+  padding: 0;
+  margin: 0;
+}
+
+.app-header-spacer-locations-remember p {
+  text-align: start;
+  padding: 0;
+  line-height: 1.25;
+  font-size: 1rem;
+  margin: 1rem 0rem;
+}
+.app-header-spacer-locations-remember-buttons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: fit-content;
+  /* border: 1px solid red; */
+  /* margin-top: 1rem; */
+}
+.app-header-spacer-locations-remember-button {
+  background-color: #0064e6;
+  color: white;
+  padding: 0.6rem 0.8rem;
+  font-weight: 700;
+  margin-right: 0.5rem;
+}
+.app-header-spacer-locations-remember-button-text {
+  margin-left: 0.5rem;
+}
+
+.app-header-spacer-locations-remember-register-text {
+  margin-left: 0.5rem;
+  color: #0064e6;
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+.app-header-spacer-recent-searches {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 1rem;
+  /* border: 1px solid red; */
+}
+
+.app-header-spacer-recent-searches-heading {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 14px;
+  padding-left: 1rem;
+  border-bottom: 1px solid #b0b2b4;
+}
+
+.app-header-spacer-recent-searches-content {
+  display: flex;
+  justify-content: flex-start;
+  /* border: 1px solid red; */
+  padding-left: 1rem;
+}
+
+.app-header-spacer-recent-searches-content p {
+  text-align: start;
+}
+
 @media screen and (max-width: 900px) {
   .header-container {
-    padding: 0rem 0.5rem;
     /* border: 1px solid red; */
   }
+
+  .app-header {
+    /* border: 1px solid cyan; */
+  }
   .app-header h1 {
-    font-size: 1.8rem;
-    margin-right: 2rem;
+    font-size: 2.2rem;
+    min-width: none;
+  }
+
+  .header-search {
+    display: none;
+  }
+
+  .mobile-header-search-icon {
+    /* border: 1px solid red; */
+    margin-right: 0.3rem;
+  }
+
+  .app-header-spacer-header {
+    height: 3.8rem;
+    /* padding: 1rem 0rem; */
+  }
+
+  .app-header-spacer-header h1 {
+    font-size: 2.2rem;
+    min-width: 0;
+  }
+
+  .app-header-spacer-header-search {
+    display: none;
+    width: 100%;
+    /* border: 1px solid red; */
+  }
+
+  .app-header-spacer-header-search-mobile {
+    display: flex;
+    /* border: 1px solid green; */
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+
+  .app-header-spacer-header-search-mobile
+    .app-header-spacer-header-search__placesAutocomplete {
+    position: relative;
+    width: 100%;
+    /* border: 1px solid blue; */
+  }
+
+  .app-header-spacer-header-search-mobile
+    .app-header-spacer-header-search__placesAutocomplete__inputWrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    /* border: 1px solid red; */
+  }
+
+  .app-header-spacer-autocomplete-item {
+    /* border: 1px solid red; */
+    font-size: 15px;
+    text-align: start;
+  }
+
+  .app-header-spacer-locations-remember h4{
+    font-size: 20px;
   }
 }
