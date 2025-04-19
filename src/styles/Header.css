@@ -353,6 +353,7 @@ select {
 @media screen and (max-width: 900px) {
   .header-container {
     /* border: 1px solid red; */
+    padding: 0rem 0.5rem;
   }
 
   .app-header {
@@ -372,8 +373,14 @@ select {
     margin-right: 0.3rem;
   }
 
+  .header-container-focused .app-header-spacer{
+    /* border: 1px solid red; */
+    padding: 0rem 0.5rem;
+  }
+
   .app-header-spacer-header {
     height: 3.8rem;
+    /* border: 1px solid green; */
     /* padding: 1rem 0rem; */
   }
 
