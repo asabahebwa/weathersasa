@@ -33,6 +33,12 @@ function App() {
 
   const handleCityChange = async (e) => {
     setCity(e.target.value);
+
+    if (e.target.value.length < 2) {
+      setAutocompleteCities([]);
+      return;
+    }
+
     if (!city) return;
 
     const res = await fetchPlace(city);
