@@ -155,8 +155,8 @@ function Header({
                 ? "550px"
                 : "470px"
               : isMobileView
-              ? 120 + autocompleteCities.length * 60 + "px"
-              : 60 + autocompleteCities.length * 60 + "px",
+              ? 140 + autocompleteCities.length * 45 + "px"
+              : 80 + autocompleteCities.length * 45 + "px",
         }}
       >
         <div className="app-header-spacer-header">
