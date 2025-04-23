@@ -14,7 +14,9 @@ import MobileWeatherCondition from "./components/MobileWeatherCondition";
 import MenuBar from "./components/MenuBar";
 import Sun from "./components/Sun";
 import AirQuality from "./components/AirQuality";
+import Maps from "./components/Maps";
 import "./styles/App.css";
+// import backgroundImage from "./image/@1x-G5_thunderstorm-shower-day.jpg";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -123,6 +125,9 @@ function App() {
             forecastData={forecast}
             selectedDayIndex={selectedDayIndex}
           />
+          {forecast.forecast && (
+            <Maps forecastData={forecast} selectedDayIndex={selectedDayIndex} />
+          )}
         </>
       )}
     </div>

@@ -123,7 +123,7 @@ function Header({
             <div className="placesAutocomplete__inputWrap">
               <input
                 type="text"
-                id="city"
+                id="fakeCity"
                 name="city"
                 readOnly
                 onFocus={handleHeaderInputFocus}
@@ -223,7 +223,7 @@ function Header({
                 ref={isMobileView ? spacerInputRef : null}
                 list="places"
                 type="text"
-                id="city"
+                id="mobileCity"
                 name="city"
                 onChange={handleCityChange}
                 value={city}
