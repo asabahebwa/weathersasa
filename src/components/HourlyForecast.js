@@ -801,147 +801,151 @@ const HourlyForecast = ({
     return result;
   };
   return (
-    <div className="chart">
-      {selectedDayIndex !== 0 && (
-        <div
-          className="seeMoreWeatherBefore"
-          onClick={() => setSelectedDayIndex(selectedDayIndex - 1)}
-        >
-          <span>See weather for</span>
-          <span className="date">{formattedPreviousDayDate}</span>
-        </div>
-      )}
-
-      {data.map((item, index) => {
-        // console.log(item);
-        const isExpanded = expandedHourIndex === index;
-        return (
+    <div className="chart-container">
+      <div className="chart">
+        {selectedDayIndex !== 0 && (
           <div
-            className="weatherByHour"
-            key={index}
-            onClick={() => toggleExpand(index)}
+            className="seeMoreWeatherBefore"
+            onClick={() => setSelectedDayIndex(selectedDayIndex - 1)}
           >
+            <span>See weather for</span>
+            <span className="date">{formattedPreviousDayDate}</span>
+          </div>
+        )}
+
+        {data.map((item, index) => {
+          // console.log(item);
+          const isExpanded = expandedHourIndex === index;
+          return (
             <div
-              className={`weatherByHourSummary ${
-                isExpanded ? "weatherByHourSummary--expanded" : ""
-              }`}
+              className="weatherByHour"
+              key={index}
+              onClick={() => toggleExpand(index)}
             >
-              <div className="weatherByHourTime">
-                <span>{item.time.split(" ")[1].split(":")[0]}</span>
-                <span className="weatherByHourTimeZero">{"00"}</span>
-              </div>
-              <div className="weatherByHourTempPrecipAndWind">
-                <div
-                  style={{
-                    marginBottom:
-                      ((Math.trunc(item.temp_c) - minTempC) /
-                        (maxTempC - minTempC)) *
-                        (marginBottomMax - marginBottomMin) +
-                      marginBottomMin,
-                  }}
-                  className="weatherByHourTempContainer"
-                >
-                  <div className="weatherByHourIcon">
-                    <img
-                      src={`https:${item.condition.icon}`}
-                      alt="icon"
-                      width={50}
-                    />
+              <div
+                className={`weatherByHourSummary ${
+                  isExpanded ? "weatherByHourSummary--expanded" : ""
+                }`}
+              >
+                <div className="weatherByHourTime">
+                  <span>{item.time.split(" ")[1].split(":")[0]}</span>
+                  <span className="weatherByHourTimeZero">{"00"}</span>
+                </div>
+                <div className="weatherByHourTempPrecipAndWind">
+                  <div
+                    style={{
+                      marginBottom:
+                        ((Math.trunc(item.temp_c) - minTempC) /
+                          (maxTempC - minTempC)) *
+                          (marginBottomMax - marginBottomMin) +
+                        marginBottomMin,
+                    }}
+                    className="weatherByHourTempContainer"
+                  >
+                    <div className="weatherByHourIcon">
+                      <img
+                        src={`https:${item.condition.icon}`}
+                        alt="icon"
+                        width={50}
+                      />
+                    </div>
+                    <div className="weatherByHourTemp">
+                      {Math.trunc(item.temp_c)}
+                      {String.fromCharCode(176)}
+                    </div>
                   </div>
-                  <div className="weatherByHourTemp">
-                    {Math.trunc(item.temp_c)}
-                    {String.fromCharCode(176)}
+                  <div className="weatherByHourPrecipAndWind">
+                    <div className="weatherByHourPrecipitationContainer">
+                      <img
+                        src="/precipitation.png"
+                        alt="icon"
+                        width={30}
+                        height={30}
+                        color="red"
+                        className="weatherByHourPrecipitationIcon"
+                      />
+                      <div className="weatherByHourPrecipitationText">
+                        {getPrecipitationValue(
+                          item.chance_of_rain,
+                          item.chance_of_snow
+                        )}
+                      </div>
+                    </div>
+                    <div className="weatherByHourWindContainer">
+                      <span className="weatherByHourWindIcon">
+                        {Math.trunc(item.wind_kph)}
+                      </span>
+                    </div>
                   </div>
                 </div>
-                <div className="weatherByHourPrecipAndWind">
-                  <div className="weatherByHourPrecipitationContainer">
-                    <img
-                      src="/precipitation.png"
-                      alt="icon"
-                      width={30}
-                      height={30}
-                      color="red"
-                      className="weatherByHourPrecipitationIcon"
-                    />
-                    <div className="weatherByHourPrecipitationText">
-                      {getPrecipitationValue(
+              </div>
+
+              <div
+                className={
+                  isExpanded
+                    ? "weatherByHourDetails--expanded"
+                    : "weatherByHourDetails"
+                }
+              >
+                <div className="weatherDetailsCondition">
+                  <span className="weatherDetailsConditionText">
+                    {getConditionText(item.condition.code, item.condition.text)}{" "}
+                    {getWindPower(item.wind_kph)}
+                  </span>
+                </div>
+
+                <div className="weatherDetailsRows__general">
+                  <div className="weatherDetailsRow">
+                    <span className="detailLabel">Humidity:</span>
+                    <span className="detailValue">{item.humidity}%</span>
+                  </div>
+                  <div className="weatherDetailsRow">
+                    <span className="detailLabel">Pressure:</span>
+                    <span className="detailValue">{item.pressure_mb} mb</span>
+                  </div>
+                  <div className="weatherDetailsRow">
+                    <span className="detailLabel">Wind:</span>
+                    <span className="detailValue">
+                      {Math.trunc(item.wind_kph)} kph
+                    </span>
+                  </div>
+                </div>
+                <div className="weatherDetailsRows__all">
+                  <div className="weatherDetailsRow__temp">
+                    <span className="detailLabel">Temperature feels like</span>
+                    <span className="detailValue">
+                      {Math.trunc(item.feelslike_c)}
+                      {String.fromCharCode(176)}C
+                    </span>
+                  </div>
+                  <div className="weatherDetailsRow__precip">
+                    <span className="detailLabel">
+                      {getPrecipitationText(
                         item.chance_of_rain,
                         item.chance_of_snow
                       )}
-                    </div>
+                    </span>
                   </div>
-                  <div className="weatherByHourWindContainer">
-                    <span className="weatherByHourWindIcon">
-                      {Math.trunc(item.wind_kph)}
+                  <div className="weatherDetailsRow__wind">
+                    <span className="detailLabel">
+                      Light winds from the {getWindDirection(item.wind_degree)}
                     </span>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div
-              className={
-                isExpanded
-                  ? "weatherByHourDetails--expanded"
-                  : "weatherByHourDetails"
-              }
-            >
-              <div className="weatherDetailsCondition">
-                <span className="weatherDetailsConditionText">
-                  {getConditionText(item.condition.code, item.condition.text)}{" "}
-                  {getWindPower(item.wind_kph)}
-                </span>
-              </div>
-
-              <div className="weatherDetailsRows__general">
-                <div className="weatherDetailsRow">
-                  <span className="detailLabel">Humidity:</span>
-                  <span className="detailValue">{item.humidity}%</span>
-                </div>
-                <div className="weatherDetailsRow">
-                  <span className="detailLabel">Pressure:</span>
-                  <span className="detailValue">{item.pressure_mb} mb</span>
-                </div>
-                <div className="weatherDetailsRow">
-                  <span className="detailLabel">Wind:</span>
-                  <span className="detailValue">{item.wind_kph} kph</span>
-                </div>
-              </div>
-              <div className="weatherDetailsRows__all">
-                <div className="weatherDetailsRow__temp">
-                  <span className="detailLabel">Temperature feels like</span>
-                  <span className="detailValue">
-                    {item.feelslike_c}
-                    {String.fromCharCode(176)}C
-                  </span>
-                </div>
-                <div className="weatherDetailsRow__precip">
-                  <span className="detailLabel">
-                    {getPrecipitationText(
-                      item.chance_of_rain,
-                      item.chance_of_snow
-                    )}
-                  </span>
-                </div>
-                <div className="weatherDetailsRow__wind">
-                  <span className="detailLabel">
-                    Light winds from the {getWindDirection(item.wind_degree)}
-                  </span>
-                </div>
-              </div>
-            </div>
+          );
+        })}
+        {selectedDayIndex < 13 && (
+          <div
+            className="seeMoreWeatherAfter"
+            onClick={() => setSelectedDayIndex(selectedDayIndex + 1)}
+          >
+            <span>See weather for</span>
+            <span className="date">{formattedNextDayDate}</span>
           </div>
-        );
-      })}
-      {selectedDayIndex < 13 && (
-        <div
-          className="seeMoreWeatherAfter"
-          onClick={() => setSelectedDayIndex(selectedDayIndex + 1)}
-        >
-          <span>See weather for</span>
-          <span className="date">{formattedNextDayDate}</span>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

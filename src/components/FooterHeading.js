@@ -134,7 +134,12 @@ function FooterHeading({ forecastData, selectedDayIndex }) {
       <div className="footer-heading">
         <p className="footer-heading-text-col">
           Weathersasa in association with{" "}
-          <a className="dtn" href="https://www.dtn.com/">
+          <a
+            className="dtn"
+            href="https://www.dtn.com/"
+            target="_blank"
+            rel="noreferrer"
+          >
             DTN
           </a>
         </p>
