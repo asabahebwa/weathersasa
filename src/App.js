@@ -15,6 +15,8 @@ import MenuBar from "./components/MenuBar";
 import Sun from "./components/Sun";
 import AirQuality from "./components/AirQuality";
 import Maps from "./components/Maps";
+import FooterHeading from "./components/FooterHeading";
+import Footer from "./components/Footer";
 import "./styles/App.css";
 // import backgroundImage from "./image/@1x-G5_thunderstorm-shower-day.jpg";
 
@@ -128,6 +130,11 @@ function App() {
           {forecast.forecast && (
             <Maps forecastData={forecast} selectedDayIndex={selectedDayIndex} />
           )}
+          <FooterHeading
+            forecastData={forecast}
+            selectedDayIndex={selectedDayIndex}
+          />
+          <Footer />
         </>
       )}
     </div>

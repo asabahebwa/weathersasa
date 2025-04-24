@@ -43,7 +43,7 @@ const Maps = ({ forecastData, selectedDayIndex }) => {
   // console.log(forecastData);
   return (
     <div className="maps-container">
-      <APIProvider apiKey={"AIzaSyCZiZ8D_BD0q5D6mFn2nWqbyLH4ub5xAjQ"}>
+      <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
         <Map
           style={{ width: "auto", height: "450px" }}
           mapId="DEMO_MAP_ID"
