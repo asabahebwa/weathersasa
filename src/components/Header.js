@@ -41,26 +41,26 @@ function Header({
   }, []);
 
   // Add click outside detection
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      // If header spacer is open and click is outside of it
-      if (
-        inputFocused &&
-        spacerRef.current &&
-        !spacerRef.current.contains(event.target)
-      ) {
-        handleSpacerClose(event);
-      }
-    };
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
+  //     // If header spacer is open and click is outside of it
+  //     if (
+  //       inputFocused &&
+  //       spacerRef.current &&
+  //       !spacerRef.current.contains(event.target)
+  //     ) {
+  //       handleSpacerClose(event);
+  //     }
+  //   };
 
-    // Add event listener when component mounts or inputFocused changes
-    document.addEventListener("mousedown", handleClickOutside);
+  //   // Add event listener when component mounts or inputFocused changes
+  //   document.addEventListener("mousedown", handleClickOutside);
 
-    // Remove event listener on cleanup
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  });
+  //   // Remove event listener on cleanup
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // });
 
   const getSelectedCity = (city) => {
     if (autocompleteCities.includes(city)) {
