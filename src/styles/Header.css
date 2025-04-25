@@ -104,6 +104,10 @@ select {
   height: 0;
 }
 
+.header-container-focused .app-header{
+  display: none;
+}
+
 .header-container-focused .app-header-spacer {
   display: flex;
   flex-direction: column;

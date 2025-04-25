@@ -130,11 +130,14 @@ function App() {
           {forecast.forecast && (
             <Maps forecastData={forecast} selectedDayIndex={selectedDayIndex} />
           )}
-          <FooterHeading
-            forecastData={forecast}
-            selectedDayIndex={selectedDayIndex}
-          />
-          <Footer />
+
+          {forecast.forecast && (
+            <FooterHeading
+              forecastData={forecast}
+              selectedDayIndex={selectedDayIndex}
+            />
+          )}
+          {forecast.forecast && <Footer />}
         </>
       )}
     </div>
