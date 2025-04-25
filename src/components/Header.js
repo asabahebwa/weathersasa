@@ -82,7 +82,9 @@ function Header({
   };
 
   // Function to handle focusing on the header input
-  const handleHeaderInputFocus = () => {
+  const handleHeaderInputFocus = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     setInputFocused(true);
     setAutocompleteCities([]);
     // Use a small timeout to ensure the DOM has updated
@@ -101,15 +103,6 @@ function Header({
     setInputFocused(false);
     setAutocompleteCities([]);
     handleCityChange({ target: { value: "" } });
-
-    // Add a small timeout to ensure state changes have been processed
-    setTimeout(() => {
-      // Explicitly blur any focused inputs to ensure nothing gets focused
-      // console.log("Blurring active element");
-      if (document.activeElement instanceof HTMLElement) {
-        document.activeElement.blur();
-      }
-    }, 10);
   };
 
   const handleMobileSearchClick = () => {
@@ -139,7 +132,7 @@ function Header({
                 id="fakeCity"
                 name="city"
                 readOnly
-                onFocus={handleHeaderInputFocus}
+                onFocus={(e) => handleHeaderInputFocus(e)}
                 value={city}
                 placeholder="Enter a city"
               />
