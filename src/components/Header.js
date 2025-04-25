@@ -101,6 +101,15 @@ function Header({
     setInputFocused(false);
     setAutocompleteCities([]);
     handleCityChange({ target: { value: "" } });
+
+    // Add a small timeout to ensure state changes have been processed
+    setTimeout(() => {
+      // Explicitly blur any focused inputs to ensure nothing gets focused
+      // console.log("Blurring active element");
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+    }, 10);
   };
 
   const handleMobileSearchClick = () => {
