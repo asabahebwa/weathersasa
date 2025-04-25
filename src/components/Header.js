@@ -93,7 +93,11 @@ function Header({
     }, 10);
   };
 
-  const handleSpacerClose = () => {
+  const handleSpacerClose = (e) => {
+    e.preventDefault();
+    // Stop event propagation to prevent it from bubbling up
+    e.stopPropagation();
+
     setInputFocused(false);
     setAutocompleteCities([]);
     handleCityChange({ target: { value: "" } });
@@ -211,7 +215,7 @@ function Header({
           </div>
           <div
             className="app-header-spacer-close-icon"
-            onClick={() => handleSpacerClose()}
+            onClick={(e) => handleSpacerClose(e)}
           >
             <FontAwesomeIcon icon={faTimes} size="xl" />
           </div>
