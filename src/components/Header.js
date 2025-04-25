@@ -49,7 +49,7 @@ function Header({
         spacerRef.current &&
         !spacerRef.current.contains(event.target)
       ) {
-        handleSpacerClose();
+        handleSpacerClose(event);
       }
     };
 
@@ -60,7 +60,7 @@ function Header({
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [inputFocused]);
+  });
 
   const getSelectedCity = (city) => {
     if (autocompleteCities.includes(city)) {
