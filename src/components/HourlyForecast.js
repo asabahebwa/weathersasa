@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import "../styles/HourlyForecast.css";
 
 const HourlyForecast = ({
   forecastData,
   selectedDayIndex,
   setSelectedDayIndex,
+  toggleExpandedHour,
+  expandedHourIndex,
+  getConditionText,
 }) => {
-  const [expandedHourIndex, setExpandedHourIndex] = useState(null);
-
   if (!forecastData || !forecastData.forecast) {
     return null;
   }
@@ -83,9 +84,7 @@ const HourlyForecast = ({
   const timelyHourlyData = hourlyData.slice(getHoursElapsedSinceMidnight());
 
   let data = selectedDayIndex === 0 ? timelyHourlyData : hourlyData;
-  // console.log(timelyHourlyData);
 
-  // Calculate max temperature for scaling
   const temperatures = hourlyData.map((item) => {
     return Math.trunc(item.temp_c);
   });
@@ -94,15 +93,6 @@ const HourlyForecast = ({
 
   let marginBottomMax = 136;
   let marginBottomMin = 16;
-
-  // Toggle expanded state for clicked hour
-  const toggleExpand = (index) => {
-    if (expandedHourIndex === index) {
-      setExpandedHourIndex(null);
-    } else {
-      setExpandedHourIndex(index);
-    }
-  };
 
   const getWindDirection = (windDegree) => {
     if (windDegree >= 0 && windDegree < 22.5) {
@@ -157,8 +147,6 @@ const HourlyForecast = ({
     }
     return result;
   };
-
-  //cdn.weatherapi.com/weather/64x64/night/119.png
 
   let conditions = [
     {
@@ -451,310 +439,6 @@ const HourlyForecast = ({
     },
   ];
 
-  let weatherIcons = [
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/113.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/113.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/116.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/116.png",
-    },
-
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/119.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/119.png",
-    },
-
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/122.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/122.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/143.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/143.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/176.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/176.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/179.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/179.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/182.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/182.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/185.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/185.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/200.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/200.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/227.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/227.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/230.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/230.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/248.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/248.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/260.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/260.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/263.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/263.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/266.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/266.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/281.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/281.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/284.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/284.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/293.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/293.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/296.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/296.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/299.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/299.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/302.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/302.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/305.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/305.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/308.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/308.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/311.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/311.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/314.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/314.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/317.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/317.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/320.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/320.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/323.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/323.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/326.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/326.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/329.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/329.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/332.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/332.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/335.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/335.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/338.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/338.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/350.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/350.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/353.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/353.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/356.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/356.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/359.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/359.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/362.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/362.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/365.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/365.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/368.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/368.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/371.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/371.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/374.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/374.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/377.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/377.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/386.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/386.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/389.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/389.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/392.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/392.png",
-    },
-    {
-      day: "cdn.weatherapi.com/weather/64x64/day/395.png",
-      night: "cdn.weatherapi.com/weather/64x64/night/395.png",
-    },
-  ];
-
-  const getConditionText = (code, text) => {
-    switch (code) {
-      case 1000:
-        if (text === "Clear ") {
-          return "A clear sky";
-        } else {
-          return "Sunny";
-        }
-      case 1003:
-        return "Partly cloudy";
-      case 1006:
-        return "Cloudy";
-      case 1009:
-        return "Overcast";
-      case 1030:
-        return "Mist";
-      case 1063:
-        return "Patchy rain possible";
-      case 1066:
-        return "Patchy snow possible";
-      case 1069:
-        return "Patchy sleet possible";
-      case 1072:
-        return "Patchy freezing drizzle possible";
-      case 1087:
-        return "Thundery outbreaks possible";
-      case 1114:
-        return "Blowing snow";
-      case 1117:
-        return "Blizzard";
-      case 1135:
-        return "Fog";
-      case 1147:
-        return "Freezing fog";
-      case 1150:
-        return "Patchy light drizzle";
-      case 1153:
-        return "Light drizzle";
-      case 1168:
-        return "Freezing drizzle";
-      case 1171:
-        return "Heavy freezing drizzle";
-      case 1180:
-        return "Patchy light rain";
-      case 1183:
-        return "Light rain";
-      case 1186:
-        return "Moderate rain at times";
-      case 1189:
-        return "Moderate rain";
-      case 1192:
-        return "Heavy rain at times";
-      case 1195:
-        return "Heavy rain";
-      case 1198:
-        return "Light freezing rain";
-      case 1201:
-        return "Moderate or heavy freezing rain";
-      case 1204:
-        return "Light sleet";
-      case 1207:
-        return "Moderate or heavy sleet";
-      case 1210:
-        return "Patchy light snow";
-      case 1213:
-        return "Light snow";
-      case 1216:
-        return "Patchy moderate snow";
-      case 1219:
-        return "Moderate snow";
-      case 1222:
-        return "Patchy heavy snow";
-      case 1225:
-        return "Heavy snow";
-      case 1237:
-        return "Ice pellets";
-      case 1240:
-        return "Light rain shower";
-      case 1243:
-        return "Moderate or heavy rain shower";
-      case 1246:
-        return "Torrential rain shower";
-      case 1249:
-        return "Light sleet showers";
-      case 1252:
-        return "Moderate or heavy sleet showers";
-      case 1255:
-        return "Light snow showers";
-      case 1258:
-        return "Moderate or heavy snow showers";
-      case 1261:
-        return "Light showers of ice pellets";
-      case 1264:
-        return "Moderate or heavy showers of ice pellets";
-      case 1273:
-        return "Patchy light rain with thunder";
-      case 1276:
-        return "Moderate or heavy rain with thunder";
-      case 1279:
-        return "Patchy light snow with thunder";
-      case 1282:
-        return "Moderate or heavy snow with thunder";
-      default:
-        return "Unknown condition";
-    }
-  };
-
   const getWindPower = (windSpeed) => {
     let result = "";
     switch (true) {
@@ -820,7 +504,7 @@ const HourlyForecast = ({
             <div
               className="weatherByHour"
               key={index}
-              onClick={() => toggleExpand(index)}
+              onClick={() => toggleExpandedHour(index)}
             >
               <div
                 className={`weatherByHourSummary ${
