@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/HourlyForecast.css";
 
 const HourlyForecast = ({
@@ -8,10 +8,30 @@ const HourlyForecast = ({
   toggleExpandedHour,
   expandedHourIndex,
   getConditionText,
+  getTempColor,
 }) => {
-  if (!forecastData || !forecastData.forecast) {
-    return null;
-  }
+  // if (!forecastData || !forecastData.forecast) {
+  //   return null;
+  // }
+
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
+  const handleMouseEnter = (index) => {
+    setHoveredIndex(index);
+    // console.log("Hovered index:", index);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
+  };
+
+  const getBoxShadow = (color, index) => {
+    const isExpanded = expandedHourIndex === index;
+    const isHovered = hoveredIndex === index;
+    if (isExpanded || isHovered) {
+      return `inset 0 3px 0 ${color}`;
+    }
+  };
 
   const nth = (d) => {
     switch (d) {
@@ -499,17 +519,24 @@ const HourlyForecast = ({
 
         {data.map((item, index) => {
           // console.log(item);
+
+          let color = getTempColor(Math.trunc(item.temp_c));
           const isExpanded = expandedHourIndex === index;
           return (
             <div
               className="weatherByHour"
               key={index}
               onClick={() => toggleExpandedHour(index)}
+              onMouseEnter={() => handleMouseEnter(index)}
+              onMouseLeave={handleMouseLeave}
             >
               <div
                 className={`weatherByHourSummary ${
                   isExpanded ? "weatherByHourSummary--expanded" : ""
                 }`}
+                style={{
+                  boxShadow: getBoxShadow(color, index),
+                }}
               >
                 <div className="weatherByHourTime">
                   <span>{item.time.split(" ")[1].split(":")[0]}</span>
@@ -570,6 +597,9 @@ const HourlyForecast = ({
                     ? "weatherByHourDetails--expanded"
                     : "weatherByHourDetails"
                 }
+                style={{
+                  boxShadow: `inset 0 3px 0 ${color}`,
+                }}
               >
                 <div className="weatherDetailsCondition">
                   <span className="weatherDetailsConditionText">

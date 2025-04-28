@@ -25,7 +25,7 @@
   cursor: pointer;
   border-left: 1px solid #d5d5d5;
   /* border: 1px solid blue; */
-  box-shadow: inset 0 -6px 0 #eb5038;
+  /* box-shadow: inset 0 -6px 0 #eb5038; */
 }
 
 .weatherDay--selected {
@@ -37,7 +37,7 @@
   position: relative; /* Need this for z-index to work */
   border-bottom: none;
   border-left: 1px solid #d5d5d5;
-  box-shadow: 0 -8px 0 #eb5038, 0 6px 0 white;
+  /* box-shadow: 0 -8px 0 #eb5038, 0 6px 0 white; */
   padding-left: 0rem;
 
   /* border: 1px solid green; */
@@ -50,7 +50,7 @@
 
 .weatherDay:hover {
   border-bottom: none;
-  box-shadow: 0 -6px 0 #eb5038, 0 6px 0 white;
+  /* box-shadow: 0 -6px 0 #eb5038, 0 6px 0 white; */
 }
 
 .weatherDay:hover .weatherDay__date {
@@ -58,7 +58,7 @@
 }
 
 .weatherDay--selected:hover {
-  box-shadow: 0 -8px 0 #eb5038, 0 6px 0 white;
+  /* box-shadow: 0 -8px 0 #eb5038, 0 6px 0 white; */
 }
 
 .weatherDay .weatherDay__date {

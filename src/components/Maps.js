@@ -28,7 +28,7 @@ import {
 //   { key: "barangaroo", location: { lat: -33.8605523, lng: 151.1972205 } },
 // ];
 
-const Maps = ({ forecastData, selectedDayIndex }) => {
+const Maps = ({ forecastData, selectedDayIndex, getTempColor }) => {
   let selectedLocation = {
     key: forecastData.location.name,
     location: {
@@ -37,8 +37,9 @@ const Maps = ({ forecastData, selectedDayIndex }) => {
     },
   };
 
-  let selectedLocationTemperature =
-    forecastData.forecast.forecastday[selectedDayIndex].day.avgtemp_c;
+  let selectedLocationTemperature = Math.trunc(
+    forecastData.forecast.forecastday[selectedDayIndex].day.maxtemp_c
+  );
 
   // console.log(forecastData);
   return (
@@ -63,6 +64,7 @@ const Maps = ({ forecastData, selectedDayIndex }) => {
           <PoiMarker
             poi={selectedLocation}
             selectedLocationTemperature={selectedLocationTemperature}
+            getTempColor={getTempColor}
           />
         </Map>
       </APIProvider>
@@ -70,7 +72,7 @@ const Maps = ({ forecastData, selectedDayIndex }) => {
   );
 };
 
-const PoiMarker = ({ poi, selectedLocationTemperature }) => {
+const PoiMarker = ({ poi, selectedLocationTemperature, getTempColor }) => {
   const [markerRef, marker] = useAdvancedMarkerRef();
   return (
     <>
@@ -81,7 +83,16 @@ const PoiMarker = ({ poi, selectedLocationTemperature }) => {
       <InfoWindow className="info-window" anchor={marker} pixelOffset={[0, 0]}>
         <div className="info-window-location">{poi.key}</div>
         <div className="info-window-temp">
-          {Math.trunc(selectedLocationTemperature)}
+          <div className="info-window-temp-value">
+            {selectedLocationTemperature}
+          </div>
+
+          <div
+            className="info-window-temp-color"
+            style={{
+              backgroundColor: getTempColor(selectedLocationTemperature),
+            }}
+          ></div>
         </div>
       </InfoWindow>
     </>

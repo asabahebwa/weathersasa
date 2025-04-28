@@ -1,15 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/DailyForecast.css";
 
 const DailyForecast = ({
   forecastData,
   selectedDayIndex,
   setSelectedDayIndex,
-  selectedApiCondition,
   setExpandedHourIndex,
   setSelectedApiCondition,
+  getTempColor,
   getConditionText,
 }) => {
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
+  const handleMouseEnter = (index) => {
+    setHoveredIndex(index);
+    // console.log("Hovered index:", index);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
+  };
+
+  const getBoxShadow = (color, index) => {
+    const isSelected = selectedDayIndex === index;
+    const isHovered = hoveredIndex === index;
+
+    if (isSelected) {
+      // If this day is selected, maintain a consistent style with larger top border
+      return `0 -8px 0 ${color}, 0 6px 0 white`;
+    } else if (isHovered) {
+      // If not selected but hovered, show a slightly prominent top border
+      return `0 -6px 0 ${color}, 0 6px 0 white`;
+    } else {
+      // Default state - show bottom border only
+      return `inset 0 -6px 0 ${color}`;
+    }
+  };
+
   if (!forecastData || !forecastData.forecast) {
     return null;
   }
@@ -168,63 +195,72 @@ const DailyForecast = ({
 
   return (
     <div className="weatherDays">
-      {forecastData.forecast.forecastday.map((day, index) => (
-        <div
-          className={`weatherDay ${
-            selectedDayIndex === index ? "weatherDay--selected" : ""
-          }`}
-          key={index}
-          onClick={() => setSelectedParameters(index)}
-        >
-          <>
-            {index === 0 ? (
-              <div className="today">
-                <span>Today</span>
-              </div>
-            ) : (
-              <div className="weatherDay__date">
-                {formatDayOfWeek(day.date)}
-                &nbsp;
-                <span className="weatherDay__dateOfMonth">
-                  {formatDate(day.date)}
-                </span>
-              </div>
-            )}
-
-            <div className="weatherDay__summary">
-              <div className="weatherDay__icon">
-                <img
-                  src={`https:${day.day.condition.icon}`}
-                  alt={day.day.condition.text}
-                  width={selectedDayIndex === index ? 88 : 64}
-                  height={selectedDayIndex === index ? 88 : 64}
-                />
-              </div>
-
-              <div className="weatherDay__temps">
-                <span className="weatherDay__maxTemp">
-                  {Math.round(day.day.maxtemp_c)}
-                  {String.fromCharCode(176)}
-                </span>
-                <span className="weatherDay__minTemp">
-                  {Math.round(day.day.mintemp_c)}
-                  {String.fromCharCode(176)}
-                </span>
-              </div>
-
-              {selectedDayIndex === index && (
-                <div className="weatherDay__condition">
-                  {getConditionText(
-                    day.day.condition.code,
-                    day.day.condition.text
-                  )}{" "}
-                  {getWindPower(day.day.maxwind_kph)}
+      {forecastData.forecast.forecastday.map((day, index) => {
+        let color = getTempColor(Math.trunc(day.day.maxtemp_c));
+        // console.log(color);
+        return (
+          <div
+            className={`weatherDay ${
+              selectedDayIndex === index ? "weatherDay--selected" : ""
+            }`}
+            key={index}
+            style={{
+              boxShadow: getBoxShadow(color, index),
+            }}
+            onClick={() => setSelectedParameters(index)}
+            onMouseEnter={() => handleMouseEnter(index)}
+            onMouseLeave={handleMouseLeave}
+          >
+            <>
+              {index === 0 ? (
+                <div className="today">
+                  <span>Today</span>
+                </div>
+              ) : (
+                <div className="weatherDay__date">
+                  {formatDayOfWeek(day.date)}
+                  &nbsp;
+                  <span className="weatherDay__dateOfMonth">
+                    {formatDate(day.date)}
+                  </span>
                 </div>
               )}
-            </div>
-          </>
-        </div>
-      ))}
+
+              <div className="weatherDay__summary">
+                <div className="weatherDay__icon">
+                  <img
+                    src={`https:${day.day.condition.icon}`}
+                    alt={day.day.condition.text}
+                    width={selectedDayIndex === index ? 88 : 64}
+                    height={selectedDayIndex === index ? 88 : 64}
+                  />
+                </div>
+
+                <div className="weatherDay__temps">
+                  <span className="weatherDay__maxTemp">
+                    {Math.round(day.day.maxtemp_c)}
+                    {String.fromCharCode(176)}
+                  </span>
+                  <span className="weatherDay__minTemp">
+                    {Math.round(day.day.mintemp_c)}
+                    {String.fromCharCode(176)}
+                  </span>
+                </div>
+
+                {selectedDayIndex === index && (
+                  <div className="weatherDay__condition">
+                    {getConditionText(
+                      day.day.condition.code,
+                      day.day.condition.text
+                    )}{" "}
+                    {getWindPower(day.day.maxwind_kph)}
+                  </div>
+                )}
+              </div>
+            </>
+          </div>
+        );
+      })}
     </div>
   );
 };

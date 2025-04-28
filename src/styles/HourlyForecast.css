@@ -38,7 +38,7 @@
 
 .weatherByHour:hover {
   cursor: pointer;
-  box-shadow: inset 0 3px 0 #eb5038;
+  /* box-shadow: inset 0 3px 0 #eb5038; */
 }
 
 .weatherByHourSummary {
@@ -57,7 +57,7 @@
   justify-content: space-between;
   border-right: none;
   width: 4rem;
-  box-shadow: inset 0 3px 0 #eb5038;
+  /* box-shadow: inset 0 3px 0 #eb5038; */
 }
 
 .weatherByHourTempPrecipAndWind {
@@ -122,7 +122,7 @@
   width: 0rem;
   padding: 0rem;
   border: none;
-  box-shadow: inset 0 3px 0 #eb5038;
+  /* box-shadow: inset 0 3px 0 #eb5038; */
   -webkit-transition: width, 0.4s linear;
   -moz-transition: width, 0.4s linear;
   -ms-transition: width, 0.4s linear;
@@ -137,7 +137,7 @@
   background-color: #f6f6f6;
   width: 15rem;
   border-right: 1px solid #e6e8ea;
-  box-shadow: inset 0 3px 0 #eb5038;
+  /* box-shadow: inset 0 3px 0 #eb5038; */
   -webkit-transition: width, 0.4s linear;
   -moz-transition: width, 0.4s linear;
   -ms-transition: width, 0.4s linear;
@@ -163,7 +163,7 @@
 
 .weatherDetailsConditionText {
   color: #333;
-  font-weight: 500;
+  font-weight: 700;
   color: #141414;
   display: block;
   text-wrap: no-wrap;
@@ -270,6 +270,7 @@
 .weatherByHourTimeZero {
   font-weight: normal;
   color: #545658;
+  font-size: 1rem;
 }
 
 .weatherByHourTempContainer {

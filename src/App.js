@@ -62,6 +62,88 @@ function App() {
   const forecast = useSelector((state) => state.forecast);
   // console.log(forecast);
 
+  const getTempColor = (temp) => {
+    switch (true) {
+      case temp < -30:
+        return "#241967";
+      case temp < -28:
+        return "#272579";
+      case temp < -26:
+        return "#20348D";
+      case temp < -24:
+        return "#214295";
+      case temp < -22:
+        return "#3054A2";
+      case temp < -20:
+        return "#3E65AF";
+      case temp < -18:
+        return "#4976BA";
+      case temp < -16:
+        return "#5784C2";
+      case temp < -14:
+        return "#688FCA";
+      case temp < -12:
+        return "#759FD3";
+      case temp < -10:
+        return "#89ADDC";
+      case temp < -8:
+        return "#9AB9E3";
+      case temp < -6:
+        return "#9BC3DA";
+      case temp < -4:
+        return "#9ACDCF";
+      case temp < -2:
+        return "#9CD2C1";
+      case temp < 0:
+        return "#9ED0AA";
+      case temp < 2:
+        return "#D7DE7E";
+      case temp < 4:
+        return "#EADA6F";
+      case temp < 6:
+        return "#F4D862";
+      case temp < 8:
+        return "#FCCC4E";
+      case temp < 10:
+        return "#F7B42D";
+      case temp < 12:
+        return "#F29C00";
+      case temp < 14:
+        return "#F29400";
+      case temp < 16:
+        return "#F3840D";
+      case temp < 18:
+        return "#EE730E";
+      case temp < 20:
+        return "#ED6517";
+      case temp < 22:
+        return "#EB561E";
+      case temp < 24:
+        return "#E84B1A";
+      case temp < 26:
+        return "#E04016";
+      case temp < 28:
+        return "#D83412";
+      case temp < 30:
+        return "#D2270F";
+      case temp < 32:
+        return "#C30507";
+      case temp < 34:
+        return "#B6070D";
+      case temp < 36:
+        return "#A90914";
+      case temp < 38:
+        return "#89061A";
+      case temp < 40:
+        return "#6F0317";
+      case temp >= 40:
+        return "#4D0014";
+
+      default:
+        return "black";
+    }
+  };
+
   const getBackgroundImageUrl = (width) => {
     let url;
     if (!selectedBackgroundCondition) {
@@ -378,6 +460,7 @@ function App() {
                 selectedApiCondition={selectedApiCondition}
                 setSelectedApiCondition={setSelectedApiCondition}
                 getConditionText={getConditionText}
+                getTempColor={getTempColor}
                 setExpandedHourIndex={setExpandedHourIndex}
               />
             )}
@@ -397,6 +480,7 @@ function App() {
               setExpandedHourIndex={setExpandedHourIndex}
               setSelectedDayIndex={setSelectedDayIndex}
               getConditionText={getConditionText}
+              getTempColor={getTempColor}
             />
           )}
           <LastUpdated forecastData={forecast} />
@@ -406,7 +490,11 @@ function App() {
             selectedDayIndex={selectedDayIndex}
           />
           {forecast.forecast && (
-            <Maps forecastData={forecast} selectedDayIndex={selectedDayIndex} />
+            <Maps
+              forecastData={forecast}
+              selectedDayIndex={selectedDayIndex}
+              getTempColor={getTempColor}
+            />
           )}
 
           {forecast.forecast && (

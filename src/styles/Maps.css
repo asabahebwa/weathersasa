@@ -43,11 +43,6 @@
   display: flex;
   align-items: center;
   color: white;
-}
-
-.info-window-temp {
-  display: flex;
-  align-items: center;
   /* border: 1px solid green; */
 }
 
@@ -57,4 +52,31 @@
   text-align: center;
   font-weight: 400;
   font-size: 15px;
+}
+
+.info-window-temp {
+  display: flex;
+  padding: 0 !important;
+  margin: 0 !important;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 1.5rem;
+  /* border: 1px solid cyan; */
+}
+
+.info-window-temp-value {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100% !important;
+  height: 80%;
+  /* padding: 0px 5px; */
+  /* border: 1px solid blue; */
+}
+
+.info-window-temp-color {
+  width: 100% !important;
+  height: 20%;
+  /* border: 1px solid red; */
 }
