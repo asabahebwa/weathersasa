@@ -36,6 +36,8 @@
   padding: 0 !important;
   /* border: 1px solid red; */
   margin: 0;
+  white-space: nowrap;
+  text-wrap: none;
 }
 
 .info-window-location {
@@ -71,7 +73,7 @@
   align-items: center;
   width: 100% !important;
   height: 80%;
-  /* padding: 0px 5px; */
+  padding: 0px 5px;
   /* border: 1px solid blue; */
 }
 

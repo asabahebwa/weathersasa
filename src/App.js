@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { getWeatherForecast } from "./services/forecast";
+import { getWeatherForecast, getBulkWeatherData } from "./services/forecast";
 import { addForecast } from "./store/forecast/index";
+import { addBulkForecast } from "./store/bulkForecast/index";
 import { fetchPlace } from "./services/fetchPlace";
 import Header from "./components/Header";
 import Loader from "./components/Loader";
@@ -60,7 +61,213 @@ function App() {
   const dispatch = useDispatch();
 
   const forecast = useSelector((state) => state.forecast);
-  // console.log(forecast);
+  const bulkForecast = useSelector((state) => state.bulkForecast);
+
+  const locations = [
+    {
+      key: "San Francisco",
+      location: {
+        lat: 37.775,
+        lng: -122.418,
+      },
+    },
+    {
+      key: "Nairobi",
+      location: {
+        lat: -1.283,
+        lng: 36.817,
+      },
+    },
+    {
+      key: "Doha",
+      location: {
+        lat: 25.287,
+        lng: 51.533,
+      },
+    },
+    {
+      key: "Moscow",
+      location: {
+        lat: 55.752,
+        lng: 37.616,
+      },
+    },
+    {
+      key: "New York",
+      location: {
+        lat: 40.712776,
+        lng: -74.005974,
+      },
+    },
+    {
+      key: "San Paulo",
+      location: {
+        lat: -23.533,
+        lng: -46.617,
+      },
+    },
+    {
+      key: "Rome",
+      location: {
+        lat: 41.9,
+        lng: 12.483,
+      },
+    },
+    {
+      key: "Madrid",
+      location: {
+        lat: 40.4,
+        lng: -3.683,
+      },
+    },
+    {
+      key: "Kyiv",
+      location: {
+        lat: 50.433,
+        lng: 30.517,
+      },
+    },
+    {
+      key: "Berlin",
+      location: {
+        lat: 52.517,
+        lng: 13.4,
+      },
+    },
+    {
+      key: "Cairo",
+      location: {
+        lat: 30.05,
+        lng: 31.25,
+      },
+    },
+    {
+      key: "Lagos",
+      location: {
+        lat: 6.453,
+        lng: 3.396,
+      },
+    },
+    {
+      key: "Rabat",
+      location: {
+        lat: 34.025,
+        lng: -6.836,
+      },
+    },
+    {
+      key: "Beijing",
+      location: {
+        lat: 39.929,
+        lng: 116.388,
+      },
+    },
+    {
+      key: "New Delhi",
+      location: {
+        lat: 28.6,
+        lng: 77.2,
+      },
+    },
+    {
+      key: "Seoul",
+      location: {
+        lat: 37.566,
+        lng: 127,
+      },
+    },
+    {
+      key: "Cape Town",
+      location: {
+        lat: -33.917,
+        lng: 18.417,
+      },
+    },
+    {
+      key: "Miami",
+      location: {
+        lat: 25.774,
+        lng: -80.194,
+      },
+    },
+    {
+      key: "Vancouver",
+      location: {
+        lat: 49.25,
+        lng: -123.133,
+      },
+    },
+    {
+      key: "Anchorage",
+      location: {
+        lat: 61.218,
+        lng: -149.9,
+      },
+    },
+    {
+      key: "Yellowknife",
+      location: {
+        lat: 62.45,
+        lng: -114.35,
+      },
+    },
+    {
+      key: "Nuuk",
+      location: {
+        lat: 64.183,
+        lng: -51.75,
+      },
+    },
+    {
+      key: "Qaarsut",
+      location: {
+        lat: 70.733,
+        lng: -52.65,
+      },
+    },
+    {
+      key: "Bogota",
+      location: {
+        lat: 4.6,
+        lng: -74.083,
+      },
+    },
+    {
+      key: "Sydney",
+      location: {
+        lat: -33.883,
+        lng: 151.217,
+      },
+    },
+    {
+      key: "Darwin",
+      location: {
+        lat: -12.467,
+        lng: 130.833,
+      },
+    },
+    {
+      key: "Auckland",
+      location: {
+        lat: -36.867,
+        lng: 174.767,
+      },
+    },
+    {
+      key: "Manila",
+      location: {
+        lat: 14.604,
+        lng: 120.982,
+      },
+    },
+    {
+      key: "Murmansk",
+      location: {
+        lat: 68.967,
+        lng: 33.083,
+      },
+    },
+  ];
 
   const getTempColor = (temp) => {
     switch (true) {
@@ -388,7 +595,7 @@ function App() {
   };
 
   useEffect(() => {
-    getWeatherForecast(coordinates).then((items) => {
+    getWeatherForecast().then((items) => {
       dispatch(addForecast(items));
       setLoading(false);
       setSelectedDayIndex(0);
@@ -398,6 +605,14 @@ function App() {
           items.forecast.forecastday[0].day.condition.text
         )
       );
+      // After main forecast is loaded, fetch data for all locations
+      getBulkWeatherData(locations)
+        .then((items) => {
+          dispatch(addBulkForecast(items));
+        })
+        .catch((err) => {
+          console.error("Failed to fetch bulk weather data:", err);
+        });
     });
   }, []);
 
@@ -420,7 +635,6 @@ function App() {
   }, [selectedCity]);
 
   useEffect(() => {
-    // console.log("Selected API condition:", selectedApiCondition);
     setSelectedbackgroundCondition(
       getSelectedBackgroundCondition(selectedApiCondition)
     );
@@ -494,6 +708,8 @@ function App() {
               forecastData={forecast}
               selectedDayIndex={selectedDayIndex}
               getTempColor={getTempColor}
+              locations={locations}
+              bulkForecast={bulkForecast}
             />
           )}
 
