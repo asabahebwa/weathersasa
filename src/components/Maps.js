@@ -185,11 +185,13 @@ const Maps = ({
             lat: selectedLocation.location.lat,
             lng: selectedLocation.location.lng,
           }}
+          defaultOptions={{
+            zoomControl: false,
+            scrollwheel: false,
+          }}
           options={{
             minZoom: 2, // Set minimum zoom level (prevents zooming out beyond this)
             maxZoom: 20, // Optional: Set maximum zoom level (prevents zooming in beyond this)
-            zoomControl: true, // Ensure zoom controls are enabled
-            scrollwheel: true, // Allow zoom with mouse wheel
           }}
         >
           <MyComponent location={selectedLocation.location} />
