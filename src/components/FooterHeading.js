@@ -24,6 +24,10 @@ function FooterHeading({ forecastData, selectedDayIndex }) {
     "Africa/Nairobi": "EAT (GMT+3)",
     "Africa/Tripoli": "EET (GMT+2)",
     "Africa/Tunis": "CET (GMT+1)",
+    "Africa/Luanda": "WAT (GMT+1)", // Angola
+    "Africa/Windhoek": "CAT (GMT+2)", // Namibia
+    "Africa/Maputo": "CAT (GMT+2)", // Mozambique
+    "Africa/Harare": "CAT (GMT+2)", // Zimbabwe
 
     // Americas
     "America/Anchorage": "AKDT (GMT-8)",
@@ -44,6 +48,10 @@ function FooterHeading({ forecastData, selectedDayIndex }) {
     "America/St_Johns": "NDT (GMT-2:30)",
     "America/Toronto": "EDT (GMT-4)",
     "America/Vancouver": "PDT (GMT-7)",
+    "America/Winnipeg": "CDT (GMT-5)", // Central Canada
+    "America/Edmonton": "MDT (GMT-6)", // Mountain Canada
+    "America/Jamaica": "EST (GMT-5)", // Jamaica
+    "America/Puerto_Rico": "AST (GMT-4)", // Puerto Rico
 
     // Asia
     "Asia/Baghdad": "AST (GMT+3)",
@@ -72,6 +80,12 @@ function FooterHeading({ forecastData, selectedDayIndex }) {
     "Asia/Tehran": "IRST (GMT+3:30)",
     "Asia/Tokyo": "JST (GMT+9)",
     "Asia/Yangon": "MMT (GMT+6:30)",
+    "Asia/Almaty": "ALMT (GMT+6)", // Kazakhstan
+    "Asia/Tbilisi": "GET (GMT+4)", // Georgia
+    "Asia/Yerevan": "AMT (GMT+4)", // Armenia
+    "Asia/Baku": "AZT (GMT+4)", // Azerbaijan
+    "Asia/Tashkent": "UZT (GMT+5)", // Uzbekistan
+    "Asia/Ulaanbaatar": "ULAT (GMT+8)",
 
     // Australia and Pacific
     "Australia/Adelaide": "ACDT (GMT+10:30)",
@@ -86,6 +100,8 @@ function FooterHeading({ forecastData, selectedDayIndex }) {
     "Pacific/Honolulu": "HST (GMT-10)",
     "Pacific/Noumea": "NCT (GMT+11)",
     "Pacific/Tahiti": "TAHT (GMT-10)",
+    "Pacific/Port_Moresby": "PGT (GMT+10)", // Papua New Guinea
+    "Pacific/Guadalcanal": "SBT (GMT+11)", // Solomon Islands
 
     // Europe
     "Europe/Amsterdam": "CEST (GMT+2)",
@@ -99,7 +115,6 @@ function FooterHeading({ forecastData, selectedDayIndex }) {
     "Europe/Dublin": "IST (GMT+1)",
     "Europe/Helsinki": "EEST (GMT+3)",
     "Europe/Kiev": "EEST (GMT+3)",
-    "Europe/Lisbon": "WEST (GMT+1)",
     "Europe/London": "BST (GMT+1)",
     "Europe/Madrid": "CEST (GMT+2)",
     "Europe/Moscow": "MSK (GMT+3)",
@@ -111,6 +126,11 @@ function FooterHeading({ forecastData, selectedDayIndex }) {
     "Europe/Vienna": "CEST (GMT+2)",
     "Europe/Warsaw": "CEST (GMT+2)",
     "Europe/Zurich": "CEST (GMT+2)",
+    "Europe/Minsk": "MSK (GMT+3)",
+    "Europe/Lisbon": "WET/WEST (GMT+0/+1)", // Portugal (seasonal)
+    "Europe/Kyiv": "EEST (GMT+3)", // Updated spelling for Ukraine's capital (both Kiev/Kyiv might be needed)
+    "Europe/Istanbul": "TRT (GMT+3)", // Turkey (technically in Asia too)
+    "Europe/Reykjavik": "GMT",
   };
 
   let location = forecastData.location;

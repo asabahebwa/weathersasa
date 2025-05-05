@@ -79,8 +79,17 @@
 }
 .weatherByHourPrecipitationIcon {
   display: flex;
-  flex-direction: column;
-  /* border: 1px solid blue; */
+  width: 40%;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
+  /* border: 1px solid red; */
+}
+
+.weatherByHourPrecipitationIcon--precip {
+  background-color: #B4B4B4;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
 }
 
 .weatherByHourPrecipitationText {

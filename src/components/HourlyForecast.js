@@ -139,13 +139,15 @@ const HourlyForecast = ({
   const getPrecipitationValue = (rain, snow) => {
     let value = "";
     if (rain === 0 && snow === 0) {
-      value = `0%`;
+      value = 0;
     } else if (rain > 0 && snow === 0) {
-      value = `${Math.trunc(rain)}%`;
+      value = Math.trunc(rain);
     } else if (rain === 0 && snow > 0) {
-      value = `${Math.trunc(snow)}%`;
+      value = Math.trunc(snow);
+    } else if (Math.trunc(rain + snow) >= 100) {
+      value = 100;
     } else if (rain > 0 && snow > 0) {
-      value = `${Math.trunc(rain + snow)}%`;
+      value = Math.trunc(rain + snow);
     } else {
       value = `-`;
     }
@@ -520,6 +522,11 @@ const HourlyForecast = ({
         {data.map((item, index) => {
           // console.log(item);
 
+          let precipValue = getPrecipitationValue(
+            item.chance_of_rain,
+            item.chance_of_snow
+          );
+
           let color = getTempColor(Math.trunc(item.temp_c));
           const isExpanded = expandedHourIndex === index;
           return (
@@ -567,19 +574,35 @@ const HourlyForecast = ({
                   </div>
                   <div className="weatherByHourPrecipAndWind">
                     <div className="weatherByHourPrecipitationContainer">
-                      <img
-                        src="/precipitation.png"
-                        alt="icon"
-                        width={30}
-                        height={30}
-                        color="red"
-                        className="weatherByHourPrecipitationIcon"
-                      />
+                      <div className="weatherByHourPrecipitationIcon">
+                        <div
+                          className="weatherByHourPrecipitationIcon--precip"
+                          style={{
+                            backgroundColor:
+                              precipValue > 0 ? "#1C86E0" : "#B4B4B4",
+                          }}
+                        ></div>
+                        <div
+                          className="weatherByHourPrecipitationIcon--precip"
+                          style={{
+                            backgroundColor:
+                              precipValue > 0 ? "#1C86E0" : "#B4B4B4",
+                          }}
+                        ></div>
+                        <div
+                          className="weatherByHourPrecipitationIcon--precip"
+                          style={{
+                            backgroundColor:
+                              precipValue > 0 ? "#1C86E0" : "#B4B4B4",
+                          }}
+                        ></div>
+                      </div>
                       <div className="weatherByHourPrecipitationText">
                         {getPrecipitationValue(
                           item.chance_of_rain,
                           item.chance_of_snow
                         )}
+                        %
                       </div>
                     </div>
                     <div className="weatherByHourWindContainer">
