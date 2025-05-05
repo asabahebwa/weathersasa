@@ -26,7 +26,7 @@ const MenuBar = () => {
   });
 
   const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
+    // setMobileMenuOpen(!mobileMenuOpen);
   };
 
   return (
@@ -64,16 +64,16 @@ const MenuBar = () => {
           <nav className="main-nav">
             <ul>
               <li>
-                <a href="/">Home</a>
+                <span>Home</span>
               </li>
               <li>
-                <a href="/blog">Blog</a>
+                <span>Blog</span>
               </li>
               <li>
-                <a href="/visualizations">Visualizations</a>
+                <span>Visualizations</span>
               </li>
               <li>
-                <a href="/contact">Contact</a>
+                <span>Contact</span>
               </li>
             </ul>
           </nav>

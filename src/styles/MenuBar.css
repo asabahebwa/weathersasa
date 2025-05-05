@@ -11,6 +11,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 14px;
   /* border: 1px solid red; */
 }
 
@@ -48,6 +49,7 @@
 .menu-bar-right {
   /* border: 1px solid blue; */
   display: flex;
+  font-size: 14px;
   align-items: center;
 }
 
@@ -97,11 +99,12 @@
   align-items: center;
   cursor: pointer;
   /* border: 1px solid red; */
+  font-weight: 600;
   padding-bottom: 0.1rem;
 }
 
 .sign-in:hover {
-  box-shadow: 0 2px 0 #067eb3;
+  /* box-shadow: 0 2px 0 #067eb3; */
 }
 .user-icon {
   margin-right: 0.5rem;
@@ -119,25 +122,29 @@
   padding: 0;
   margin-right: 1.5rem;
 }
+.main-nav ul li:last-child {
+  margin-right: 0;
+}
 
-.main-nav ul li a {
+.main-nav ul li span {
   color: #333;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
   transition: color 0.2s;
   /* border: 1px solid red; */
-  padding-bottom: 0.3rem;
-  font-size: 0.95rem;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 .main-nav ul li a:hover {
   /* color: #149edc; */
-  box-shadow: 0 2px 0 #067eb3;
+  /* box-shadow: 0 2px 0 #067eb3; */
 }
 
 .social-icons {
-  display: flex;
+  display: none;
   margin-right: 1.5rem;
+  /* border: 1px solid red; */
 }
 
 .social-icons a {
