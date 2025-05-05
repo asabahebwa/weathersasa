@@ -135,6 +135,8 @@ function FooterHeading({ forecastData, selectedDayIndex }) {
 
   let location = forecastData.location;
 
+  // console.log("Location data:", location);
+
   let timezone = location.tz_id;
 
   const getTimezoneDisplay = () => {

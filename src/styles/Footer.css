@@ -40,36 +40,34 @@
 }
 
 .footer-columns .logo span {
-  font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: 0.5px;
 }
 
 .footer-columns .logo-w {
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
-  width: 24px;
-  height: 24px;
+  font-size: 1.2rem;
+  width: 28px;
+  height: 28px;
   color: white;
   background-color: black;
-  margin-right: 0.5rem;
-  /* font-size: 16px; */
-  font-weight: 700;
+  margin-right: 0.3rem;
+  /* border: 1px solid red; */
 }
 
 .footer-columns .logo-s {
-  /* border: 1px solid blue; */
-  display: inline-flex;
-  /* border: 1px solid red; */
+  display: flex;
   justify-content: center;
   align-items: center;
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   color: white;
   background-color: black;
-  /* font-size: 16px; */
+  font-size: 1.2rem;
   font-weight: 700;
+  /* border: 1px solid red; */
 }
 
 .column-one .brand-name {
@@ -85,7 +83,8 @@
 
 .column-one .brand-slogan {
   text-align: start;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
+  /* border: 1px solid red; */
 }
 
 .column-one .brand-social-icons {
@@ -93,7 +92,7 @@
   /* border: 1px solid red; */
   margin-right: 1.5rem;
   width: fit-content;
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
 }
 
 .column-one .brand-social-icons a {
@@ -188,6 +187,24 @@
   .column-one {
     width: 100%;
     /* border: 1px solid green; */
+  }
+
+  .footer-columns .logo-w {
+    font-size: 16px;
+    width: 24px;
+    height: 24px;
+    /* border: 1px solid red; */
+  }
+
+  .footer-columns .logo-s {
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+    /* border: 1px solid red; */
+  }
+
+  .column-one .brand-name {
+    font-size: 1.5rem;
   }
 
   .column-two {
