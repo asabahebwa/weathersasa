@@ -1,4 +1,3 @@
-import React from "react";
 import "../styles/AirQuality.css";
 
 function AirQuality({ forecastData, selectedDayIndex }) {
