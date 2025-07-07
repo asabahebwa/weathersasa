@@ -395,25 +395,32 @@ function App() {
 
     if (e.target.value.length < 2) {
       setAutocompleteCities([]);
+      setAutocompleteErr("");
       return;
     }
 
     if (!city) return;
 
-    const res = await fetchPlace(city);
+    try {
+      const data = await fetchPlace(city);
+      if (data.length > 0) {
+        setAutocompleteCities(data);
+        setCities(data);
+        setAutocompleteErr("");
+      } else {
+        setAutocompleteCities([]);
+        setCities([]);
 
-    !autocompleteCities.includes(e.target.value) &&
-      res.features &&
-      setAutocompleteCities(res.features.map((place) => place.place_name));
-    res.error ? setAutocompleteErr(res.error) : setAutocompleteErr("");
-
-    if (res.features) {
-      const cities = res.features.map((place) => ({
-        name: place.place_name,
-        coordinates: place.geometry.coordinates,
-      }));
-
-      setCities(cities);
+        if (e.target.value.length > 3) {
+          setAutocompleteErr("No suggestions found.");
+        } else {
+          setAutocompleteErr("");
+        }
+      }
+    } catch (error) {
+      setAutocompleteCities([]);
+      setCities([]);
+      setAutocompleteErr(error.message);
     }
   };
 

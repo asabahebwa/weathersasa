@@ -64,14 +64,13 @@ function Header({
 
   const getSelectedCity = (city) => {
     if (autocompleteCities.includes(city)) {
-      setSelectedCity(city);
+      setSelectedCity(city.name);
 
-      // Find selected city coordinates when it matches
-      const selectedPlace = cities.find((c) => c.name === city);
+      //Find selected city coordinates when it matches
+      const selectedPlace = cities.find((c) => c.name === city.name);
 
-      // console.log("Selected place:", selectedPlace);
       if (selectedPlace) {
-        const [longitude, latitude] = selectedPlace.coordinates;
+        const [latitude, longitude] = [selectedPlace.lat, selectedPlace.lon];
         setCoordinates({ latitude, longitude });
         setLoading(true);
         setInputFocused(false);
@@ -197,7 +196,7 @@ function Header({
                 className="app-header-spacer-autocomplete-wrapper"
               >
                 {autocompleteCities.map((city, i) => {
-                  // console.log("City:", city);
+                  console.log(city);
                   return (
                     <div
                       onClick={() => getSelectedCity(city)}
@@ -208,7 +207,7 @@ function Header({
                         // e.preventDefault(); // Prevents the input from losing focus
                       }}
                     >
-                      {city}
+                      {city.name}, {city.region}, {city.country}
                     </div>
                   );
                 })}
@@ -252,7 +251,6 @@ function Header({
               className="app-header-spacer-autocomplete-wrapper"
             >
               {autocompleteCities.map((city, i) => {
-                // console.log("City:", city);
                 return (
                   <div
                     onClick={() => getSelectedCity(city)}
@@ -263,7 +261,7 @@ function Header({
                       // e.preventDefault(); // Prevents the input from losing focus
                     }}
                   >
-                    {city}
+                    {city.name}, {city.region}, {city.country}
                   </div>
                 );
               })}
