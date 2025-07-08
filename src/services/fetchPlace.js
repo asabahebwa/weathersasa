@@ -16,9 +16,11 @@ export const fetchPlace = async (text) => {
     );
     if (!res.ok) throw new Error(res.statusText);
     return res.json();
-  } catch (err) {
-    throw new Error(
-      "We couldn’t fetch location suggestions. Please check your connection and try again."
-    );
+  } 
+  
+  catch (error) {
+    throw error instanceof Error
+      ? error
+      : new Error("An unknown error occurred.");
   }
 };
