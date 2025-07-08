@@ -8,17 +8,17 @@ export interface Place {
   url: string;
 }
 
-export const fetchPlace = async (text: string): Promise<Place[]> => {
+export const fetchPlace = async (text: string): Promise<Place[] | []> => {
   try {
-    const res = await fetch(
+    const response = await fetch(
       `https://api.weatherapi.com/v1/search.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${text}`
     );
 
-    if (!res.ok) {
-      throw new Error(res.statusText);
+    if (!response.ok) {
+      throw new Error(response.statusText);
     }
 
-    const data: Place[] = await res.json();
+    const data = await response.json();
     return data;
   } catch (error: unknown) {
     throw error instanceof Error
