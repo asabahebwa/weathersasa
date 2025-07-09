@@ -223,7 +223,6 @@ function Header({
                 className="app-header-spacer-autocomplete-wrapper"
               >
                 {autocompleteCities.map((city, i) => {
-                  console.log(city);
                   return (
                     <div
                       onClick={() => getSelectedCity(city)}

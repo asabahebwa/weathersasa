@@ -1,7 +1,18 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { type ForecastState } from "../store/forecast/index";
 import "../styles/HourlyForecast.css";
 
-const HourlyForecast = ({
+interface HourlyForecastProps {
+  forecastData: ForecastState;
+  selectedDayIndex: number;
+  setSelectedDayIndex: (index: number) => void;
+  toggleExpandedHour: (index: number) => void;
+  expandedHourIndex: number | null;
+  getConditionText: (code: number, text: string) => string;
+  getTempColor: (temp: number) => string;
+}
+
+function HourlyForecast({
   forecastData,
   selectedDayIndex,
   setSelectedDayIndex,
@@ -9,23 +20,18 @@ const HourlyForecast = ({
   expandedHourIndex,
   getConditionText,
   getTempColor,
-}) => {
-  // if (!forecastData || !forecastData.forecast) {
-  //   return null;
-  // }
+}: HourlyForecastProps) {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-
-  const handleMouseEnter = (index) => {
+  const handleMouseEnter = (index: number) => {
     setHoveredIndex(index);
-    // console.log("Hovered index:", index);
   };
 
   const handleMouseLeave = () => {
     setHoveredIndex(null);
   };
 
-  const getBoxShadow = (color, index) => {
+  const getBoxShadow = (color: string, index: number) => {
     const isExpanded = expandedHourIndex === index;
     const isHovered = hoveredIndex === index;
     if (isExpanded || isHovered) {
@@ -33,7 +39,7 @@ const HourlyForecast = ({
     }
   };
 
-  const nth = (d) => {
+  const nth = (d: number) => {
     switch (d) {
       case 1:
       case 21:
@@ -50,12 +56,15 @@ const HourlyForecast = ({
     }
   };
 
-  const getPreviousDayDate = (currentDate) => {
+  const getPreviousDayDate = (currentDate: string) => {
     const date = new Date(currentDate);
     date.setDate(date.getDate() - 1);
 
     // Format the date to display day of week and day
-    const options = { weekday: "long", day: "numeric" };
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: "long",
+      day: "numeric",
+    };
 
     return (
       date.toLocaleDateString("en-GB", options) +
@@ -63,12 +72,15 @@ const HourlyForecast = ({
     );
   };
 
-  const getNextDayDate = (currentDate) => {
+  const getNextDayDate = (currentDate: string) => {
     const date = new Date(currentDate);
     date.setDate(date.getDate() + 1);
 
     // Format the date to display day of week and month/day
-    const options = { weekday: "long", day: "numeric" };
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: "long",
+      day: "numeric",
+    };
 
     return (
       date.toLocaleDateString("en-GB", options) +
@@ -83,7 +95,7 @@ const HourlyForecast = ({
   const formattedPreviousDayDate = getPreviousDayDate(currentDayDate);
 
   const getHoursElapsedSinceMidnight = () => {
-    let date = new Date(forecastData.location.localtime);
+    const date = new Date(forecastData.location.localtime);
 
     // Get hours and minutes
     const hours = date.getHours();
@@ -103,18 +115,18 @@ const HourlyForecast = ({
 
   const timelyHourlyData = hourlyData.slice(getHoursElapsedSinceMidnight());
 
-  let data = selectedDayIndex === 0 ? timelyHourlyData : hourlyData;
+  const data = selectedDayIndex === 0 ? timelyHourlyData : hourlyData;
 
-  const temperatures = hourlyData.map((item) => {
+  const temperatures = hourlyData.map((item: any) => {
     return Math.trunc(item.temp_c);
   });
   const maxTempC = Math.max(...temperatures);
   const minTempC = Math.min(...temperatures);
 
-  let marginBottomMax = 136;
-  let marginBottomMin = 16;
+  const marginBottomMax = 136;
+  const marginBottomMin = 16;
 
-  const getWindDirection = (windDegree) => {
+  const getWindDirection = (windDegree: number) => {
     if (windDegree >= 0 && windDegree < 22.5) {
       return "north";
     } else if (windDegree >= 22.5 && windDegree < 67.5) {
@@ -136,8 +148,8 @@ const HourlyForecast = ({
     }
   };
 
-  const getPrecipitationValue = (rain, snow) => {
-    let value = "";
+  const getPrecipitationValue = (rain: number, snow: number) => {
+    let value: number;
     if (rain === 0 && snow === 0) {
       value = 0;
     } else if (rain > 0 && snow === 0) {
@@ -149,12 +161,12 @@ const HourlyForecast = ({
     } else if (rain > 0 && snow > 0) {
       value = Math.trunc(rain + snow);
     } else {
-      value = `-`;
+      value = 0;
     }
     return value;
   };
 
-  const getPrecipitationText = (rain, snow) => {
+  const getPrecipitationText = (rain: number, snow: number) => {
     let result = "";
     if (rain === 0 && snow === 0) {
       result = "Precipitation is not expected";
@@ -170,298 +182,7 @@ const HourlyForecast = ({
     return result;
   };
 
-  let conditions = [
-    {
-      code: 1000,
-      day: "Sunny",
-      night: "Clear",
-      icon: 113,
-    },
-    {
-      code: 1003,
-      day: "Partly cloudy",
-      night: "Partly cloudy",
-      icon: 116,
-    },
-    {
-      code: 1006,
-      day: "Cloudy",
-      night: "Cloudy",
-      icon: 119,
-    },
-    {
-      code: 1009,
-      day: "Overcast",
-      night: "Overcast",
-      icon: 122,
-    },
-    {
-      code: 1030,
-      day: "Mist",
-      night: "Mist",
-      icon: 143,
-    },
-    {
-      code: 1063,
-      day: "Patchy rain possible",
-      night: "Patchy rain possible",
-      icon: 176,
-    },
-    {
-      code: 1066,
-      day: "Patchy snow possible",
-      night: "Patchy snow possible",
-      icon: 179,
-    },
-    {
-      code: 1069,
-      day: "Patchy sleet possible",
-      night: "Patchy sleet possible",
-      icon: 182,
-    },
-    {
-      code: 1072,
-      day: "Patchy freezing drizzle possible",
-      night: "Patchy freezing drizzle possible",
-      icon: 185,
-    },
-    {
-      code: 1087,
-      day: "Thundery outbreaks possible",
-      night: "Thundery outbreaks possible",
-      icon: 200,
-    },
-    {
-      code: 1114,
-      day: "Blowing snow",
-      night: "Blowing snow",
-      icon: 227,
-    },
-    {
-      code: 1117,
-      day: "Blizzard",
-      night: "Blizzard",
-      icon: 230,
-    },
-    {
-      code: 1135,
-      day: "Fog",
-      night: "Fog",
-      icon: 248,
-    },
-    {
-      code: 1147,
-      day: "Freezing fog",
-      night: "Freezing fog",
-      icon: 260,
-    },
-    {
-      code: 1150,
-      day: "Patchy light drizzle",
-      night: "Patchy light drizzle",
-      icon: 263,
-    },
-    {
-      code: 1153,
-      day: "Light drizzle",
-      night: "Light drizzle",
-      icon: 266,
-    },
-    {
-      code: 1168,
-      day: "Freezing drizzle",
-      night: "Freezing drizzle",
-      icon: 281,
-    },
-    {
-      code: 1171,
-      day: "Heavy freezing drizzle",
-      night: "Heavy freezing drizzle",
-      icon: 284,
-    },
-    {
-      code: 1180,
-      day: "Patchy light rain",
-      night: "Patchy light rain",
-      icon: 293,
-    },
-    {
-      code: 1183,
-      day: "Light rain",
-      night: "Light rain",
-      icon: 296,
-    },
-    {
-      code: 1186,
-      day: "Moderate rain at times",
-      night: "Moderate rain at times",
-      icon: 299,
-    },
-    {
-      code: 1189,
-      day: "Moderate rain",
-      night: "Moderate rain",
-      icon: 302,
-    },
-    {
-      code: 1192,
-      day: "Heavy rain at times",
-      night: "Heavy rain at times",
-      icon: 305,
-    },
-    {
-      code: 1195,
-      day: "Heavy rain",
-      night: "Heavy rain",
-      icon: 308,
-    },
-    {
-      code: 1198,
-      day: "Light freezing rain",
-      night: "Light freezing rain",
-      icon: 311,
-    },
-    {
-      code: 1201,
-      day: "Moderate or heavy freezing rain",
-      night: "Moderate or heavy freezing rain",
-      icon: 314,
-    },
-    {
-      code: 1204,
-      day: "Light sleet",
-      night: "Light sleet",
-      icon: 317,
-    },
-    {
-      code: 1207,
-      day: "Moderate or heavy sleet",
-      night: "Moderate or heavy sleet",
-      icon: 320,
-    },
-    {
-      code: 1210,
-      day: "Patchy light snow",
-      night: "Patchy light snow",
-      icon: 323,
-    },
-    {
-      code: 1213,
-      day: "Light snow",
-      night: "Light snow",
-      icon: 326,
-    },
-    {
-      code: 1216,
-      day: "Patchy moderate snow",
-      night: "Patchy moderate snow",
-      icon: 329,
-    },
-    {
-      code: 1219,
-      day: "Moderate snow",
-      night: "Moderate snow",
-      icon: 332,
-    },
-    {
-      code: 1222,
-      day: "Patchy heavy snow",
-      night: "Patchy heavy snow",
-      icon: 335,
-    },
-    {
-      code: 1225,
-      day: "Heavy snow",
-      night: "Heavy snow",
-      icon: 338,
-    },
-    {
-      code: 1237,
-      day: "Ice pellets",
-      night: "Ice pellets",
-      icon: 350,
-    },
-    {
-      code: 1240,
-      day: "Light rain shower",
-      night: "Light rain shower",
-      icon: 353,
-    },
-    {
-      code: 1243,
-      day: "Moderate or heavy rain shower",
-      night: "Moderate or heavy rain shower",
-      icon: 356,
-    },
-    {
-      code: 1246,
-      day: "Torrential rain shower",
-      night: "Torrential rain shower",
-      icon: 359,
-    },
-    {
-      code: 1249,
-      day: "Light sleet showers",
-      night: "Light sleet showers",
-      icon: 362,
-    },
-    {
-      code: 1252,
-      day: "Moderate or heavy sleet showers",
-      night: "Moderate or heavy sleet showers",
-      icon: 365,
-    },
-    {
-      code: 1255,
-      day: "Light snow showers",
-      night: "Light snow showers",
-      icon: 368,
-    },
-    {
-      code: 1258,
-      day: "Moderate or heavy snow showers",
-      night: "Moderate or heavy snow showers",
-      icon: 371,
-    },
-    {
-      code: 1261,
-      day: "Light showers of ice pellets",
-      night: "Light showers of ice pellets",
-      icon: 374,
-    },
-    {
-      code: 1264,
-      day: "Moderate or heavy showers of ice pellets",
-      night: "Moderate or heavy showers of ice pellets",
-      icon: 377,
-    },
-    {
-      code: 1273,
-      day: "Patchy light rain with thunder",
-      night: "Patchy light rain with thunder",
-      icon: 386,
-    },
-    {
-      code: 1276,
-      day: "Moderate or heavy rain with thunder",
-      night: "Moderate or heavy rain with thunder",
-      icon: 389,
-    },
-    {
-      code: 1279,
-      day: "Patchy light snow with thunder",
-      night: "Patchy light snow with thunder",
-      icon: 392,
-    },
-    {
-      code: 1282,
-      day: "Moderate or heavy snow with thunder",
-      night: "Moderate or heavy snow with thunder",
-      icon: 395,
-    },
-  ];
-
-  const getWindPower = (windSpeed) => {
+  const getWindPower = (windSpeed: number) => {
     let result = "";
     switch (true) {
       case windSpeed === 0:
@@ -519,15 +240,13 @@ const HourlyForecast = ({
           </div>
         )}
 
-        {data.map((item, index) => {
-          // console.log(item);
-
-          let precipValue = getPrecipitationValue(
+        {data.map((item: any, index: number) => {
+          const precipValue = getPrecipitationValue(
             item.chance_of_rain,
             item.chance_of_snow
           );
 
-          let color = getTempColor(Math.trunc(item.temp_c));
+          const color = getTempColor(Math.trunc(item.temp_c));
           const isExpanded = expandedHourIndex === index;
           return (
             <div
@@ -685,6 +404,6 @@ const HourlyForecast = ({
       </div>
     </div>
   );
-};
+}
 
 export default HourlyForecast;

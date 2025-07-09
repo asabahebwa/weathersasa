@@ -1,7 +1,12 @@
-import React from "react";
+import { type ForecastState } from "../store/forecast/index";
 import "../styles/Sun.css";
 
-function Sun({ forecastData, selectedDayIndex }) {
+interface SunProps {
+  forecastData: ForecastState;
+  selectedDayIndex: number;
+}
+
+function Sun({ forecastData, selectedDayIndex }: SunProps) {
   if (!forecastData || !forecastData.forecast) {
     return null;
   }

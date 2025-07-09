@@ -1,8 +1,16 @@
-import React from "react";
+import { type ForecastState } from "../store/forecast/index";
 import "../styles/MobileWeatherCondition.css";
 
-function MobileWeatherCondition({ forecastData, selectedDayIndex }) {
-  const getConditionText = (code, text) => {
+interface MobileWeatherConditionProps {
+  forecastData: ForecastState;
+  selectedDayIndex: number;
+}
+
+function MobileWeatherCondition({
+  forecastData,
+  selectedDayIndex,
+}: MobileWeatherConditionProps) {
+  const getConditionText = (code: number, text: string) => {
     switch (code) {
       case 1000:
         if (text === "Clear " || text === "Clear") {
@@ -109,7 +117,7 @@ function MobileWeatherCondition({ forecastData, selectedDayIndex }) {
     }
   };
 
-  const getWindPower = (windSpeed) => {
+  const getWindPower = (windSpeed: number) => {
     let result = "";
     switch (true) {
       case windSpeed === 0:

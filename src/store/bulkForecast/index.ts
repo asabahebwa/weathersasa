@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 // Define the state shape
-interface BulkForecastState {
+export interface BulkForecastState {
   [key: string]: any;
 }
 

@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { type ForecastState } from "../store/forecast/index"; // Adjust the import path as necessary
+import { type ForecastState } from "../store/forecast/index";
 import "../styles/DailyForecast.css";
 
 interface DailyForecastProps {
   forecastData: ForecastState;
   selectedDayIndex: number;
+  selectedApiCondition: string;
   setSelectedDayIndex: (index: number) => void;
   setExpandedHourIndex: (index: number | null) => void;
   setSelectedApiCondition: (condition: string) => void;

@@ -1,9 +1,13 @@
-import React from "react";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
-import "../styles/LastUpdated.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { type ForecastState } from "../store/forecast/index";
+import "../styles/LastUpdated.css";
 
-function LastUpdated({ forecastData }) {
+interface LastUpdatedProps {
+  forecastData: ForecastState;
+}
+
+function LastUpdated({ forecastData }: LastUpdatedProps) {
   if (!forecastData || !forecastData.forecast) {
     return null;
   }

@@ -1,7 +1,11 @@
-import React from "react";
+import { type ForecastState } from "../store/forecast/index";
 import "../styles/FooterHeading.css";
 
-function FooterHeading({ forecastData, selectedDayIndex }) {
+interface FooterHeadingProps {
+  forecastData: ForecastState;
+}
+
+function FooterHeading({ forecastData }: FooterHeadingProps) {
   if (!forecastData || !forecastData.forecast) {
     return null;
   }
@@ -134,8 +138,6 @@ function FooterHeading({ forecastData, selectedDayIndex }) {
   };
 
   let location = forecastData.location;
-
-  // console.log("Location data:", location);
 
   let timezone = location.tz_id;
 

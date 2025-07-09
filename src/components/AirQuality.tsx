@@ -1,14 +1,20 @@
+import { type ForecastState } from "../store/forecast/index";
 import "../styles/AirQuality.css";
 
-function AirQuality({ forecastData, selectedDayIndex }) {
+interface AirQualityProps {
+  forecastData: ForecastState;
+  selectedDayIndex: number;
+}
+
+function AirQuality({ forecastData, selectedDayIndex }: AirQualityProps) {
   if (!forecastData || !forecastData.forecast) {
     return null;
   }
 
-  let uvIndex = forecastData.forecast.forecastday[selectedDayIndex].day.uv;
+  const uvIndex = forecastData.forecast.forecastday[selectedDayIndex].day.uv;
 
-  function getUVLevelAndColor(index) {
-    let result = {
+  function getUVLevelAndColor(index: number) {
+    const result = {
       level: "",
       color: "",
     };
@@ -42,16 +48,22 @@ function AirQuality({ forecastData, selectedDayIndex }) {
     return result;
   }
 
-  let uv = getUVLevelAndColor(uvIndex);
+  const uv = getUVLevelAndColor(uvIndex);
 
-  function calcAQI(Cp, Ih, Il, BPh, BPl) {
-    var a = Ih - Il;
-    var b = BPh - BPl;
-    var c = Cp - BPl;
+  function calcAQI(
+    Cp: number,
+    Ih: number,
+    Il: number,
+    BPh: number,
+    BPl: number
+  ) {
+    const a = Ih - Il;
+    const b = BPh - BPl;
+    const c = Cp - BPl;
     return Math.round((a / b) * c + Il);
   }
 
-  function aqiFromPM(pm) {
+  function aqiFromPM(pm: any) {
     if (isNaN(pm)) return "-";
     if (pm == undefined) return "-";
     if (pm < 0) return pm;
@@ -84,11 +96,11 @@ function AirQuality({ forecastData, selectedDayIndex }) {
     }
   }
 
-  let pm25value =
+  const pm25value =
     forecastData.forecast.forecastday[selectedDayIndex].day.air_quality.pm2_5;
-  let aQI = aqiFromPM(pm25value);
+  const aQI = aqiFromPM(pm25value);
 
-  function getAQIResult(aqi) {
+  function getAQIResult(aqi: number) {
     switch (true) {
       case aqi >= 0 && aqi <= 50:
         return { level: "L", color: "#afd251" };
@@ -109,7 +121,7 @@ function AirQuality({ forecastData, selectedDayIndex }) {
     }
   }
 
-  let pollution = getAQIResult(aQI);
+  const pollution = getAQIResult(aQI);
 
   return (
     <div className="air-quality-container">

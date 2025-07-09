@@ -1,17 +1,63 @@
 import React, { useEffect } from "react";
-import "../styles/Maps.css";
-
 import {
   APIProvider,
   Map,
   useMap,
   AdvancedMarker,
-  InfoWindow,
   useAdvancedMarkerRef,
   Pin,
 } from "@vis.gl/react-google-maps";
+import { type ForecastState } from "../store/forecast/index";
+import { type BulkForecastState } from "../store/bulkForecast/index";
+import { type Location } from "../services/forecast";
+import "../styles/Maps.css";
 
-const MyComponent = ({ location }) => {
+interface MapsProps {
+  forecastData: ForecastState;
+  selectedDayIndex: number;
+  getTempColor: (temp: number) => string;
+  bulkForecast: BulkForecastState;
+}
+
+interface PoiMarkerProps {
+  poi: Location;
+  selectedLocationTemperature: number;
+  getTempColor: (temp: number) => string;
+}
+
+interface PoiMarkersProps {
+  locations: Array<any>;
+  getTempColor: (temp: number) => string;
+  selectedDayIndex: number;
+}
+
+interface LocationsPoiMarkerProps {
+  poi: any;
+  getTempColor: (temp: number) => string;
+  selectedDayIndex: number;
+  visible: boolean;
+}
+
+interface MyComponentProps {
+  location: {
+    lat: number;
+    lng: number;
+  };
+}
+
+interface CustomLocationInfoWindowProps {
+  poi: Location;
+  getTempColor: (temp: number) => string;
+  selectedLocationTemperature: number;
+}
+
+interface CustomLocationsInfoWindowProps {
+  poi: any;
+  getTempColor: (temp: number) => string;
+  selectedDayIndex: number;
+}
+
+const MyComponent = ({ location }: MyComponentProps) => {
   // const apiIsLoaded = useApiIsLoaded();
   const map = useMap();
 
@@ -32,8 +78,8 @@ const CustomLocationInfoWindow = ({
   poi,
   getTempColor,
   selectedLocationTemperature,
-}) => {
-  const [markerRef, marker] = useAdvancedMarkerRef();
+}: CustomLocationInfoWindowProps) => {
+  const [markerRef] = useAdvancedMarkerRef();
 
   return (
     <>
@@ -65,9 +111,12 @@ const CustomLocationInfoWindow = ({
   );
 };
 
-const CustomLocationsInfoWindow = ({ poi, getTempColor, selectedDayIndex }) => {
-  const [markerRef, marker] = useAdvancedMarkerRef();
-
+const CustomLocationsInfoWindow = ({
+  poi,
+  getTempColor,
+  selectedDayIndex,
+}: CustomLocationsInfoWindowProps) => {
+  const [markerRef] = useAdvancedMarkerRef();
   return (
     <>
       <AdvancedMarker
@@ -112,15 +161,14 @@ const Maps = ({
   forecastData,
   selectedDayIndex,
   getTempColor,
-  locations,
   bulkForecast,
-}) => {
+}: MapsProps) => {
   const [zoom, setZoom] = React.useState(6);
-  let selectedLocationTemperature = Math.trunc(
+  const selectedLocationTemperature = Math.trunc(
     forecastData.forecast.forecastday[selectedDayIndex].day.maxtemp_c
   );
 
-  let selectedLocation = {
+  const selectedLocation = {
     key: forecastData.location.name,
     location: {
       lat: forecastData.location.lat,
@@ -129,13 +177,13 @@ const Maps = ({
   };
 
   // Filter out the selected location from the locations array
-  let filteredLocations = bulkForecast.bulk?.filter(
-    (poi) =>
+  const filteredLocations = bulkForecast.bulk?.filter(
+    (poi: any) =>
       poi.query.location.lat !== selectedLocation.location.lat &&
       poi.query.location.lon !== selectedLocation.location.lng
   );
 
-  const getZoomThreshold = (customId) => {
+  const getZoomThreshold = (customId: string) => {
     let zoomThreshold;
     switch (customId) {
       case "Berlin":
@@ -150,7 +198,7 @@ const Maps = ({
     return zoomThreshold;
   };
 
-  let filteredLocationsWithThreshold = filteredLocations?.map((poi) => {
+  const filteredLocationsWithThreshold = filteredLocations?.map((poi: any) => {
     const customId = poi.query.custom_id;
 
     return {
@@ -162,13 +210,13 @@ const Maps = ({
     };
   });
 
-  const handleZoomChange = (zoom) => {
+  const handleZoomChange = (zoom: { detail: { zoom: number } }) => {
     setZoom(zoom.detail.zoom);
   };
 
   return (
     <div className="maps-container">
-      <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
+      <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
         <Map
           style={{ width: "auto", height: "450px" }}
           mapId="DEMO_MAP_ID"
@@ -180,7 +228,7 @@ const Maps = ({
           cameraControl={false}
           onZoomChanged={handleZoomChange}
           mapTypeId={"satellite"}
-          defaultZoom={6} // Set default zoom directly here
+          defaultZoom={6}
           defaultCenter={{
             lat: selectedLocation.location.lat,
             lng: selectedLocation.location.lng,
@@ -190,8 +238,8 @@ const Maps = ({
             scrollwheel: false,
           }}
           options={{
-            minZoom: 2, // Set minimum zoom level (prevents zooming out beyond this)
-            maxZoom: 20, // Optional: Set maximum zoom level (prevents zooming in beyond this)
+            minZoom: 2,
+            maxZoom: 20,
           }}
         >
           <MyComponent location={selectedLocation.location} />
@@ -204,7 +252,6 @@ const Maps = ({
 
           {bulkForecast.bulk && (
             <PoiMarkers
-              selectedLocation={selectedLocation}
               locations={filteredLocationsWithThreshold}
               getTempColor={getTempColor}
               selectedDayIndex={selectedDayIndex}
@@ -216,8 +263,12 @@ const Maps = ({
   );
 };
 
-const PoiMarker = ({ poi, selectedLocationTemperature, getTempColor }) => {
-  const [markerRef, marker] = useAdvancedMarkerRef();
+const PoiMarker = ({
+  poi,
+  selectedLocationTemperature,
+  getTempColor,
+}: PoiMarkerProps) => {
+  const [markerRef] = useAdvancedMarkerRef();
 
   return (
     <>
@@ -240,10 +291,10 @@ const LocationsPoiMarker = ({
   getTempColor,
   selectedDayIndex,
   visible,
-}) => {
+}: LocationsPoiMarkerProps) => {
   const [markerRef, marker] = useAdvancedMarkerRef();
 
-  let isVisible = visible;
+  const isVisible = visible;
 
   return (
     isVisible && (
@@ -279,10 +330,14 @@ const LocationsPoiMarker = ({
   );
 };
 
-const PoiMarkers = ({ locations, getTempColor, selectedDayIndex }) => {
+const PoiMarkers = ({
+  locations,
+  getTempColor,
+  selectedDayIndex,
+}: PoiMarkersProps) => {
   return (
     <>
-      {locations.map((poi, index) => {
+      {locations.map((poi: any, index: number) => {
         // Create a new marker reference for each location
         return (
           <LocationsPoiMarker

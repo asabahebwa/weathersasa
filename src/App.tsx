@@ -1,24 +1,23 @@
 import { useState, useEffect, type ChangeEvent } from "react";
+import Header from "./components/Header";
+import Loader from "./components/Loader";
+import Location from "./components/Location";
+import HourlyForecast from "./components/HourlyForecast";
+import DailyForecast from "./components/DailyForecast";
+import LastUpdated from "./components/LastUpdated";
+import MobileWeatherCondition from "./components/MobileWeatherCondition";
+import MenuBar from "./components/MenuBar";
+import Sun from "./components/Sun";
+import AirQuality from "./components/AirQuality";
+import Maps from "./components/Maps";
+import FooterHeading from "./components/FooterHeading";
+import Footer from "./components/Footer";
 import { useAppSelector, useAppDispatch } from "./store/hooks";
-
 import { getWeatherForecast, getBulkWeatherData } from "./services/forecast";
 import { addForecast } from "./store/forecast/index";
 import { addBulkForecast } from "./store/bulkForecast/index";
 import { fetchPlace, type Place } from "./services/fetchPlace";
 import { type Coordinates } from "./services/forecast";
-import Header from "./components/Header";
-import Loader from "./components/Loader";
-import Location from "./components/Location";
-// import HourlyForecast from "./components/HourlyForecast";
-import DailyForecast from "./components/DailyForecast";
-// import LastUpdated from "./components/LastUpdated";
-// import MobileWeatherCondition from "./components/MobileWeatherCondition";
-import MenuBar from "./components/MenuBar";
-// import Sun from "./components/Sun";
-// import AirQuality from "./components/AirQuality";
-// import Maps from "./components/Maps";
-// import FooterHeading from "./components/FooterHeading";
-// import Footer from "./components/Footer";
 import "./styles/App.css";
 
 // Function to get device width
@@ -63,9 +62,6 @@ function App() {
 
   const forecast = useAppSelector((state) => state.forecast);
   const bulkForecast = useAppSelector((state) => state.bulkForecast);
-
-  console.log("Forecast data:", forecast);
-  console.log("Bulk forecast data:", bulkForecast);
 
   const locations = [
     {
@@ -386,13 +382,13 @@ function App() {
   const url = getBackgroundImageUrl(deviceWidth);
 
   // Toggle expanded state for clicked hour
-  // const toggleExpandedHour = (index) => {
-  //   if (expandedHourIndex === index) {
-  //     setExpandedHourIndex(null);
-  //   } else {
-  //     setExpandedHourIndex(index);
-  //   }
-  // };
+  const toggleExpandedHour = (index: number) => {
+    if (expandedHourIndex === index) {
+      setExpandedHourIndex(null);
+    } else {
+      setExpandedHourIndex(index);
+    }
+  };
 
   const handleCityChange = async (e: ChangeEvent<HTMLInputElement>) => {
     setCity(e.target.value);
@@ -707,50 +703,44 @@ function App() {
               />
             )}
           </div>
+
+          {forecast.forecast && (
+            <MobileWeatherCondition
+              forecastData={forecast}
+              selectedDayIndex={selectedDayIndex}
+            />
+          )}
+
+          {forecast.forecast && (
+            <HourlyForecast
+              forecastData={forecast}
+              selectedDayIndex={selectedDayIndex}
+              toggleExpandedHour={toggleExpandedHour}
+              expandedHourIndex={expandedHourIndex}
+              setSelectedDayIndex={setSelectedDayIndex}
+              getConditionText={getConditionText}
+              getTempColor={getTempColor}
+            />
+          )}
+
+          <LastUpdated forecastData={forecast} />
+          <Sun forecastData={forecast} selectedDayIndex={selectedDayIndex} />
+          <AirQuality
+            forecastData={forecast}
+            selectedDayIndex={selectedDayIndex}
+          />
+          {forecast.forecast && (
+            <Maps
+              forecastData={forecast}
+              selectedDayIndex={selectedDayIndex}
+              getTempColor={getTempColor}
+              bulkForecast={bulkForecast}
+            />
+          )}
+
+          {forecast.forecast && <FooterHeading forecastData={forecast} />}
+          {forecast.forecast && <Footer />}
         </>
-        // {forecast.forecast && (
-        //   <MobileWeatherCondition
-        //     forecastData={forecast}
-        //     selectedDayIndex={selectedDayIndex}
-        //   />
-        // )}
-
-        // {forecast.forecast && (
-        //   <HourlyForecast
-        //     forecastData={forecast}
-        //     selectedDayIndex={selectedDayIndex}
-        //     toggleExpandedHour={toggleExpandedHour}
-        //     expandedHourIndex={expandedHourIndex}
-        //     setExpandedHourIndex={setExpandedHourIndex}
-        //     setSelectedDayIndex={setSelectedDayIndex}
-        //     getConditionText={getConditionText}
-        //     getTempColor={getTempColor}
-        //   />
-        // )}
-        // <LastUpdated forecastData={forecast} />
-        // <Sun forecastData={forecast} selectedDayIndex={selectedDayIndex} />
-        // <AirQuality
-        //   forecastData={forecast}
-        //   selectedDayIndex={selectedDayIndex}
-        // />
-        // {forecast.forecast && (
-        //   <Maps
-        //     forecastData={forecast}
-        //     selectedDayIndex={selectedDayIndex}
-        //     getTempColor={getTempColor}
-        //     locations={locations}
-        //     bulkForecast={bulkForecast}
-        //   />
-        // )}
-
-        // {forecast.forecast && (
-        //   <FooterHeading
-        //     forecastData={forecast}
-        //     selectedDayIndex={selectedDayIndex}
-        //   />
-        // )}
-        // {forecast.forecast && <Footer />}
-        // </>
       )}
     </div>
   );
