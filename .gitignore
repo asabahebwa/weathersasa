@@ -12,6 +12,15 @@ dist
 dist-ssr
 *.local
 
+# testing
+/coverage
+
+# production
+/build
+
+# mock files
+/__mocks__/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
