@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "deploy": "scp -r ./build/* /var/www/pixelmap.studio/html",
     "lint": "eslint .",
     "preview": "vite preview"
   },
