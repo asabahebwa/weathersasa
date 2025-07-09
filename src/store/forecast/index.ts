@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 // Define the state type
-interface ForecastState {
+export interface ForecastState {
   [key: string]: any;
 }
 

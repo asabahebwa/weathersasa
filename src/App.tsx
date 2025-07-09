@@ -1,15 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type ChangeEvent } from "react";
 import { useAppSelector, useAppDispatch } from "./store/hooks";
 
 import { getWeatherForecast, getBulkWeatherData } from "./services/forecast";
 import { addForecast } from "./store/forecast/index";
 import { addBulkForecast } from "./store/bulkForecast/index";
-// import { fetchPlace } from "./services/fetchPlace";
-// import Header from "./components/Header";
-// import Loader from "./components/Loader";
-// import Location from "./components/Location";
+import { fetchPlace, type Place } from "./services/fetchPlace";
+import { type Coordinates } from "./services/forecast";
+import Header from "./components/Header";
+import Loader from "./components/Loader";
+import Location from "./components/Location";
 // import HourlyForecast from "./components/HourlyForecast";
-// import DailyForecast from "./components/DailyForecast";
+import DailyForecast from "./components/DailyForecast";
 // import LastUpdated from "./components/LastUpdated";
 // import MobileWeatherCondition from "./components/MobileWeatherCondition";
 import MenuBar from "./components/MenuBar";
@@ -18,41 +19,42 @@ import MenuBar from "./components/MenuBar";
 // import Maps from "./components/Maps";
 // import FooterHeading from "./components/FooterHeading";
 // import Footer from "./components/Footer";
-// import "./styles/App.css";
+import "./styles/App.css";
 
 // Function to get device width
+const getDeviceWidth = () => {
+  return window.innerWidth;
+};
+const useWindowWidth = () => {
+  const [width, setWidth] = useState(getDeviceWidth());
 
-// const getDeviceWidth = () => {
-//   return window.innerWidth;
-// };
-// const useWindowWidth = () => {
-//   const [width, setWidth] = useState(getDeviceWidth());
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(getDeviceWidth());
+    };
 
-//   useEffect(() => {
-//     const handleResize = () => {
-//       setWidth(getDeviceWidth());
-//     };
+    window.addEventListener("resize", handleResize);
 
-//     window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-//     return () => window.removeEventListener("resize", handleResize);
-//   }, []);
-
-//   return width;
-// };
+  return width;
+};
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState("");
   const [bulkError, setBulkError] = useState("");
   const [city, setCity] = useState("");
-  const [cities, setCities] = useState([]);
+  const [cities, setCities] = useState<Place[]>([]);
   const [selectedCity, setSelectedCity] = useState("");
-  const [coordinates, setCoordinates] = useState(null);
-  const [autocompleteCities, setAutocompleteCities] = useState([]);
+  const [coordinates, setCoordinates] = useState<Coordinates | null>(null);
+  const [autocompleteCities, setAutocompleteCities] = useState<Place[]>([]);
   const [autocompleteErr, setAutocompleteErr] = useState("");
   const [selectedDayIndex, setSelectedDayIndex] = useState<number>(0);
-  const [expandedHourIndex, setExpandedHourIndex] = useState(null);
+  const [expandedHourIndex, setExpandedHourIndex] = useState<number | null>(
+    null
+  );
   const [selectedApiCondition, setSelectedApiCondition] = useState("");
   const [selectedBackgroundCondition, setSelectedbackgroundCondition] =
     useState("");
@@ -271,117 +273,117 @@ function App() {
     },
   ];
 
-  // const getTempColor = (temp: number) => {
-  //   switch (true) {
-  //     case temp < -30:
-  //       return "#241967";
-  //     case temp < -28:
-  //       return "#272579";
-  //     case temp < -26:
-  //       return "#20348D";
-  //     case temp < -24:
-  //       return "#214295";
-  //     case temp < -22:
-  //       return "#3054A2";
-  //     case temp < -20:
-  //       return "#3E65AF";
-  //     case temp < -18:
-  //       return "#4976BA";
-  //     case temp < -16:
-  //       return "#5784C2";
-  //     case temp < -14:
-  //       return "#688FCA";
-  //     case temp < -12:
-  //       return "#759FD3";
-  //     case temp < -10:
-  //       return "#89ADDC";
-  //     case temp < -8:
-  //       return "#9AB9E3";
-  //     case temp < -6:
-  //       return "#9BC3DA";
-  //     case temp < -4:
-  //       return "#9ACDCF";
-  //     case temp < -2:
-  //       return "#9CD2C1";
-  //     case temp < 0:
-  //       return "#9ED0AA";
-  //     case temp < 2:
-  //       return "#D7DE7E";
-  //     case temp < 4:
-  //       return "#EADA6F";
-  //     case temp < 6:
-  //       return "#F4D862";
-  //     case temp < 8:
-  //       return "#FCCC4E";
-  //     case temp < 10:
-  //       return "#F7B42D";
-  //     case temp < 12:
-  //       return "#F29C00";
-  //     case temp < 14:
-  //       return "#F29400";
-  //     case temp < 16:
-  //       return "#F3840D";
-  //     case temp < 18:
-  //       return "#EE730E";
-  //     case temp < 20:
-  //       return "#ED6517";
-  //     case temp < 22:
-  //       return "#EB561E";
-  //     case temp < 24:
-  //       return "#E84B1A";
-  //     case temp < 26:
-  //       return "#E04016";
-  //     case temp < 28:
-  //       return "#D83412";
-  //     case temp < 30:
-  //       return "#D2270F";
-  //     case temp < 32:
-  //       return "#C30507";
-  //     case temp < 34:
-  //       return "#B6070D";
-  //     case temp < 36:
-  //       return "#A90914";
-  //     case temp < 38:
-  //       return "#89061A";
-  //     case temp < 40:
-  //       return "#6F0317";
-  //     case temp >= 40:
-  //       return "#4D0014";
+  const getTempColor = (temp: number) => {
+    switch (true) {
+      case temp < -30:
+        return "#241967";
+      case temp < -28:
+        return "#272579";
+      case temp < -26:
+        return "#20348D";
+      case temp < -24:
+        return "#214295";
+      case temp < -22:
+        return "#3054A2";
+      case temp < -20:
+        return "#3E65AF";
+      case temp < -18:
+        return "#4976BA";
+      case temp < -16:
+        return "#5784C2";
+      case temp < -14:
+        return "#688FCA";
+      case temp < -12:
+        return "#759FD3";
+      case temp < -10:
+        return "#89ADDC";
+      case temp < -8:
+        return "#9AB9E3";
+      case temp < -6:
+        return "#9BC3DA";
+      case temp < -4:
+        return "#9ACDCF";
+      case temp < -2:
+        return "#9CD2C1";
+      case temp < 0:
+        return "#9ED0AA";
+      case temp < 2:
+        return "#D7DE7E";
+      case temp < 4:
+        return "#EADA6F";
+      case temp < 6:
+        return "#F4D862";
+      case temp < 8:
+        return "#FCCC4E";
+      case temp < 10:
+        return "#F7B42D";
+      case temp < 12:
+        return "#F29C00";
+      case temp < 14:
+        return "#F29400";
+      case temp < 16:
+        return "#F3840D";
+      case temp < 18:
+        return "#EE730E";
+      case temp < 20:
+        return "#ED6517";
+      case temp < 22:
+        return "#EB561E";
+      case temp < 24:
+        return "#E84B1A";
+      case temp < 26:
+        return "#E04016";
+      case temp < 28:
+        return "#D83412";
+      case temp < 30:
+        return "#D2270F";
+      case temp < 32:
+        return "#C30507";
+      case temp < 34:
+        return "#B6070D";
+      case temp < 36:
+        return "#A90914";
+      case temp < 38:
+        return "#89061A";
+      case temp < 40:
+        return "#6F0317";
+      case temp >= 40:
+        return "#4D0014";
 
-  //     default:
-  //       return "black";
-  //   }
-  // };
+      default:
+        return "black";
+    }
+  };
 
-  // const getBackgroundImageUrl = (width) => {
-  //   let url;
-  //   if (!selectedBackgroundCondition) {
-  //     return;
-  //   }
-  //   switch (true) {
-  //     case width < 400:
-  //       url = `https://weathersasa.lon1.cdn.digitaloceanspaces.com/images/G1/@1x-G1_${selectedBackgroundCondition}-day.jpg`;
-  //       break;
-  //     case width >= 400 && width < 600:
-  //       url = `https://weathersasa.lon1.cdn.digitaloceanspaces.com/images/G2/@1x-G2_${selectedBackgroundCondition}-day.jpg`;
-  //       break;
-  //     case width >= 600 && width < 1008:
-  //       url = `https://weathersasa.lon1.cdn.digitaloceanspaces.com/images/G3/@1x-G3_${selectedBackgroundCondition}-day.jpg`;
-  //       break;
-  //     case width >= 1008 && width < 1280:
-  //       url = `https://weathersasa.lon1.cdn.digitaloceanspaces.com/images/G4/@1x-G4_${selectedBackgroundCondition}-day.jpg`;
-  //       break;
-  //     case width > 1280:
-  //       url = `https://weathersasa.lon1.cdn.digitaloceanspaces.com/images/G5/@1x-G5_${selectedBackgroundCondition}-day.jpg`;
-  //       break;
-  //     default:
-  //       url = `https://weathersasa.lon1.cdn.digitaloceanspaces.com/images/G4/@1x-G4_${selectedBackgroundCondition}-day.jpg`;
-  //   }
-  //   return url;
-  // };
+  const getBackgroundImageUrl = (width: number) => {
+    let url;
+    if (!selectedBackgroundCondition) {
+      return;
+    }
+    switch (true) {
+      case width < 400:
+        url = `https://weathersasa.lon1.cdn.digitaloceanspaces.com/images/G1/@1x-G1_${selectedBackgroundCondition}-day.jpg`;
+        break;
+      case width >= 400 && width < 600:
+        url = `https://weathersasa.lon1.cdn.digitaloceanspaces.com/images/G2/@1x-G2_${selectedBackgroundCondition}-day.jpg`;
+        break;
+      case width >= 600 && width < 1008:
+        url = `https://weathersasa.lon1.cdn.digitaloceanspaces.com/images/G3/@1x-G3_${selectedBackgroundCondition}-day.jpg`;
+        break;
+      case width >= 1008 && width < 1280:
+        url = `https://weathersasa.lon1.cdn.digitaloceanspaces.com/images/G4/@1x-G4_${selectedBackgroundCondition}-day.jpg`;
+        break;
+      case width > 1280:
+        url = `https://weathersasa.lon1.cdn.digitaloceanspaces.com/images/G5/@1x-G5_${selectedBackgroundCondition}-day.jpg`;
+        break;
+      default:
+        url = `https://weathersasa.lon1.cdn.digitaloceanspaces.com/images/G4/@1x-G4_${selectedBackgroundCondition}-day.jpg`;
+    }
+    return url;
+  };
 
-  // let deviceWidth = useWindowWidth();
-  // let url = getBackgroundImageUrl(deviceWidth);
+  const deviceWidth = useWindowWidth();
+  const url = getBackgroundImageUrl(deviceWidth);
 
   // Toggle expanded state for clicked hour
   // const toggleExpandedHour = (index) => {
@@ -392,39 +394,43 @@ function App() {
   //   }
   // };
 
-  // const handleCityChange = async (e) => {
-  //   setCity(e.target.value);
+  const handleCityChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    setCity(e.target.value);
 
-  //   if (e.target.value.length < 2) {
-  //     setAutocompleteCities([]);
-  //     setAutocompleteErr("");
-  //     return;
-  //   }
+    if (e.target.value.length < 2) {
+      setAutocompleteCities([]);
+      setAutocompleteErr("");
+      return;
+    }
 
-  //   if (!city) return;
+    if (!city) return;
 
-  //   try {
-  //     const data = await fetchPlace(city);
-  //     if (data.length > 0) {
-  //       setAutocompleteCities(data);
-  //       setCities(data);
-  //       setAutocompleteErr("");
-  //     } else {
-  //       setAutocompleteCities([]);
-  //       setCities([]);
+    try {
+      const data = await fetchPlace(city);
+      if (data.length > 0) {
+        setAutocompleteCities(data);
+        setCities(data);
+        setAutocompleteErr("");
+      } else {
+        setAutocompleteCities([]);
+        setCities([]);
 
-  //       if (e.target.value.length > 3) {
-  //         setAutocompleteErr("No suggestions found.");
-  //       } else {
-  //         setAutocompleteErr("");
-  //       }
-  //     }
-  //   } catch (error) {
-  //     setAutocompleteCities([]);
-  //     setCities([]);
-  //     setAutocompleteErr(error.message);
-  //   }
-  // };
+        if (e.target.value.length > 3) {
+          setAutocompleteErr("No suggestions found.");
+        } else {
+          setAutocompleteErr("");
+        }
+      }
+    } catch (error) {
+      setAutocompleteCities([]);
+      setCities([]);
+      if (error instanceof Error) {
+        setAutocompleteErr(error.message);
+      } else {
+        setAutocompleteErr("An unknown error occurred");
+      }
+    }
+  };
 
   const getConditionText = (code: number, text: string) => {
     switch (code) {
@@ -621,7 +627,7 @@ function App() {
         setLoading(false);
         setError(error instanceof Error ? error.message : "An error occurred");
       }
-    }
+    };
 
     const fetchBulkWeatherData = async () => {
       try {
@@ -665,7 +671,7 @@ function App() {
   return (
     <div className="App">
       <MenuBar />
-      {/*  <Header
+      <Header
         city={city}
         handleCityChange={handleCityChange}
         autocompleteCities={autocompleteCities}
@@ -701,49 +707,51 @@ function App() {
               />
             )}
           </div>
-          {forecast.forecast && (
-            <MobileWeatherCondition
-              forecastData={forecast}
-              selectedDayIndex={selectedDayIndex}
-            />
-          )}
-          {forecast.forecast && (
-            <HourlyForecast
-              forecastData={forecast}
-              selectedDayIndex={selectedDayIndex}
-              toggleExpandedHour={toggleExpandedHour}
-              expandedHourIndex={expandedHourIndex}
-              setExpandedHourIndex={setExpandedHourIndex}
-              setSelectedDayIndex={setSelectedDayIndex}
-              getConditionText={getConditionText}
-              getTempColor={getTempColor}
-            />
-          )}
-          <LastUpdated forecastData={forecast} />
-          <Sun forecastData={forecast} selectedDayIndex={selectedDayIndex} />
-          <AirQuality
-            forecastData={forecast}
-            selectedDayIndex={selectedDayIndex}
-          />
-          {forecast.forecast && (
-            <Maps
-              forecastData={forecast}
-              selectedDayIndex={selectedDayIndex}
-              getTempColor={getTempColor}
-              locations={locations}
-              bulkForecast={bulkForecast}
-            />
-          )}
-
-          {forecast.forecast && (
-            <FooterHeading
-              forecastData={forecast}
-              selectedDayIndex={selectedDayIndex}
-            />
-          )}
-          {forecast.forecast && <Footer />}
         </>
-      )} */}
+        // {forecast.forecast && (
+        //   <MobileWeatherCondition
+        //     forecastData={forecast}
+        //     selectedDayIndex={selectedDayIndex}
+        //   />
+        // )}
+
+        // {forecast.forecast && (
+        //   <HourlyForecast
+        //     forecastData={forecast}
+        //     selectedDayIndex={selectedDayIndex}
+        //     toggleExpandedHour={toggleExpandedHour}
+        //     expandedHourIndex={expandedHourIndex}
+        //     setExpandedHourIndex={setExpandedHourIndex}
+        //     setSelectedDayIndex={setSelectedDayIndex}
+        //     getConditionText={getConditionText}
+        //     getTempColor={getTempColor}
+        //   />
+        // )}
+        // <LastUpdated forecastData={forecast} />
+        // <Sun forecastData={forecast} selectedDayIndex={selectedDayIndex} />
+        // <AirQuality
+        //   forecastData={forecast}
+        //   selectedDayIndex={selectedDayIndex}
+        // />
+        // {forecast.forecast && (
+        //   <Maps
+        //     forecastData={forecast}
+        //     selectedDayIndex={selectedDayIndex}
+        //     getTempColor={getTempColor}
+        //     locations={locations}
+        //     bulkForecast={bulkForecast}
+        //   />
+        // )}
+
+        // {forecast.forecast && (
+        //   <FooterHeading
+        //     forecastData={forecast}
+        //     selectedDayIndex={selectedDayIndex}
+        //   />
+        // )}
+        // {forecast.forecast && <Footer />}
+        // </>
+      )}
     </div>
   );
 }

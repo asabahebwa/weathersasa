@@ -8,7 +8,7 @@ export interface Place {
   url: string;
 }
 
-export const fetchPlace = async (text: string): Promise<Place[] | []> => {
+export const fetchPlace = async (text: string): Promise<Place[]> => {
   try {
     const response = await fetch(
       `https://api.weatherapi.com/v1/search.json?key=${import.meta.env.VITE_WEATHER_API_KEY}&q=${text}`

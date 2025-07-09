@@ -15,7 +15,7 @@ interface BulkWeatherData {
   bulk: Array<any>
 }
 
-interface WeatherForecast {
+export interface WeatherForecast {
   location: {
     name: string,
     region: string,

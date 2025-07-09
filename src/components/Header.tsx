@@ -1,11 +1,32 @@
-import React, { useState, useRef, useEffect } from "react";
+import {
+  useState,
+  useRef,
+  useEffect,
+  type ChangeEvent,
+  type FocusEvent,
+  type MouseEvent,
+} from "react";
 import {
   faSearch,
   faTimes,
   faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { type Place } from "../services/fetchPlace";
+import { type Coordinates } from "../services/forecast";
 import "../styles/Header.css";
+
+interface HeaderProps {
+  city: string;
+  handleCityChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  autocompleteCities: Place[];
+  setAutocompleteCities: (cities: Place[]) => void;
+  setSelectedCity: (city: string) => void;
+  cities: Place[];
+  setCoordinates: (coordinates: Coordinates) => void;
+  setLoading: (loading: boolean) => void;
+  autocompleteErr: string | null;
+}
 
 function Header({
   city,
@@ -17,12 +38,14 @@ function Header({
   setCoordinates,
   setLoading,
   autocompleteErr,
-}) {
-  const [inputFocused, setInputFocused] = useState(false);
-  const [isMobileView, setIsMobileView] = useState(window.innerWidth < 900);
+}: HeaderProps) {
+  const [inputFocused, setInputFocused] = useState<boolean>(false);
+  const [isMobileView, setIsMobileView] = useState<boolean>(
+    window.innerWidth < 900
+  );
 
-  const spacerRef = useRef(null);
-  const spacerInputRef = useRef(null);
+  const spacerRef = useRef<HTMLDivElement>(null);
+  const spacerInputRef = useRef<HTMLInputElement>(null);
 
   // Add responsive handler
   useEffect(() => {
@@ -42,12 +65,12 @@ function Header({
 
   // Add click outside detection
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event: MouseEvent) => {
       // If header spacer is open and click is outside of it
       if (
         inputFocused &&
         spacerRef.current &&
-        !spacerRef.current.contains(event.target)
+        !spacerRef.current.contains(event.target as Node)
       ) {
         handleSpacerClose(event);
       }
@@ -62,7 +85,7 @@ function Header({
     };
   }, [inputFocused]);
 
-  const getSelectedCity = (city) => {
+  const getSelectedCity = (city: Place) => {
     if (autocompleteCities.includes(city)) {
       setSelectedCity(city.name);
 
@@ -75,13 +98,17 @@ function Header({
         setLoading(true);
         setInputFocused(false);
         setAutocompleteCities([]);
-        handleCityChange({ target: { value: "" } });
+        handleCityChange({
+          target: { value: "" },
+        } as ChangeEvent<HTMLInputElement>);
       }
     }
   };
 
   // Function to handle focusing on the header input
-  const handleHeaderInputFocus = (e) => {
+  const handleHeaderInputFocus = (
+    e: MouseEvent<HTMLElement> | FocusEvent<HTMLElement>
+  ) => {
     e.preventDefault();
     e.stopPropagation();
     setInputFocused(true);
@@ -94,14 +121,14 @@ function Header({
     }, 10);
   };
 
-  const handleSpacerClose = (e) => {
+  const handleSpacerClose = (e: MouseEvent | MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    // Stop event propagation to prevent it from bubbling up
     e.stopPropagation();
-
     setInputFocused(false);
     setAutocompleteCities([]);
-    handleCityChange({ target: { value: "" } });
+    handleCityChange({
+      target: { value: "" },
+    } as ChangeEvent<HTMLInputElement>);
   };
 
   const handleMobileSearchClick = () => {
@@ -203,9 +230,6 @@ function Header({
                       key={i}
                       style={{ cursor: "pointer" }}
                       className="app-header-spacer-autocomplete-item"
-                      onMouseDown={(e) => {
-                        // e.preventDefault(); // Prevents the input from losing focus
-                      }}
                     >
                       {city.name}, {city.region}, {city.country}
                     </div>
@@ -257,9 +281,6 @@ function Header({
                     key={i}
                     style={{ cursor: "pointer" }}
                     className="app-header-spacer-autocomplete-item"
-                    onMouseDown={(e) => {
-                      // e.preventDefault(); // Prevents the input from losing focus
-                    }}
                   >
                     {city.name}, {city.region}, {city.country}
                   </div>
