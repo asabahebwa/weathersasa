@@ -1,9 +1,9 @@
-interface Coordinates {
+export interface Coordinates {
   latitude: number;
   longitude: number;
 }
 
-interface Location {
+export interface Location {
   key: string,
   location: {
     lat: number,
@@ -63,14 +63,14 @@ interface WeatherForecast {
 }
 
 export async function getWeatherForecast(
-  coordinates?: Coordinates
-): Promise<WeatherForecast | null> {
+  coordinates?: Coordinates | null
+): Promise<WeatherForecast> {
   const defaultLocation = "London";
   const query = coordinates
     ? `${coordinates.latitude},${coordinates.longitude}`
     : defaultLocation;
 
-  const url = `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${query}&days=14&aqi=yes&alerts=no`;
+  const url = `https://api.weatherapi.com/v1/forecast.json?key=${import.meta.env.VITE_WEATHER_API_KEY}&q=${query}&days=14&aqi=yes&alerts=no`;
 
   try {
     const response = await fetch(url);
@@ -90,7 +90,7 @@ export async function getWeatherForecast(
 export const getBulkWeatherData = async (
   locations: Location[]
 ): Promise<BulkWeatherData> => {
-  const url = `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=bulk&days=14&aqi=yes&alerts=no`;
+  const url = `https://api.weatherapi.com/v1/forecast.json?key=${import.meta.env.VITE_WEATHER_API_KEY}&q=bulk&days=14&aqi=yes&alerts=no`;
 
   const payload = {
     locations: locations.map((item) => ({

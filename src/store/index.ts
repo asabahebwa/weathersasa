@@ -1,13 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { rootReducer } from "./rootReducer";
+import rootReducer from "./rootReducer";
 
-export const store = (state = {}) => {
-  return configureStore(
-    rootReducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  );
-};
+export const store = configureStore({
+  reducer: rootReducer,
+  devTools: process.env.NODE_ENV !== "production",
+});
 
-// Export types for TypeScript
-export type RootState = ReturnType<ReturnType<typeof store>['getState']>;
-export type AppDispatch = ReturnType<typeof store>['dispatch'];
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
