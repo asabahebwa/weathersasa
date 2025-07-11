@@ -12,6 +12,7 @@ import AirQuality from "./components/AirQuality";
 import Maps from "./components/Maps";
 import FooterHeading from "./components/FooterHeading";
 import Footer from "./components/Footer";
+import ErrorMessage from "./components/ErrorMessage";
 import { useAppSelector, useAppDispatch } from "./store/hooks";
 import { getWeatherForecast, getBulkWeatherData } from "./services/forecast";
 import { addForecast } from "./store/forecast/index";
@@ -620,8 +621,9 @@ function App() {
           )
         );
       } catch (error: unknown) {
-        setLoading(false);
         setError(error instanceof Error ? error.message : "An error occurred");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -641,11 +643,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (selectedCity) {
-      setLoading(true);
-      getWeatherForecast(coordinates).then((items) => {
+    if (!selectedCity) return;
+
+    const fetchWeatherData = async () => {
+      try {
+        setLoading(true);
+        const items = await getWeatherForecast(coordinates);
         dispatch(addForecast(items));
-        setLoading(false);
         setSelectedDayIndex(0);
         setExpandedHourIndex(null);
         setSelectedApiCondition(
@@ -654,8 +658,18 @@ function App() {
             items?.forecast.forecastday[0].day.condition.text
           )
         );
-      });
-    }
+      } catch (error) {
+        const errorMessage =
+          error instanceof Error
+            ? error.message
+            : "An unexpected error occurred";
+        setError(errorMessage);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchWeatherData();
   }, [selectedCity]);
 
   useEffect(() => {
@@ -679,7 +693,9 @@ function App() {
         autocompleteErr={autocompleteErr}
       />
 
-      {loading ? (
+      {error ? (
+        <ErrorMessage text={error} />
+      ) : loading ? (
         <Loader />
       ) : (
         <>
