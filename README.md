@@ -1,1 +1,1 @@
-![Tests](https://github.com/asabahebwa/weathersasa/actions/workflows/deploy.yml/badge.svg)
+![Tests](https://github.com/asabahebwa/weathersasa/actions/workflows/main.yml/badge.svg)
