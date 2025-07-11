@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "deploy": "scp -r ./dist/* /var/www/pixelmap.studio/html",
+    "deploy": "scp -r ./dist/* /var/www/weathersasa.com/html",
     "lint": "eslint .",
     "preview": "vite preview"
   },
