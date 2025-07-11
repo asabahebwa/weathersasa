@@ -6,7 +6,26 @@ on:
       - master
 
 jobs:
-  deploy-to-digital-ocean-droplet:
+  test:
+    runs-on: ubuntu-latest
+    name: run unit tests
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test
+
+  deploy:
+    needs: test
     runs-on: ubuntu-latest
     name: deploy weathersasa
     steps:
