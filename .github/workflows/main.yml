@@ -18,4 +18,4 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSHKEY }}
-          script: cd projects/weathersasa/ && git pull && npm run build && npm run deploy
+          script: cd projects/weathersasa/ && git pull && npm install && npm run build && npm run deploy
