@@ -12,7 +12,13 @@ jobs:
     steps:
       - name: Checkout master
         uses: actions/checkout@master
-      - name: Pull from GitHub
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - name: Pull from GitHub and deploy
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
