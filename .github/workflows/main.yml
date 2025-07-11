@@ -24,4 +24,15 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSHKEY }}
-          script: cd projects/weathersasa/ && git pull && npm install && npm run build && npm run deploy
+          script: |
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install 22
+            nvm use 22
+            node -v
+            npm -v
+            cd projects/weathersasa/
+            git pull
+            npm install
+            npm run build
+            npm run deploy
