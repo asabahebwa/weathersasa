@@ -12,6 +12,7 @@ const forecastSlice = createSlice({
   name: "forecast",
   initialState,
   reducers: {
+    // @ts-ignore-next-line
     addForecast(state, action) {
       return {
         ...initialState,

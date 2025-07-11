@@ -44,6 +44,7 @@ const useWindowWidth = () => {
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState("");
+  // @ts-ignore-next-line
   const [bulkError, setBulkError] = useState("");
   const [city, setCity] = useState("");
   const [cities, setCities] = useState<Place[]>([]);

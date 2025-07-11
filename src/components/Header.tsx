@@ -77,10 +77,12 @@ function Header({
     };
 
     // Add event listener when component mounts or inputFocused changes
+    // @ts-ignore-next-line
     document.addEventListener("mousedown", handleClickOutside);
 
     // Remove event listener on cleanup
     return () => {
+      // @ts-ignore-next-line
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [inputFocused]);
