@@ -233,6 +233,7 @@ const Maps = ({
             lat: selectedLocation.location.lat,
             lng: selectedLocation.location.lng,
           }}
+          // @ts-ignore-next-line
           defaultOptions={{
             zoomControl: false,
             scrollwheel: false,

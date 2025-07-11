@@ -2,7 +2,7 @@ import "../styles/Loader.css";
 
 function Loader() {
   return (
-    <div className="loading-container">
+    <div data-testid="loading-container" className="loading-container">
       <div className="loading-message">Loading weather data...</div>
     </div>
   );

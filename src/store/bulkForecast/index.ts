@@ -12,6 +12,7 @@ const bulkForecastSlice = createSlice({
   name: "bulkForecast",
   initialState,
   reducers: {
+     // @ts-ignore-next-line
     addBulkForecast(state, action) {
       return {
         ...initialState,
