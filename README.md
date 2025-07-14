@@ -4,7 +4,7 @@
 
 # weathersasa ☀️🌧️🌪️
 
-Live Site: weathersasa.com
+🔗 **Live Site:** [weathersasa.com](https://weathersasa.com/)
 
 weathersasa is a modern weather application designed to provide accurate, real-time weather data to users across the globe. Built with accessibility, reliability, and usability in mind, it empowers users to make informed decisions based on weather conditions.
 
