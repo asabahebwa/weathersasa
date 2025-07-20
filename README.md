@@ -1,42 +1,12 @@
 ![Tests](https://github.com/asabahebwa/weathersasa/actions/workflows/main.yml/badge.svg)
 
-![gif](https://github.com/asabahebwa/weathersasa/blob/master/src/assets/ws.gif)
+![gif](https://github.com/asabahebwa/weathersasa/blob/master/src/assets/wsc.gif)
 
 # weathersasa ☀️🌧️🌪️
 
 🔗 **Live Site:** [weathersasa.com](https://weathersasa.com/)
 
 weathersasa is a modern weather application designed to provide accurate, real-time weather data to users across the globe. Built with accessibility, reliability, and usability in mind, it empowers users to make informed decisions based on weather conditions.
-
-## 🌟 Key Features
-
-- Real-Time Weather Data
-  Get up-to-date information on temperature, humidity, wind speed, and more.
-
-- Forecasts & Alerts
-  Access multi-day forecasts and receive alerts for severe weather conditions.
-
-- User-Friendly Interface
-  Clean design with visual elements like icons, charts, and maps to enhance understanding.
-
-- Location-Based Data (Coming Soon)
-  Automatic geolocation to deliver hyper-localized weather info.
-
-- Personalization
-  Save favorite locations, configure alerts, and customize notifications.
-
-- Cross-Platform Access (Coming Soon)
-  Available on web and planned for mobile platforms.
-
-## 🎯 Project Goals
-
-- Deliver accurate and real-time weather information based on user location or selected cities.
-
-- Help users make better decisions through forecasts, alerts, and environmental data.
-
-- Provide an intuitive interface that's accessible to a wide audience.
-
-- Support daily planning, safety, and industry use cases like agriculture and travel.
 
 ## 🛠️ How It Works
 
