@@ -14,7 +14,7 @@ function LastUpdated({ forecastData }: LastUpdatedProps) {
   const lastUpdated = forecastData.current.last_updated;
 
   return (
-    <div className="lastUpdated">
+    <div data-testid="last-updated" className="lastUpdated">
       <FontAwesomeIcon icon={faClock} />
       <span className="lastUpdated-text">Last updated</span>
       <span className="lastUpdated-time">

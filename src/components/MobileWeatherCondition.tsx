@@ -168,7 +168,7 @@ function MobileWeatherCondition({
   }
 
   return (
-    <div className="mobile-condition-container">
+    <div data-testid="mobile-condition-container" className="mobile-condition-container">
       <div className="mobile-condition">
         {getConditionText(
           forecastData.forecast.forecastday[selectedDayIndex].day.condition

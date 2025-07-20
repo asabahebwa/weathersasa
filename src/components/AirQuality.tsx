@@ -124,7 +124,7 @@ function AirQuality({ forecastData, selectedDayIndex }: AirQualityProps) {
   const pollution = getAQIResult(aQI);
 
   return (
-    <div className="air-quality-container">
+    <div data-testid="air-quality-container" className="air-quality-container">
       <div className="pollen-container">
         <div className="pollen-icon"></div>
         <span className="pollen-label">Pollen</span>
