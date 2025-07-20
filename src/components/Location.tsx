@@ -7,7 +7,7 @@ interface LocationProps {
 function Location({ selectedCity }: LocationProps) {
   const city = selectedCity.split(",")[0];
   return (
-    <div className="location-section">
+    <div data-testid="location" className="location-section">
       <h1 className="selected-city">{city || "London"}</h1>
     </div>
   );

@@ -30,10 +30,10 @@ const MenuBar = () => {
   };
 
   return (
-    <div className="menu-bar-container">
+    <div data-testid="menu-bar-container" className="menu-bar-container">
       <div className="menu-bar">
         <div className="menu-bar-left">
-          <div className="logo">
+          <div data-testid="logo" className="logo">
             <span className="logo-w">W</span>
             <span className="logo-s">S</span>
           </div>
@@ -77,40 +77,6 @@ const MenuBar = () => {
               </li>
             </ul>
           </nav>
-          <div className="social-icons">
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-            >
-              <FontAwesomeIcon icon={faFacebook} />
-            </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-            >
-              <FontAwesomeIcon icon={faInstagram} />
-            </a>
-            <a
-              href="https://threads.net"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Threads"
-            >
-              <FontAwesomeIcon icon={faThreads} />
-            </a>
-            <a
-              href="https://x.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="xTwitter"
-            >
-              <FontAwesomeIcon icon={faXTwitter} />
-            </a>
-          </div>
           <div className="hamburger-menu-container" onClick={toggleMobileMenu}>
             <button className="hamburger-menu" aria-label="Toggle mobile menu">
               <FontAwesomeIcon icon={faBars} className="hamburger-icon" />

@@ -12,7 +12,7 @@ function Sun({ forecastData, selectedDayIndex }: SunProps) {
   }
 
   return (
-    <div className="sun">
+    <div data-testid="sun" className="sun">
       <span className="sunrise">
         Sunrise{" "}
         {forecastData.forecast.forecastday[selectedDayIndex].astro.sunrise}

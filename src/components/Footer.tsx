@@ -9,7 +9,7 @@ import "../styles/Footer.css";
 
 function Footer() {
   return (
-    <div className="footer-container">
+    <div data-testid="footer-container" className="footer-container">
       <footer className="footer">
         <div className="footer-columns">
           <div className="column-one">
