@@ -146,6 +146,7 @@ function Header({
 
   return (
     <div
+      data-testid="header-container"
       className={`header-container ${
         inputFocused ? "header-container-focused" : ""
       }`}
@@ -291,7 +292,10 @@ function Header({
           </div>
         </div>
         {autocompleteCities.length === 0 && (
-          <div className="app-header-spacer-locations">
+          <div
+            data-testid="app-header-spacer-locations"
+            className="app-header-spacer-locations"
+          >
             <p className="app-header-spacer-locations-heading">My Locations</p>
             <div className="app-header-spacer-locations-remember">
               <h4>Remember the places that matter to you</h4>

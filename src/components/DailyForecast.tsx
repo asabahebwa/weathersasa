@@ -2,10 +2,10 @@ import { useState } from "react";
 import { type ForecastState } from "../store/forecast/index";
 import "../styles/DailyForecast.css";
 
-interface DailyForecastProps {
+export interface DailyForecastProps {
   forecastData: ForecastState;
   selectedDayIndex: number;
-  selectedApiCondition: string;
+  // selectedApiCondition: string;
   setSelectedDayIndex: (index: number) => void;
   setExpandedHourIndex: (index: number | null) => void;
   setSelectedApiCondition: (condition: string) => void;
