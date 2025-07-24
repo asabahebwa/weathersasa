@@ -712,7 +712,6 @@ function App() {
                 forecastData={forecast}
                 selectedDayIndex={selectedDayIndex}
                 setSelectedDayIndex={setSelectedDayIndex}
-                selectedApiCondition={selectedApiCondition}
                 setSelectedApiCondition={setSelectedApiCondition}
                 getConditionText={getConditionText}
                 getTempColor={getTempColor}

@@ -1,15 +1,10 @@
-import React, { useEffect } from "react";
-import {
-  APIProvider,
-  Map,
-  useMap,
-  AdvancedMarker,
-  useAdvancedMarkerRef,
-  Pin,
-} from "@vis.gl/react-google-maps";
+import React from "react";
+import { APIProvider, Map } from "@vis.gl/react-google-maps";
 import { type ForecastState } from "../store/forecast/index";
 import { type BulkForecastState } from "../store/bulkForecast/index";
-import { type Location } from "../services/forecast";
+import MyComponent from "./MyComponent";
+import PoiMarker from "./PoiMarker";
+import PoiMarkers from "./PoiMarkers";
 import "../styles/Maps.css";
 
 interface MapsProps {
@@ -18,144 +13,6 @@ interface MapsProps {
   getTempColor: (temp: number) => string;
   bulkForecast: BulkForecastState;
 }
-
-interface PoiMarkerProps {
-  poi: Location;
-  selectedLocationTemperature: number;
-  getTempColor: (temp: number) => string;
-}
-
-interface PoiMarkersProps {
-  locations: Array<any>;
-  getTempColor: (temp: number) => string;
-  selectedDayIndex: number;
-}
-
-interface LocationsPoiMarkerProps {
-  poi: any;
-  getTempColor: (temp: number) => string;
-  selectedDayIndex: number;
-  visible: boolean;
-}
-
-interface MyComponentProps {
-  location: {
-    lat: number;
-    lng: number;
-  };
-}
-
-interface CustomLocationInfoWindowProps {
-  poi: Location;
-  getTempColor: (temp: number) => string;
-  selectedLocationTemperature: number;
-}
-
-interface CustomLocationsInfoWindowProps {
-  poi: any;
-  getTempColor: (temp: number) => string;
-  selectedDayIndex: number;
-}
-
-const MyComponent = ({ location }: MyComponentProps) => {
-  // const apiIsLoaded = useApiIsLoaded();
-  const map = useMap();
-
-  useEffect(() => {
-    if (!map) return;
-
-    if (map) {
-      // Use the map instance (e.g., map.panTo(), map.setZoom())
-      map.panTo({ lat: location.lat, lng: location.lng });
-      map.setZoom(6);
-    }
-  }, [map, location.lat, location.lng]);
-
-  return null;
-};
-
-const CustomLocationInfoWindow = ({
-  poi,
-  getTempColor,
-  selectedLocationTemperature,
-}: CustomLocationInfoWindowProps) => {
-  const [markerRef] = useAdvancedMarkerRef();
-
-  return (
-    <>
-      <AdvancedMarker key={poi.key} position={poi.location} ref={markerRef}>
-        <div
-          className="info-window"
-          style={{
-            position: "absolute",
-            left: 20 /* Position to the right */,
-            top: -33,
-            background: "white",
-          }}
-        >
-          <div className="info-window-location">{poi.key}</div>
-          <div className="info-window-temp">
-            <div className="info-window-temp-value">
-              {selectedLocationTemperature}
-            </div>
-            <div
-              className="info-window-temp-color"
-              style={{
-                backgroundColor: getTempColor(selectedLocationTemperature),
-              }}
-            />
-          </div>
-        </div>
-      </AdvancedMarker>
-    </>
-  );
-};
-
-const CustomLocationsInfoWindow = ({
-  poi,
-  getTempColor,
-  selectedDayIndex,
-}: CustomLocationsInfoWindowProps) => {
-  const [markerRef] = useAdvancedMarkerRef();
-  return (
-    <>
-      <AdvancedMarker
-        position={{ lat: poi.query.location.lat, lng: poi.query.location.lon }}
-        ref={markerRef}
-      >
-        <div
-          className="info-window"
-          style={{
-            position: "absolute",
-            left: 15 /* Position to the right */,
-            top: -16,
-            background: "white",
-          }}
-        >
-          <div className="info-window-location">{poi.query.custom_id}</div>
-          <div className="info-window-temp">
-            <div className="info-window-temp-value">
-              {Math.trunc(
-                poi.query.forecast.forecastday[selectedDayIndex].day.maxtemp_c
-              )}
-            </div>
-            <div
-              className="info-window-temp-color"
-              style={{
-                backgroundColor: getTempColor(
-                  Math.trunc(
-                    poi.query.forecast.forecastday[selectedDayIndex].day
-                      .maxtemp_c
-                  )
-                ),
-              }}
-            />
-          </div>
-        </div>
-      </AdvancedMarker>
-    </>
-  );
-};
 
 const Maps = ({
   forecastData,
@@ -176,7 +33,6 @@ const Maps = ({
     },
   };
 
-  // Filter out the selected location from the locations array
   const filteredLocations = bulkForecast.bulk?.filter(
     (poi: any) =>
       poi.query.location.lat !== selectedLocation.location.lat &&
@@ -261,96 +117,6 @@ const Maps = ({
         </Map>
       </APIProvider>
     </div>
-  );
-};
-
-const PoiMarker = ({
-  poi,
-  selectedLocationTemperature,
-  getTempColor,
-}: PoiMarkerProps) => {
-  const [markerRef] = useAdvancedMarkerRef();
-
-  return (
-    <>
-      <AdvancedMarker key={poi.key} position={poi.location} ref={markerRef}>
-        <Pin background={"white"} glyphColor={"#000"} borderColor={"#000"} />
-      </AdvancedMarker>
-
-      <CustomLocationInfoWindow
-        poi={poi}
-        selectedLocationTemperature={selectedLocationTemperature}
-        getTempColor={getTempColor}
-      />
-    </>
-  );
-};
-
-// Create a separate component for each marker
-const LocationsPoiMarker = ({
-  poi,
-  getTempColor,
-  selectedDayIndex,
-  visible,
-}: LocationsPoiMarkerProps) => {
-  const [markerRef, marker] = useAdvancedMarkerRef();
-
-  const isVisible = visible;
-
-  return (
-    isVisible && (
-      <>
-        <AdvancedMarker
-          position={{
-            lat: poi.query.location.lat,
-            lng: poi.query.location.lon,
-          }}
-          ref={markerRef}
-        >
-          <div
-            style={{
-              width: 10,
-              height: 10,
-              position: "absolute",
-              top: 0,
-              left: 0,
-              background: "#ffffff",
-              transform: "translate(-50%, -50%)",
-            }}
-          ></div>
-        </AdvancedMarker>
-        {marker && (
-          <CustomLocationsInfoWindow
-            poi={poi}
-            getTempColor={getTempColor}
-            selectedDayIndex={selectedDayIndex}
-          />
-        )}
-      </>
-    )
-  );
-};
-
-const PoiMarkers = ({
-  locations,
-  getTempColor,
-  selectedDayIndex,
-}: PoiMarkersProps) => {
-  return (
-    <>
-      {locations.map((poi: any, index: number) => {
-        // Create a new marker reference for each location
-        return (
-          <LocationsPoiMarker
-            key={index}
-            poi={poi}
-            getTempColor={getTempColor}
-            selectedDayIndex={selectedDayIndex}
-            visible={poi.query.visible}
-          />
-        );
-      })}
-    </>
   );
 };
 

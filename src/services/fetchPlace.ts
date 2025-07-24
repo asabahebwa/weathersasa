@@ -1,5 +1,5 @@
 export interface Place {
-  id?: string;
+  id?: number;
   name: string;
   region: string;
   country: string;
@@ -19,6 +19,7 @@ export const fetchPlace = async (text: string): Promise<Place[]> => {
     }
 
     const data = await response.json();
+    console.log(data)
     return data;
   } catch (error: unknown) {
     throw error instanceof Error
