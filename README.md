@@ -13,14 +13,14 @@ weathersasa is a modern weather application designed to provide accurate, real-t
 - WeatherAPI Integration
   Powered by WeatherAPI for real-time and forecasted weather data.
 
-- Geolocation (Upcoming Feature)
-  Auto-detect location to streamline the user experience.
-
 - Visual Presentation
   Charts, maps, and icons enhance data readability and engagement.
 
 - Custom Experiences
   Tailored alerts, saved locations, and notification preferences.
+
+- Geolocation (Upcoming Feature)
+  Auto-detect location to streamline the user experience.
 
 ## 📈 Impact & Use Cases
 
@@ -40,11 +40,9 @@ WeatherSasa adds value by:
 
 Frontend: React, TypeScript, Vite
 
-Backend: Node.js, Express, Sequelize
-
-Database: PostgreSQL
-
 APIs: WeatherAPI
+
+Testing: React Testing Library, Jest
 
 Deployment: GitHub Actions → DigitalOcean
 
